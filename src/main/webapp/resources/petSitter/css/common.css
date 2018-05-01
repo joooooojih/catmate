@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+  dd {
+    padding-bottom: 10px;
+  }
+  #next {
+    width: 150px;
+  }
+  #buttonRow {
+    text-align: center;
+  }
+  img {
+    width: 270px;
+    height: 270px;
+  }

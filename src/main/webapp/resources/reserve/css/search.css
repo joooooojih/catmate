@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#container {
+    border: 1px solid silver;
+    background-color: white;
+  }
+  #searchCount b {
+    text-align: center;
+  }
+  #bodyRow {
+    border: 1px solid silver;
+  }
+  #price {
+    text-align: right;
+  }
+  #subtitle {
+    text-align: center;
+  }
+  #imgHeight {
+    height: 270px;
+  }
+  #reviewsGrade {
+    text-align: right;
+    margin-top: 12px;
+  }
+  #searchName {
+    text-align: left;
+    margin-top: 12px;
+  }
+  #petGrade {
+    text-align: center;
+    margin-top: 12px;
+  }
+  #bottomRow{
+    border-top:1px solid silver;
+  }
+  #subtitleImg {
+    width: 30px;
+    height: 30px;
+  }
+  #area span {
+    border-right: 1px solid silver;
+  }

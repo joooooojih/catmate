@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+  #sidebar {
+    border: 1px solid silver;
+    padding: 15px;
+    text-align: center;
+  }
+  #sidebar #day {
+    border: 1px solid silver;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  #sidebar #price {
+    font-size: x-large;
+  }
+  #imgHeight {
+    height: 550px;
+  }
+  #container {
+    border: 1px solid silver;
+  }
+  table {
+    font-size: small;
+  }
+  #reservation {
+    width: 20em;
+  }
+  #middle {
+    padding-bottom: 20px;
+    border-bottom: 1px solid silver;
+    padding: 20px;
+  }
+  #middle img {
+    width: 100px;
+    height: 100px;
+  }
+  #middle #topCon1 {
+    text-align: center;
+  }
+  #middle #middle2 li {
+    list-style: square;
+  }
+  #middle #middle2 ul {
+    margin-top: 1em;
+  }
+  #middle #left {
+    text-align: lift;
+  }
+  #middle #right {
+    text-align: right;
+  }
+  #middle #middle4 {
+    padding-top: 2em;
+  }
+  #middle #middle4 .row {
+    padding-bottom: 1em;
+  }
+  #area span {
+    border-right: 1px solid silver;
+  }
