@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Search {
-
     
-    /*이제된건가*/
 	@RequestMapping(value="/reserve/search", method=RequestMethod.GET)
 	public String search(HttpServletRequest request) {
 	  
