@@ -32,7 +32,7 @@
               </c:choose>
               
               <div class="${carouselClass }">
-                <img class="d-block img-fluid w-100" id="imgHeight" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test${i }.png">
+                <img class="d-block img-fluid w-100" id="imgHeight" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test${i }.png">
                 <div class="carousel-caption">
                   <h5>
                     <img src="${pageContext.request.contextPath }/resources/icon/addressIcon.png">
@@ -58,7 +58,7 @@
             <div class="row">
               <div class="col-md-3" id="topCon1">
                 <div class="carousel-inner">
-                  <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test1.png">
+                  <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test1.png">
                 </div>
               </div>
               <div class="col-md-9">
@@ -154,7 +154,7 @@
               <div class="row" id="middle4">
                 <div class="col-md-3" id="topCon1">
                   <div class="carousel-inner">
-                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test1.png">
+                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test1.png">
                   </div>
                 </div>
                 <div class="col-md-9">
@@ -177,7 +177,7 @@
               <div class="row" id="middle4">
                 <div class="col-md-3" id="topCon1">
                   <div class="carousel-inner">
-                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test1.png">
+                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test1.png">
                   </div>
                 </div>
                 <div class="col-md-9">

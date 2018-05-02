@@ -17,10 +17,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath }/start/login">로그인</a>
+            <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath }/member/login">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath }/start/signup">회원가입</a>
+            <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath }/member/signup">회원가입</a>
           </li>
         </ul>
       </div>

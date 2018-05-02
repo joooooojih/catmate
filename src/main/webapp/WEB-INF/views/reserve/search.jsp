@@ -76,7 +76,7 @@
               </c:choose>
               
               <div class="${carouselClass }">
-                <img class="d-block img-fluid w-100" id="imgHeight" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test${i }.png">
+                <img class="d-block img-fluid w-100" id="imgHeight" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test${i }.png">
                 <div class="carousel-caption">
                   <h5>
                     <img src="${pageContext.request.contextPath }/resources/icon/addressIcon.png">
@@ -125,7 +125,7 @@
           <div class="row" id="bottomRow">
             <div class="col-md-4 text-secondary" id="searchName">
               <div class="carousel-inner">
-                <img class="rounded-circle" id="subtitleImg" src="${pageContext.request.contextPath }/resources/sregister/petSitter/img/test1.png">
+                <img class="rounded-circle" id="subtitleImg" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test1.png">
                 <b>조지헌</b>
               </div>
             </div>

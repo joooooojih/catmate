@@ -5,9 +5,11 @@
 <configuration>
 
 	<typeAliases>
-		<package name="com.joji.catmate.dto"/>
+		<package name="com.catmate.dto"/>
 	</typeAliases>
 	
 	<mappers>
+	 <mapper resource="mappings/member-Mapper.xml" />
+	 
 	</mappers>
 </configuration>
