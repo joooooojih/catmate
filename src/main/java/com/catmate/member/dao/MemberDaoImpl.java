@@ -13,9 +13,9 @@ public class MemberDaoImpl implements MemberDao {
     private SqlSessionTemplate sqlSession;
     
     @Override
-    public User_profileDto getUser_profile(User_profileDto user_profileDto) {
+    public User_profileDto getUser_profile(String user_email) {
         
-        return sqlSession.selectOne("Member.getUser_profile", user_profileDto);
+        return sqlSession.selectOne("Member.getUser_profile", user_email);
     }
 
     @Override

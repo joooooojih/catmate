@@ -13,7 +13,7 @@
   #sidebar #price {
     font-size: x-large;
   }
-  #imgHeight {
+  #mainImg {
     height: 550px;
   }
   #container {
@@ -24,6 +24,16 @@
   }
   #reservation {
     width: 20em;
+  }
+  #buttonRow {
+    text-align: center;
+  }
+  #pet_sitter05_form #buttonRow input {
+    width: 300px;
+    height: 50px;
+  }
+  #tags button {
+    width: 120px;
   }
   #middle {
     padding-bottom: 20px;

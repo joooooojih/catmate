@@ -15,10 +15,12 @@
   <script>
 $(document).ready(function() {
 	
-	var submit_check = false;
+	var submit_switch = false;
 	
   $("#certification").click(function() {
-	  alert("잠시만 기다려주세요.");
+	  alert("인증 번호를 보내는 중입니다.");
+	  $("#certificationDiv2").remove();
+	  
     $.ajax({
     	
       type: "get",
@@ -29,31 +31,29 @@ $(document).ready(function() {
       dataType: "text",
       
       success: function(responseData, status, xhr) {
-    	  $("#certificationDiv2").remove();
-    	  
-    	  if(responseData == "existence") {
+    	  if(responseData == "existence") { // 이미 존재하는 아이디
     		  alert("다른 이메일을 사용해주세요.");
     	  } else {
     		  alert("인증번호가 전송되었습니다.")
     		  
-    		  $("#certificationDiv").after().append(
-    		            '<div class="input-group" id="certificationDiv2">'+
+    		  // 인증번호 input 생성
+    		  $("#certificationDiv").after(
+    		            '<br><div class="input-group" id="certificationDiv2">'+
     		                '<input type="text" id="certification_number" class="form-control" placeholder="인증번호 5자 입력" required maxlength="5">'+
     		                '<div class="input-group-append">'+
     		                  '<input type="button" id="certification_check" class="btn btn-warning text-light" value="확인">'+
     		                '</div>'+
     		             '</div>');
     		  
-    		  $("#certification_check").click(function() {
+    		  $("#certification_check").click(function() { // 인증번호 확인
     			  if(responseData == $("#certification_number").val()) {
-    			     submit_check = true;
+    			     submit_switch = true;
     			     alert("인증되었습니다.");
     			   } else {
-    				   submit_check = false;
+    				   submit_switch = false;
     				   alert("인증 번호가 다릅니다.");
     			   }
     			});
-    		  
     	  }
       },
       
@@ -65,11 +65,11 @@ $(document).ready(function() {
   
   $("#user_email").keyup(function() { // 다른 이메일 입력 시 인증 다시 받게 하기 위함
 	   $("#certificationDiv2").remove();
-	    submit_check = false;
+	    submit_switch = false;
 	  });
   
   $("#signup_form").submit(function() { // 인증 해야 submit 가능
-	  if(submit_check) {
+	  if(submit_switch) {
 		  return true;
 		  
 	  } else {
@@ -92,7 +92,7 @@ $(document).ready(function() {
             <div class="card-body">
               <h1 class="mb-4 text-primary">회원가입</h1>
               <form action="signup" method="post" id="signup_form">
-                <div class="form-group" >
+                <div class="form-group">
                   <div class="input-group" id="certificationDiv">
                     <input type="email" id="user_email" class="form-control" placeholder="이메일" required name="user_email">
                       <div class="input-group-append">
@@ -107,7 +107,7 @@ $(document).ready(function() {
                   <input type="text" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" required name="user_zip_code"><br>
   				        <input type="text" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" required name="user_address"><br>
 				          <input type="text" id="sample6_address2" class="form-control" placeholder="상세주소" name="user_daddress"><br>
-                </div>
+				        </div>
                 <input type="submit" class="btn btn-primary" value="가입하기" id="join">
               </form>
             </div>

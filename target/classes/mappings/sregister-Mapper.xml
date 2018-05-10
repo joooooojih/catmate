@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sregister">
+
+  <insert id="insertPet_sitter01">
+    <![CDATA[
+      INSERT INTO pet_sitter_house (user_email, house_title, house_zip_code, house_address, house_daddress)
+      VALUES (#{user_email}, #{house_title}, #{house_zip_code}, #{house_address}, #{house_daddress})
+    ]]>
+    <selectKey resultType="integer" keyProperty="idx" order="AFTER">
+      <![CDATA[
+        SELECT LAST_INSERT_ID()
+      ]]>
+    </selectKey>
+  </insert>
+  
+  <update id="updatePet_sitter01">
+    <![CDATA[
+      UPDATE pet_sitter_house
+      SET
+      house_title=#{house_title},
+      house_zip_code=#{house_zip_code},
+      house_address=#{house_address},
+      house_daddress=#{house_daddress}
+      WHERE
+      idx = #{idx}
+    ]]>
+  </update>
+  
+  <update id="updatePet_sitter02">
+    <![CDATA[
+      UPDATE pet_sitter_house
+      SET
+      check_in=#{check_in},
+      check_out=#{check_out},
+      day_care=#{day_care},
+      nightly_rate=#{nightly_rate},
+      surcharge=#{surcharge}
+      WHERE
+      idx = #{idx}
+    ]]>
+  </update>
+
+  <update id="updatePet_sitter03">
+    <![CDATA[
+      UPDATE pet_sitter_house
+      SET
+      care_size=#{care_size},
+      care_age=#{care_age},
+      care_space=#{care_space},
+      subway_station=#{subway_station},
+      pick_up=#{pick_up},
+      yard=#{yard},
+      children_under_14=#{children_under_14},
+      live_together=#{live_together},
+      other_animal=#{other_animal},
+      patient_dog=#{patient_dog},
+      license=#{license},
+      outdoor_bowels=#{outdoor_bowels},
+      homemade_snacks=#{homemade_snacks},
+      first_aid=#{first_aid},
+      medication_possible=#{medication_possible}
+      WHERE
+      idx = #{idx}
+    ]]>
+  </update>
+  
+  <insert id="insertRoom_photo">
+    <![CDATA[
+      INSERT INTO room_photo (idx, photo_sequence, room_photo)
+      VALUES (#{idx}, #{photo_sequence}, #{room_photo})
+    ]]>
+  </insert>
+  
+  <update id="updateRoom_photo">
+    <![CDATA[
+      UPDATE room_photo
+      SET
+      room_photo=#{room_photo}
+      WHERE
+      idx = #{idx}
+      AND
+      photo_sequence = #{photo_sequence}
+    ]]>
+  </update>
+
+  <update id="updatePet_sitter05">
+    <![CDATA[
+      UPDATE pet_sitter_house
+      SET
+      sregister=#{sregister}
+      WHERE
+      idx = #{idx}
+    ]]>
+  </update>
+
+</mapper>

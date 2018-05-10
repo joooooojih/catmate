@@ -22,12 +22,13 @@
               <br> 회원님의 펫시터 등록을 도와드리겠습니다. </b>
           </h3>
           <br>
+          <form action="pet_sitter01" method="post">
           <dl>
             <dt>
               <h4 class="text-primary">펫시터 제목</h4>
             </dt>
             <dd>
-              <input type="text" class="form-control" placeholder="제목">
+              <input type="text" name="house_title" class="form-control" placeholder="제목" value="${pet_sitter_house.house_title }">
             </dd>
           </dl>
           <dl>
@@ -35,18 +36,19 @@
               <h4 class="text-primary">주소</h4>
             </dt>
             <dd>
-              <input type="text" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호">
+              <input type="text" name="house_zip_code" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" value="${pet_sitter_house.house_zip_code }">
               <br>
-              <input type="text" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소">
+              <input type="text" name="house_address" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" value="${pet_sitter_house.house_address }">
               <br>
-              <input type="text" id="sample6_address2" class="form-control" placeholder="상세주소"> </dd>
+              <input type="text" name="house_daddress" id="sample6_address2" class="form-control" placeholder="상세주소" value="${pet_sitter_house.house_daddress }"> </dd>
           </dl>
           <br>
           <div class="row" id="buttonRow">
             <div class="col-md-12">
-              <input type="submit" class="btn btn-primary" value="다음" id="next"> 
+              <input type="submit" class="btn btn-primary" value="다음"> 
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>

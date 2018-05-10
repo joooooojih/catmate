@@ -13,9 +13,9 @@ public class MemberServiceImpl implements MemberService {
     MemberDao memberDao;
     
     @Override
-    public User_profileDto getUser_profile(User_profileDto user_profileDto) {
+    public User_profileDto getUser_profile(String user_email) {
         
-        return memberDao.getUser_profile(user_profileDto);
+        return memberDao.getUser_profile(user_email);
     }
 
     @Override

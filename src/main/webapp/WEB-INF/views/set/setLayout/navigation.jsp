@@ -3,13 +3,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <!-- Navigation -->
+  <style>
+    #navImg {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
   <c:choose>
-  	<c:when test="${scrren eq 'main' }">
-  	  <c:set var="navClass" value="navbar navbar-expand-lg navbar-light fixed-top"/>
-  	</c:when>
-  	<c:otherwise>
-  	  <c:set var="navClass" value="navbar navbar-expand-lg bg-warning fixed-top"/>
-  	</c:otherwise>
+    <c:when test="${scrren eq 'main' }">
+      <c:set var="navClass" value="navbar navbar-expand-lg navbar-light fixed-top"/>
+    </c:when>
+    <c:otherwise>
+      <c:set var="navClass" value="navbar navbar-expand-lg bg-warning fixed-top"/>
+    </c:otherwise>
   </c:choose>
   <nav class="${navClass }" id="mainNav">
     <div class="container">
@@ -37,10 +43,23 @@
             <a class="nav-link js-scroll-trigger" href="${item_two_href }">${item_two_title }</a>
           </li>
           <c:if test="${!empty user_profile }">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
-            </li>
-          </c:if>
+          <li class="nav-item">
+            <div class="btn-group">
+              <a class="nav-link js-scroll-trigger text-muted dropdown-toggle" data-toggle="dropdown"> ${user_profile.user_name } </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">메시지</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">위시리스트</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">강아지 등록</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">개인정보변경</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
+              </div>
+            </div>
+          </li>
+        </c:if>
         </ul>
       </div>
     </div>

@@ -16,7 +16,7 @@
   #subtitle {
     text-align: center;
   }
-  #imgHeight {
+  #mainImg {
     height: 270px;
   }
   #reviewsGrade {
@@ -34,7 +34,7 @@
   #bottomRow{
     border-top:1px solid silver;
   }
-  #subtitleImg {
+  #subImg {
     width: 30px;
     height: 30px;
   }

@@ -5,52 +5,21 @@
 <mapper namespace="Member">
 
   <select id="getUser_profile" resultType="User_profile">
-    SELECT * FROM user_profile 
-    WHERE 
-    user_email = #{user_email} 
+    <![CDATA[
+      SELECT * FROM user_profile 
+      WHERE 
+      user_email = #{user_email}
+    ]]>
   </select>
 
   <insert id="insertUser_profile">
-    INSERT INTO user_profile 
-    (user_email, user_password, user_name, user_birth, user_phone, user_zip_code, user_address, user_daddress, user_grade)
-    VALUES(#{user_email}, #{user_password}, #{user_name}, #{user_birth}, #{user_phone}, #{user_zip_code}, #{user_address}, #{user_daddress}, #{user_grade})
+    <![CDATA[
+      INSERT INTO user_profile 
+      (user_email, user_password, user_name, user_birth, user_phone, user_zip_code, user_address, user_daddress, user_grade)
+      VALUES(#{user_email}, #{user_password}, #{user_name}, #{user_birth}, #{user_phone}, #{user_zip_code}, #{user_address}, #{user_daddress}, #{user_grade})
+    ]]>
   </insert>
-	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">
-		SELECT
-		columnname1,
-		columnname2,
-		columnname3
-		FROM tablename1
-		WHERE columnname1 = #{value}
-	</select>
-
-	<resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
-	</select>
-
-
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO user_profile (USER_EMAIL, USER_PASSWORD, USER_PHOTO, USER_NAME, USER_BIRTH, USER_PHONE, USER_ZIP_CODE, USER_ADDRESS, USER_DADDRESS, USER_GRADE)
-		VALUES(#{value1},#{value2},#{value3})
-	</insert>
-
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
-	</update>
-
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete> -->
+  
+  
 
 </mapper>

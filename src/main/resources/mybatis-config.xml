@@ -10,6 +10,7 @@
 	
 	<mappers>
 	 <mapper resource="mappings/member-Mapper.xml" />
-	 
+	 <mapper resource="mappings/sregister-Mapper.xml"/>
+	 <mapper resource="mappings/reserve-Mapper.xml"/>
 	</mappers>
 </configuration>

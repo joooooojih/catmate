@@ -3,7 +3,7 @@
   dd {
     padding-bottom: 10px;
   }
-  #next {
+  form #buttonRow input {
     width: 150px;
   }
   #buttonRow {

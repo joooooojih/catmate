@@ -17,7 +17,7 @@ public class Pet_sitter_houseDto {
     private int day_care;
     private int nightly_rate;
     private int surcharge;
-    private String care_size;
+    private int care_size;
     private String care_age;
     private String care_space;
     private String subway_station;
@@ -104,10 +104,10 @@ public class Pet_sitter_houseDto {
     public void setSurcharge(int surcharge) {
         this.surcharge = surcharge;
     }
-    public String getCare_size() {
+    public int getCare_size() {
         return care_size;
     }
-    public void setCare_size(String care_size) {
+    public void setCare_size(int care_size) {
         this.care_size = care_size;
     }
     public String getCare_age() {

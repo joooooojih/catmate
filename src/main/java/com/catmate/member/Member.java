@@ -44,7 +44,7 @@ public class Member {
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, User_profileDto loginUser_profileDto, HttpSession session) {
-	    User_profileDto user_profileDto = memberService.getUser_profile(loginUser_profileDto);
+	    User_profileDto user_profileDto = memberService.getUser_profile(loginUser_profileDto.getUser_email());
 	    
 	    if(user_profileDto == null) {
 	        return "member/login"; // 일치하는 이메일 없음 //로그인 실패
@@ -84,7 +84,7 @@ public class Member {
 	// 회원가입 이메일 AJAX
 	@RequestMapping(value="/member/signupEmail", method=RequestMethod.GET)
     public void signupEmail(User_profileDto confirmUser_profile, HttpServletResponse response) throws AddressException, MessagingException, IOException {
-	    User_profileDto user_profileDto = memberService.getUser_profile(confirmUser_profile);
+	    User_profileDto user_profileDto = memberService.getUser_profile(confirmUser_profile.getUser_email());
 	    if(user_profileDto == null) {
 	        
 	        String content = "";
