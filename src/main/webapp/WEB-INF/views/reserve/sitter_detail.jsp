@@ -281,6 +281,5 @@
     </div>
   </section>
   <jsp:include page="../set/setLayout/footer.jsp" flush="false"/>
-  <jsp:include page="../set/setLink/script.jsp" flush="false"/>
 </body>
 </html>

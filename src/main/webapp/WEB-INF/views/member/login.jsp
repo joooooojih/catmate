@@ -36,6 +36,5 @@
       </div>
     </div>
   </section>
-  <jsp:include page="../set/setLink/script.jsp" flush="false"/>
 </body>
 </html>

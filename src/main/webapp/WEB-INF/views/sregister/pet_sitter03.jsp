@@ -99,7 +99,14 @@
                 <br>
                 <div class="row">
                   <div class="col-md-12">
-                    <input type="text" name="subway_station" id="subway_station" class="form-control" placeholder="인근 지하철 역" value="${pet_sitter_house.subway_station }"> 
+                    <c:choose>
+                      <c:when test="${pet_sitter_house.subway_station eq '없습니다.'}">
+                        <input type="text" name="subway_station" id="subway_station" class="form-control" placeholder="인근 지하철 역">
+                      </c:when>
+                      <c:otherwise>
+                        <input type="text" name="subway_station" id="subway_station" class="form-control" placeholder="인근 지하철 역" value="${pet_sitter_house.subway_station }">
+                      </c:otherwise>
+                    </c:choose>
                   </div>
                 </div>
                 <br>
@@ -190,6 +197,5 @@
     </div>
   </section>
   <jsp:include page="../set/setLayout/footer.jsp" flush="false"/>
-  <jsp:include page="../set/setLink/script.jsp" flush="false"/>
 </body>
 </html>

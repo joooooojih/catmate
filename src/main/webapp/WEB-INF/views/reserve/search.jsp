@@ -8,6 +8,16 @@
 <title>캣메이트 펫시터 맡기기 검색</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
   <link href="${pageContext.request.contextPath }/resources/reserve/css/search.css" rel="stylesheet"/>
+  <script>
+    $(document).ready(function() {
+    	$("#start_datepicker").datepicker({
+    		  hangeMonth: true, 
+            changeYear: true,
+            nextText: '다음 달',
+            prevText: '이전 달' 
+      });
+    });
+  </script>
 </head>
 <body draggable="true">
   <jsp:include page="../set/setLayout/navigation.jsp" flush="false"/>
@@ -22,7 +32,7 @@
               <option>24시간 돌봄</option>
               <option>데이케어</option>
             </select>&nbsp;&nbsp;&nbsp;
-            <input type="button" class="btn btn-light" value="예약일">&nbsp;&nbsp;&nbsp;
+            <input type="text" id="start_datepicker" class="btn btn-light" value="예약일">&nbsp;&nbsp;&nbsp;
             <select class="btn btn-light">
               <option>모든연령</option>
               <option>강아지 (1살 이하)</option>
@@ -149,6 +159,5 @@
   
   
   <jsp:include page="../set/setLayout/footer.jsp" flush="false"/>
-  <jsp:include page="../set/setLink/script.jsp" flush="false"/>
 </body>
 </html>

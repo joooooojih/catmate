@@ -158,6 +158,26 @@ public class Pet_sitter {
                 string_care_age += ", ";
             }
         }
+        
+        if(pet_sitter_houseDto.getPatient_dog() == null) {
+            pet_sitter_houseDto.setPatient_dog("no");
+        }
+        if(pet_sitter_houseDto.getLicense() == null) {
+            pet_sitter_houseDto.setLicense("no");
+        }
+        if(pet_sitter_houseDto.getOutdoor_bowels() == null) {
+            pet_sitter_houseDto.setOutdoor_bowels("no");
+        }
+        if(pet_sitter_houseDto.getHomemade_snacks() == null) {
+            pet_sitter_houseDto.setHomemade_snacks("no");
+        }
+        if(pet_sitter_houseDto.getFirst_aid() == null) {
+            pet_sitter_houseDto.setFirst_aid("no");
+        }
+        if(pet_sitter_houseDto.getMedication_possible() == null) {
+            pet_sitter_houseDto.setMedication_possible("no");
+        }
+        
         pet_sitter_houseDto.setCare_age(string_care_age);
         pet_sitter_houseDto.setIdx((int) session.getAttribute("idx"));
 
@@ -189,7 +209,6 @@ public class Pet_sitter {
         idx_check(session, request);
         List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photo");
 
-        System.out.println(savePath);
         for(int i = 0; i < room_photoDto.getUploadFile().size(); i++) {
 
             if(!room_photoDto.getUploadFile().get(i).isEmpty()) {  // 값을 변경 한 파일만
@@ -213,7 +232,6 @@ public class Pet_sitter {
                 }
             }
         }
-
         return "redirect:pet_sitter05";
     }
 
