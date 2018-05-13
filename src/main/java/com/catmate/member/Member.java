@@ -74,10 +74,11 @@ public class Member {
 	}
 	
 	@RequestMapping(value="/member/signup", method=RequestMethod.POST)
-	public String signup(HttpServletRequest request, User_profileDto user_profileDto) {
+	public String signup(HttpServletRequest request, HttpSession session, User_profileDto user_profileDto) {
 	    
 	    user_profileDto.setUser_password(passwordEncoder.encode(user_profileDto.getUser_password())); // 비밀번호 인코딩
 	    memberService.insertUser_profile(user_profileDto);
+	    session.setAttribute("user_profile", memberService.getUser_profile(user_profileDto.getUser_email()));
 		return "redirect:/";
 	}
 	

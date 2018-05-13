@@ -11,7 +11,7 @@
   <script>
     $(document).ready(function() { // 이전
 	    $("#previous").click(function() {
-	      location.href = "pet_sitter02";
+	    	$(location).attr("href", "pet_sitter02");
 	    })
 	  });
   

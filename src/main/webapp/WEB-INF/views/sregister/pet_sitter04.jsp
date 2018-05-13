@@ -36,7 +36,7 @@
   <script>
     $(document).ready(function() { // 이전
       $("#previous").click(function() {
-        location.href = "pet_sitter03";
+    	  $(location).attr("href", "pet_sitter03");
       })
     });
     
@@ -44,7 +44,7 @@
     	$("#pet_sitter04_form").submit(function() {
     		 var submit_switch = true;
     		 if(!${submit_check}) {  // 처음이면
-    			 $("input[type=file]").each(function(index) {  // 파일 5개 다 올려야 가능
+    			 $("input[id^=file]").each(function(index) {  // 파일 5개 다 올려야 가능
                 if($("#file" + index).val() == "") {
                   submit_switch = false;
                }
@@ -94,8 +94,8 @@
               <b>사진을 등록해주세요! </b>
             </h3>
             <c:if test="${submit_check }">
-              <c:forEach var="room_photo_value" items="${room_photo }">
-                <input type="hidden" value="${room_photo_value.room_photo }">
+              <c:forEach var="room_photo" items="${room_photoList }">
+                <input type="hidden" value="${room_photo.room_photo }">
               </c:forEach>
             </c:if>
             <br>

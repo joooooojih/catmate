@@ -43,7 +43,7 @@ public class Pet_sitter {
             Map<String, Object> map = reserveService.getPet_sitter_house(idx);
 
             request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
-            request.setAttribute("room_photo", map.get("room_photo"));
+            request.setAttribute("room_photoList", map.get("room_photo"));
 
         }
     }
@@ -192,7 +192,7 @@ public class Pet_sitter {
 
         idx_check(session, request);
 
-        List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photo");
+        List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");
         if(room_photoList.isEmpty()) {
             request.setAttribute("submit_check", false);
         } else {
@@ -207,7 +207,7 @@ public class Pet_sitter {
         room_photoDto.setIdx((int) session.getAttribute("idx"));
 
         idx_check(session, request);
-        List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photo");
+        List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");
 
         for(int i = 0; i < room_photoDto.getUploadFile().size(); i++) {
 
@@ -243,7 +243,7 @@ public class Pet_sitter {
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         User_profileDto pet_sitter_user_profile = memberService.getUser_profile(pet_sitter_houseDto.getUser_email());
         
-        request.setAttribute("pet_sitter_user_profile", pet_sitter_user_profile);
+        request.setAttribute("house_user_profile", pet_sitter_user_profile);
         request.setAttribute("sregister", "sregister");
         return "reserve/sitter_detail";
     }
@@ -255,6 +255,8 @@ public class Pet_sitter {
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         pet_sitter_houseDto.setSregister("yes");
         sregisterService.updatePet_sitter05(pet_sitter_houseDto);
+        
+        session.setAttribute("idx", null);
         
         return "reserve/sitter_detail";
     }

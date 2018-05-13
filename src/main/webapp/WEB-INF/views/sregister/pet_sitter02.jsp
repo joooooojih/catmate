@@ -10,7 +10,7 @@
   <script>
   $(document).ready(function() { // 이전
 	  $("#previous").click(function() {
-		  location.href = "pet_sitter01";
+		  $(location).attr("href", "pet_sitter01");
 	  })
   });
   </script>

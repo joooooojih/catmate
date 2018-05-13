@@ -1,5 +1,8 @@
 package com.catmate.dto;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("Reservation")
@@ -7,8 +10,8 @@ public class ReservationDto {
 
     private int idx;
     private String user_email;
-    private String start_date;
-    private String last_date;
+    private Date start_day;
+    private Date end_day;
     private int how_many;
     public int getIdx() {
         return idx;
@@ -22,17 +25,17 @@ public class ReservationDto {
     public void setUser_email(String user_email) {
         this.user_email = user_email;
     }
-    public String getStart_date() {
-        return start_date;
+    public Date getStart_day() {
+        return start_day;
     }
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setStart_day(Date start_day) {
+        this.start_day = start_day;
     }
-    public String getLast_date() {
-        return last_date;
+    public Date getEnd_day() {
+        return end_day;
     }
-    public void setLast_date(String last_date) {
-        this.last_date = last_date;
+    public void setEnd_day(Date end_day) {
+        this.end_day = end_day;
     }
     public int getHow_many() {
         return how_many;
