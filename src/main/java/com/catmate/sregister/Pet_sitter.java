@@ -34,7 +34,7 @@ public class Pet_sitter {
     public void idx_check(HttpSession session, HttpServletRequest request) {
         int idx;
         try {
-            idx = (int) session.getAttribute("idx");
+            idx = Integer.parseInt((String) session.getAttribute("idx"));
         } catch(Exception e) {
             idx = 0;
             session.setAttribute("idx", 0);
@@ -60,7 +60,7 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter01", method=RequestMethod.POST)
     public String pet_sitter01(HttpServletRequest request, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto) {
 
-        int idx = (int) session.getAttribute("idx");
+        int idx = Integer.parseInt((String) session.getAttribute("idx")); 
         if(idx == 0) {
             User_profileDto user_profile = (User_profileDto) session.getAttribute("user_profile");
             pet_sitter_houseDto.setUser_email(user_profile.getUser_email());
@@ -124,7 +124,7 @@ public class Pet_sitter {
         string_check_out += " : ";
         string_check_out += check_out[3];
 
-        pet_sitter_houseDto.setIdx((int) session.getAttribute("idx"));
+        pet_sitter_houseDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
         pet_sitter_houseDto.setCheck_in(string_check_in);
         pet_sitter_houseDto.setCheck_out(string_check_out);
 
@@ -179,7 +179,7 @@ public class Pet_sitter {
         }
         
         pet_sitter_houseDto.setCare_age(string_care_age);
-        pet_sitter_houseDto.setIdx((int) session.getAttribute("idx"));
+        pet_sitter_houseDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
 
         sregisterService.updatePet_sitter03(pet_sitter_houseDto);
 
@@ -204,7 +204,7 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter04", method=RequestMethod.POST)
     public String pet_sitter04(HttpServletRequest request, HttpSession session, Room_photoDto room_photoDto) {
         String savePath = request.getServletContext().getRealPath("\\resources\\pet_sitter\\img\\");
-        room_photoDto.setIdx((int) session.getAttribute("idx"));
+        room_photoDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
 
         idx_check(session, request);
         List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");

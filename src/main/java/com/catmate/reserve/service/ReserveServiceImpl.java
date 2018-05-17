@@ -70,8 +70,8 @@ public class ReserveServiceImpl implements ReserveService{
             }
         }
 
-        List<List<Room_photoDto>> room_photoList = new ArrayList<>();
-        List<User_profileDto> user_profileList = new ArrayList<>();
+        List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
+        List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
 
         for(Pet_sitter_houseDto pet_sitter_house : pet_sitter_houseList) {
             room_photoList.add(reserveDao.getRoom_photoDto(pet_sitter_house.getIdx()));

@@ -51,6 +51,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">위시리스트</a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">예약 내역</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">강아지 등록</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">개인정보변경</a>

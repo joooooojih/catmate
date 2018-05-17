@@ -56,7 +56,7 @@ public class ReserveDaoImpl implements ReserveDao {
         Pet_sitter_houseDto pet_sitter_house_searchDto = null;
         try {
         pet_sitter_house_searchDto = sqlSession.selectOne("reserve.getPet_sitter_house_search", pet_sitter_houseDto);
-        } catch(Exception e) {e.printStackTrace();}
+        } catch(Exception e) {}
         return pet_sitter_house_searchDto;
     }
 

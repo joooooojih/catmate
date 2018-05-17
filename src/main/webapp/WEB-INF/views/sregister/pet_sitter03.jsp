@@ -69,6 +69,7 @@
                     <c:forEach begin="1" end="15" var="i">
                       <option value="${i }">0~${i }kg 까지 케어 가능합니다.</option>
                     </c:forEach>
+                    <option value="16">모든 크기 케어 가능합니다.</option>
                   </select>
                 </div>
               </dd>

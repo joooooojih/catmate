@@ -29,7 +29,7 @@
       SELECT * FROM pet_sitter_house
       WHERE 
       idx = #{idx}
-      <if test="care_space == '아파트'">
+      <if test="care_space != null and care_space == '아파트'">
         AND care_space = #{care_space}
       </if>
       <if test="pick_up != null and pick_up == 'yes'">
@@ -59,16 +59,23 @@
       <if test="medication_possible != null and medication_possible == 'yes'">
         AND medication_possible = #{medication_possible}
       </if>
-      <if test="care_age != null">
+      <if test="care_age != '모든연령' and care_age != null">
         <![CDATA[
           AND care_age LIKE CONCAT('%', #{care_age}, '%')
         ]]>
         </if>
-      <if test="care_size != 0">
-        <![CDATA[
-          AND care_size <= #{care_size}
-        ]]>
-      </if>
+      <choose>
+        <when test="care_size != 0 and care_size != 16">
+          <![CDATA[
+            AND care_size <= #{care_size}
+          ]]>
+        </when>
+        <when test="care_size == 16">
+          <![CDATA[
+            AND care_size == #{care_size}
+          ]]>
+        </when>
+      </choose>
   </select>
   
   <insert id="insertReservation">
