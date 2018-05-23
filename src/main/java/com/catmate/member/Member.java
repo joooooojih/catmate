@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.catmate.dto.User_profileDto;
 import com.catmate.mail.Send_mail;
-import com.catmate.member.service.MemberService;
+import com.catmate.mypage.service.MypageService;
 
 @Controller
 public class Member {
     
     @Autowired
-    MemberService memberService;
+    MypageService mypageService;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
     @Autowired
@@ -44,7 +44,7 @@ public class Member {
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, User_profileDto loginUser_profileDto, HttpSession session) {
-	    User_profileDto user_profileDto = memberService.getUser_profile(loginUser_profileDto.getUser_email());
+	    User_profileDto user_profileDto = mypageService.getUser_profile(loginUser_profileDto.getUser_email());
 	    
 	    if(user_profileDto == null) {
 	        return "member/login"; // 일치하는 이메일 없음 //로그인 실패
@@ -77,15 +77,15 @@ public class Member {
 	public String signup(HttpServletRequest request, HttpSession session, User_profileDto user_profileDto) {
 	    
 	    user_profileDto.setUser_password(passwordEncoder.encode(user_profileDto.getUser_password())); // 비밀번호 인코딩
-	    memberService.insertUser_profile(user_profileDto);
-	    session.setAttribute("user_profile", memberService.getUser_profile(user_profileDto.getUser_email()));
+	    mypageService.insertUser_profile(user_profileDto);
+	    session.setAttribute("user_profile", mypageService.getUser_profile(user_profileDto.getUser_email()));
 		return "redirect:/";
 	}
 	
 	// 회원가입 이메일 AJAX
 	@RequestMapping(value="/member/signupEmail", method=RequestMethod.GET)
     public void signupEmail(User_profileDto confirmUser_profile, HttpServletResponse response) throws AddressException, MessagingException, IOException {
-	    User_profileDto user_profileDto = memberService.getUser_profile(confirmUser_profile.getUser_email());
+	    User_profileDto user_profileDto = mypageService.getUser_profile(confirmUser_profile.getUser_email());
 	    if(user_profileDto == null) {
 	        
 	        String content = "";
@@ -100,7 +100,6 @@ public class Member {
 	    } else {
 	        response.getWriter().print("existence");
 	    }
-	    
 	    
     }
 }

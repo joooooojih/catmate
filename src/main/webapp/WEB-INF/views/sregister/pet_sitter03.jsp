@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>캣메이트 펫 시터 등록</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/pet_sitter/css/common.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/pet_sitter_common.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() { // 이전
 	    $("#previous").click(function() {
@@ -42,8 +42,8 @@
   <section class="py-5">
     <div class="container">
       <div class="row" >
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
+        <div class="col-md-2"> </div>
+        <div class="col-md-8">
           <div class="card text-dark p-5 bg-default">
             <h3>
               <b>돌봄 환경을 입력해주세요.</b>
@@ -66,10 +66,9 @@
               <dd>
                 <div class="col-md-12">
                   <select class="form-control" name="care_size" id="care_size" >
-                    <c:forEach begin="1" end="15" var="i">
-                      <option value="${i }">0~${i }kg 까지 케어 가능합니다.</option>
-                    </c:forEach>
-                    <option value="16">모든 크기 케어 가능합니다.</option>
+                    <option value="5">소형견(0~4.9kg) 케어 가능합니다.</option>
+                    <option value="15">중형견(5~14.9kg) 케어 가능합니다.</option>
+                    <option value="16">대형견(15kg 이상) 케어 가능합니다.</option>
                   </select>
                 </div>
               </dd>
@@ -123,7 +122,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <select class="form-control" name="yard" id="yard">
-                      <option value="없습니다." selected="selected">마당 없습니다.</option>
+                      <option value="없습니다." selected>마당 없습니다.</option>
                       <option value="있습니다.">마당 있습니다.</option>
                     </select>
                   </div>

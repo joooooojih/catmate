@@ -93,20 +93,26 @@ $(document).ready(function() {
               <h1 class="mb-4 text-primary">회원가입</h1>
               <form action="signup" method="post" id="signup_form">
                 <div class="form-group">
-                  <div class="input-group" id="certificationDiv">
-                    <input type="email" id="user_email" class="form-control" placeholder="이메일" required name="user_email">
-                      <div class="input-group-append">
-                       <input type="button" id="certification" class="btn btn-warning text-light" value="인증">
-                      </div>
+                  <div class="col-md-12">
+                    <div class="input-group" id="certificationDiv">
+                      <input type="email" id="user_email" class="form-control" placeholder="이메일" required name="user_email">
+                        <div class="input-group-append">
+                        <input type="button" id="certification" class="btn btn-warning text-light" value="인증">
+                        </div>
+                    </div>
+                    <br>
+                    <input type="password" class="form-control" placeholder="비밀번호" required name="user_password"><br>
+                    <input type="text" class="form-control" placeholder="이름" required name="user_name"><br>
+                    <input type="text" class="form-control" placeholder="생년월일  8자리" maxlength="8" required name="user_birth"><br>
+                    <input type="text" class="form-control" placeholder="휴대폰 번호 -없이 11자리 입력" maxlength="11" required name="user_phone"><br>
                   </div>
-                  <br>
-                  <input type="password" class="form-control" placeholder="비밀번호" required name="user_password"><br>
-                  <input type="text" class="form-control" placeholder="이름" required name="user_name"><br>
-                  <input type="text" class="form-control" placeholder="생년월일  8자리" maxlength="8" required name="user_birth"><br>
-                  <input type="text" class="form-control" placeholder="휴대폰 번호 -없이 11자리 입력" maxlength="11" required name="user_phone"><br>
-                  <input type="text" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" required name="user_zip_code"><br>
-  				        <input type="text" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" required name="user_address"><br>
-				          <input type="text" id="sample6_address2" class="form-control" placeholder="상세주소" name="user_daddress"><br>
+                  <div class="col-md-6">
+                    <input type="text" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" required name="user_zip_code"><br>
+                  </div>
+                  <div class="col-md-12">
+                    <input type="text" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" required name="user_address"><br>
+                    <input type="text" id="sample6_address2" class="form-control" placeholder="상세주소" name="user_daddress"><br>
+                  </div>
 				        </div>
                 <input type="submit" class="btn btn-primary" value="가입하기" id="join">
               </form>

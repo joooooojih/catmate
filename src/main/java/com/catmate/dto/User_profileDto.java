@@ -1,6 +1,7 @@
 package com.catmate.dto;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 @Alias("User_profile")
 public class User_profileDto {
@@ -15,6 +16,7 @@ public class User_profileDto {
     private String user_address;
     private String user_daddress;
     private int user_grade;
+    private MultipartFile uploadFile;
     
     public String getUser_phone() {
         return user_phone;
@@ -76,5 +78,10 @@ public class User_profileDto {
     public void setUser_grade(int user_grade) {
         this.user_grade = user_grade;
     }
-    
+    public MultipartFile getUploadFile() {
+        return uploadFile;
+    }
+    public void setUploadFile(MultipartFile uploadFile) {
+        this.uploadFile = uploadFile;
+    }
 }

@@ -28,79 +28,97 @@ public class Sitter_detail {
 
     @Autowired
     ReserveService reserveService;
-    
+
     @RequestMapping(value="reserve/sitter_detail", method=RequestMethod.GET)
     public String sitter_detail(HttpServletRequest request) {
-        
+
         String idx = (String)request.getParameter("idx");
-        if(idx != null) {
-            
-            Map<String, Object> map = reserveService.getPet_sitter_house(Integer.parseInt(idx));
-            List<ReservationDto> reservationList = reserveService.getReservation(Integer.parseInt(idx));
-            List<String> disable_dayList = new ArrayList<String>();
-            
-            for(ReservationDto reservationDto : reservationList) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                
-                Calendar c1 = Calendar.getInstance();
-                Calendar c2 = Calendar.getInstance();
-                
-                c1.setTime(reservationDto.getStart_day());
-                c2.setTime(reservationDto.getEnd_day());
-                
-                while(c1.compareTo(c2) != 1) {
-                    disable_dayList.add(sdf.format(c1.getTime()));
-                    c1.add(Calendar.DATE, 1);
-                }
-            }
-            
-            request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
-            request.setAttribute("room_photoList", map.get("room_photo"));
-            request.setAttribute("house_user_profile", map.get("user_profile"));
-            request.setAttribute("disable_dayList", disable_dayList);
-            
-            // 날짜 disable 걸어야됨
+        
+        List<String> area_textList = new ArrayList<String>();
+        area_textList.add("전체");
+        area_textList.add("서울");
+        area_textList.add("인천");
+        area_textList.add("경기");
+        area_textList.add("부산");
+        
+        List<Integer> area_countList = new ArrayList<Integer>();
+        for(String area_text : area_textList) {
+            area_countList.add(reserveService.getAreaCount(area_text));
         }
         
-        
-        return "reserve/sitter_detail";
+        String return_text = "redirect:search";
+        if(idx != null) {
+
+            Map<String, Object> map = reserveService.getSitter_detail(Integer.parseInt(idx));
+            Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) map.get("pet_sitter_house");
+
+            if(pet_sitter_houseDto.getSregister().equals("yes")) {
+                List<ReservationDto> reservationList = reserveService.getReservation(Integer.parseInt(idx));
+                List<String> disable_dayList = new ArrayList<String>();
+
+                for(ReservationDto reservationDto : reservationList) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                    Calendar start_cal = Calendar.getInstance();
+                    Calendar end_cal = Calendar.getInstance();
+
+                    start_cal.setTime(reservationDto.getStart_day());
+                    end_cal.setTime(reservationDto.getEnd_day());
+
+                    while(start_cal.compareTo(end_cal) != 1) {
+                        disable_dayList.add(sdf.format(start_cal.getTime()));
+                        start_cal.add(Calendar.DATE, 1);
+                    }
+                }
+                request.setAttribute("area_text", area_textList);
+                request.setAttribute("area_count", area_countList);
+                
+                request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
+                request.setAttribute("room_photoList", map.get("room_photo"));
+                request.setAttribute("house_user_profile", map.get("user_profile"));
+                request.setAttribute("disable_dayList", disable_dayList);
+                
+                return_text = "reserve/sitter_detail";
+            }
+        }
+        return return_text;
     }
-    
+
     // insert reservation
     @RequestMapping(value="reserve/sitter_detail", method=RequestMethod.POST)
     public void sitter_detail(HttpServletRequest request, HttpSession session, ReservationDto reservationDto) {
-        
+
         User_profileDto user_profileDto = (User_profileDto) session.getAttribute("user_profile");
         reservationDto.setUser_email(user_profileDto.getUser_email());
-        
+
         reservationDto.setStart_day(Date.valueOf(request.getParameter("start_date")));
         reservationDto.setEnd_day(Date.valueOf(request.getParameter("end_date")));
-        
+
         reserveService.insertReservation(reservationDto);
-        
+
     }
-    
+
     // 유효성 검사
     @RequestMapping(value="reserve/sitter_detail_price_check", method=RequestMethod.GET)
     public void sitter_detail_price_check(HttpServletRequest request, HttpServletResponse response, ReservationDto reservationDto) throws IOException {
-        
+
         int day = -1;
         int total_price = 0;
         int excess_amount = 0;
-        Map<String, Object> map = reserveService.getPet_sitter_house(reservationDto.getIdx());
+        Map<String, Object> map = reserveService.getSitter_detail(reservationDto.getIdx());
         Pet_sitter_houseDto pet_sitter_houseDto =  (Pet_sitter_houseDto) map.get("pet_sitter_house");
-        
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        
-        c1.setTime(Date.valueOf(request.getParameter("start_date")));
-        c2.setTime(Date.valueOf(request.getParameter("end_date")));
-        
-        while(c1.compareTo(c2) != 1) {  // 며칠 인지 구함
-            day++;
-            c1.add(Calendar.DATE, 1);
+
+        Calendar start_cal = Calendar.getInstance();
+        Calendar end_cal = Calendar.getInstance();
+
+        start_cal.setTime(Date.valueOf(request.getParameter("start_date")));
+        end_cal.setTime(Date.valueOf(request.getParameter("end_date")));
+
+        while(start_cal.compareTo(end_cal) != 1) {  // 며칠 인지 구함
+            ++day;
+            start_cal.add(Calendar.DATE, 1);
         }
-        
+
         if(day == 0) { // 데이케어
             excess_amount = pet_sitter_houseDto.getDay_care() + (pet_sitter_houseDto.getSurcharge() * reservationDto.getHow_many());
         } else {
@@ -108,6 +126,6 @@ public class Sitter_detail {
         }
         total_price = excess_amount + excess_amount / 10;
         response.getWriter().print(total_price);
-        
+
     }
 }

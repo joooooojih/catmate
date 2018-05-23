@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Mypage">
+
+
+  <!-- 개인정보 관련 -->
+  <select id="getUser_profile" resultType="User_profile">
+    <![CDATA[
+      SELECT * FROM user_profile 
+      WHERE 
+      user_email=#{user_email}
+    ]]>
+  </select>
+
+  <insert id="insertUser_profile">
+    <![CDATA[
+      INSERT INTO user_profile 
+      (user_email, user_password, user_name, user_birth, user_phone, user_zip_code, user_address, user_daddress, user_grade)
+      VALUES(#{user_email}, #{user_password}, #{user_name}, #{user_birth}, #{user_phone}, #{user_zip_code}, #{user_address}, #{user_daddress}, #{user_grade})
+    ]]>
+  </insert>
+
+	<update id="updateUser_profile">
+	  <![CDATA[
+		  UPDATE user_profile
+		  SET
+		  user_photo=#{user_photo},
+		  user_birth=#{user_birth},
+		  user_phone=#{user_phone},
+		  user_zip_code=#{user_zip_code},
+		  user_address=#{user_address},
+		  user_daddress=#{user_daddress}
+		  WHERE
+		  user_email=#{user_email}
+		]]>
+	</update>
+
+  <update id="updateUser_profile_pass">
+    <![CDATA[
+      UPDATE user_profile
+      SET
+      user_password=#{user_password}
+      WHERE
+      user_email=#{user_email}
+    ]]>
+  </update>
+  
+  <delete id="deleteUser_profile">
+    <![CDATA[
+      DELETE FROM user_profile
+      WHERE 
+      user_email=#{user_email}
+    ]]>
+  </delete>
+  
+  <!-- 예약 내역 -->
+  <select id="getReservation_mypageList" resultType="Reservation">
+    <![CDATA[
+      SELECT * FROM reservation 
+      WHERE
+      user_email=#{user_email}
+      ORDER BY
+      start_day asc
+    ]]>
+  </select>
+  
+  <select id="getMy_pet_sitter_houseList" resultType="Pet_sitter_house">
+    <![CDATA[
+      SELECT * FROM pet_sitter_house
+      WHERE
+      user_email=#{user_email}
+      ORDER BY
+      idx asc
+    ]]>
+  </select>
+  
+  <select id="getMy_reservationList" resultType="Reservation">
+    SELECT * FROM reservation
+    <foreach collection="list" item="pet_sitter_house" separator="or" open="WHERE">
+      idx = #{pet_sitter_house.idx}
+    </foreach>
+    AND
+    <![CDATA[
+      end_day >= now()
+      ORDER BY
+      start_day asc
+    ]]>
+  </select>
+  
+  <!-- 강아지 등록 -->
+  <select id="getPet_profileList" resultType="Pet_profile">
+    <![CDATA[
+      SELECT * FROM pet_profile
+      WHERE
+      user_email=#{user_email}
+    ]]>
+  </select>
+  
+  <select id="getPet_profile" resultType="Pet_profile">
+    <![CDATA[
+      SELECT * FROM pet_profile
+      WHERE
+      user_email=#{user_email}
+      AND
+      idx=#{idx}
+    ]]>
+  </select>
+  
+  <insert id="insertPet_profile">
+    <![CDATA[
+      INSERT INTO pet_profile 
+      (
+        user_email,
+        pet_photo,
+        pet_name,
+        pet_gender,
+        pet_kind,
+        pet_weight,
+        pet_birth,
+        registration,
+        neutralization,
+        friendly,
+        barks,
+        disease,
+        feces,
+        mark,
+        separation_anxiety,
+        heartworm,
+        vaccine,
+        corona_enteritis,
+        kennelkov,
+        animal_hospital_name,
+        animal_hospital_telephone,
+        animal_hospital_zip_code,
+        animal_hospital_address,
+        animal_hospital_daddress
+      )
+      VALUES 
+      (
+        #{user_email},
+        #{pet_photo},
+        #{pet_name},
+        #{pet_gender},
+        #{pet_kind},
+        #{pet_weight},
+        #{pet_birth},
+        #{registration},
+        #{neutralization},
+        #{friendly},
+        #{barks},
+        #{disease},
+        #{feces},
+        #{mark},
+        #{separation_anxiety},
+        #{heartworm},
+        #{vaccine},
+        #{corona_enteritis},
+        #{kennelkov},
+        #{animal_hospital_name},
+        #{animal_hospital_telephone},
+        #{animal_hospital_zip_code},
+        #{animal_hospital_address},
+        #{animal_hospital_daddress}
+      )
+    ]]>
+  </insert>
+  
+  <update id="updatePet_profile">
+    <![CDATA[
+      UPDATE pet_profile
+      SET
+      pet_name=#{pet_name},
+      pet_photo=#{pet_photo},
+      pet_gender=#{pet_gender},
+      pet_kind=#{pet_kind},
+      pet_weight=#{pet_weight},
+      pet_birth=#{pet_birth},
+      registration=#{registration},
+      neutralization=#{neutralization},
+      friendly=#{friendly},
+      barks=#{barks},
+      disease=#{disease},
+      feces=#{feces},
+      mark=#{mark},
+      separation_anxiety=#{separation_anxiety},
+      heartworm=#{heartworm},
+      vaccine=#{vaccine},
+      corona_enteritis=#{corona_enteritis},
+      kennelkov=#{kennelkov},
+      animal_hospital_name=#{animal_hospital_name},
+      animal_hospital_telephone=#{animal_hospital_telephone},
+      animal_hospital_zip_code=#{animal_hospital_zip_code},
+      animal_hospital_address=#{animal_hospital_address},
+      animal_hospital_daddress=#{animal_hospital_daddress}
+      WHERE
+      user_email=#{user_email}
+      AND
+      idx=#{idx}
+    ]]>
+  </update>
+</mapper>

@@ -49,13 +49,13 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">메시지</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">위시리스트</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/wish_list">위시리스트</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">예약 내역</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/reservation_history/to_sitter">예약 내역</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">강아지 등록</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile">강아지 정보 관리</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">개인정보변경</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/account/account_check">개인정보변경</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
               </div>

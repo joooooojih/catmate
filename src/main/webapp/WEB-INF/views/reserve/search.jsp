@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>캣메이트 펫시터 맡기기 검색</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/reserve/css/search.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/search.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() {
     	function search() {  // ajax를 이용한 검색
@@ -30,7 +30,8 @@
             medication_possible: $("#medication_possible").val(),
             
             care_size: $("#select_search_size").val(),
-            care_age: $("#select_search_age").val()
+            care_age: $("#select_search_age").val(),
+            area: '${pet_sitter_houseDto.area}'
            },
            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
            dataType: "json",
@@ -57,7 +58,7 @@
         		   if(pet_sitter_house_search[i].pick_up == 'yes') {
         			   tags_text += '<button class="btn btn-warning text-light">픽업</button>&nbsp;&nbsp;';
         		   }
-        		   if(pet_sitter_house_search[i].yard == '없습니다.') {
+        		   if(pet_sitter_house_search[i].yard == '있습니다.') {
         			   tags_text += '<button class="btn btn-warning text-light">마당</button>&nbsp;&nbsp;';
         		   }
         		   if(pet_sitter_house_search[i].other_animal == '없습니다.') {
@@ -90,10 +91,10 @@
         			   }
         			   room_photo_text += ""+
         			         '<div class="' + carouselClass + '">'+
-                         '<img class="d-block img-fluid w-100" id="mainImg" src="${pageContext.request.contextPath }/resources/pet_sitter/img/' + room_photo_search[i][j].room_photo + '">'+
+                         '<img class="d-block img-fluid w-100" id="mainImg" src="${pageContext.request.contextPath }/resources/img/pet_sitter_img/' + room_photo_search[i][j].room_photo + '">'+
                            '<div class="carousel-caption">'+
                              '<h5>'+
-                               '<img src="${pageContext.request.contextPath }/resources/icon/addressIcon.png"> ' + pet_sitter_house_search[i].house_address +
+                               '<img src="${pageContext.request.contextPath }/resources/img/icon/addressIcon.png"> ' + pet_sitter_house_search[i].house_address +
                              '</h5>'+
                            '</div>'+
                          '</div>';
@@ -121,11 +122,11 @@
         					          '<a href="${pageContext.request.contextPath }/reserve/sitter_detail?idx=' + pet_sitter_house_search[i].idx + '">'+
         					            '<b>' + pet_sitter_house_search[i].house_title + '</b>'+
         					          '</a>'+
-        					            '<i class="d-block fa  fa-heart-o fa-fw pull-right"></i>'+
+        					            '<i class="d-block fa fa-heart-o fa-fw pull-right"></i>'+
         					          '</h3>'+
         					          '<p id="subtitle">'+
         					           '<b>'+
-        					            '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/icon/icon-dog.png">&nbsp;&nbsp;반려견 1마리 '+  // 강아지 등록 하고 마저
+        					            '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-dog.png">&nbsp;&nbsp;반려견 1마리 '+  // 강아지 등록 하고 마저
         					           '</b>'+
         					          '</p>'+
         					          '<hr>'+
@@ -141,16 +142,16 @@
         					          '<div class="row" id="bottomRow">'+
         					            '<div class="col-md-4 text-secondary" id="searchName">'+
         					              '<div class="carousel-inner">'+
-        					                '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/profile/user_img/' + user_profile_search[i].user_photo + '">'+
+        					                '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/img/user_img/' + user_profile_search[i].user_photo + '">&nbsp;&nbsp;'+
         					                '<b>' + user_profile_search[i].user_name + '</b>'+
         					              '</div>'+
         					            '</div>'+
         					            '<div class="col-md-4 text-secondary" id="petGrade">'+
-        					              '<img id="subtitleImg" src="${pageContext.request.contextPath }/resources/icon/icon-star.png">&nbsp;'+
+        					              '<img id="subtitleImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-star.png">&nbsp;'+
         					              '<b>펫시터 평점</b>&nbsp;&nbsp;&nbsp;' + user_profile_search[i].user_grade + '점'+
         					            '</div>'+
         					            '<div class="col-md-4 text-secondary" id="reviewsGrade">'+
-        					             '<img id="subtitleImg" src="${pageContext.request.contextPath }/resources/icon/icon-review.png">'+
+        					             '<img id="subtitleImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-review.png">'+
         					              '<b>후기 평점</b>&nbsp;&nbsp;&nbsp;0점'+   // 후기하고 마저
         					            '</div>'+
         					          '</div>'+
@@ -160,6 +161,9 @@
         		   );  // append
         				   
         	   }  // for
+        	   
+        	   
+        	   
         	   
            },
            error: function(xhr, status, error) {
@@ -202,10 +206,10 @@
     	$("label[id^=tag_search]").click(function() {
     		
     		if($("input[name^=" + this.id + "]").prop("checked") == true) {
-    			$("input[name^=" + this.id + "]").prop("checked", false);
-    		} else {
-    			$("input[name^=" + this.id + "]").prop("checked", true);
-    		}
+    	      $("input[name^=" + this.id + "]").prop("checked", false);
+    	    } else {
+    	      $("input[name^=" + this.id + "]").prop("checked", true);
+    	    }
     		
     		$("input[name^=tag_search]:checked").each(function() {
     			if(this.id == 'care_space') {
@@ -241,7 +245,6 @@
     <div class="container" id="container"><br>
       <div class="row">
         <div class="col-md-12">
-          <div class="btn-group">
             <select class="btn btn-light" id="select_search_age">
               <option value="모든연령">모든연령</option>
               <option value="강아지">강아지 (1살 이하)</option>
@@ -254,7 +257,6 @@
               <option value="15">중형견 (5 ~ 14.9kg)</option>
               <option value="16">대형견 (15kg이상)</option>
             </select>&nbsp;&nbsp;&nbsp;
-          </div>
         </div>
       </div>
       <br>
@@ -278,15 +280,13 @@
       <div class="row">
         <div class="col-md-12">
           <p>&nbsp;원하는 태그를 모두 선택해 주세요!</p>
-          <div class="btn-group" data-toggle="buttons">
             <c:set var="i" value="${0 }"/>
             <c:forEach var="tags" items="${tags }">
               <label class="btn btn-warning text-light" id="tag_search${i }">${tags }
                 <input type="checkbox" id="${tags_name[i] }" name="tag_search${i }" autocomplete="off">
-              </label>&nbsp;
+              </label>
               <c:set var="i" value="${i+1 }"/>
             </c:forEach>
-          </div>
         </div>
       </div>
       <br><br>
@@ -297,7 +297,6 @@
     <div class="container" id="middle_container">
     </div>
   </section>
-  
   
   <jsp:include page="../set/setLayout/footer.jsp" flush="false"/>
 </body>

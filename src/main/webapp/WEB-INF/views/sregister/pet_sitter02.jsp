@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>캣메이트 펫시터 등록</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/pet_sitter/css/common.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/pet_sitter_common.css" rel="stylesheet"/>
   <script>
   $(document).ready(function() { // 이전
 	  $("#previous").click(function() {
@@ -20,8 +20,8 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
+        <div class="col-md-2"> </div>
+        <div class="col-md-8">
           <div class="card text-dark p-5 bg-default">
             <h3>
               <b>체크인, 체크아웃 시간과

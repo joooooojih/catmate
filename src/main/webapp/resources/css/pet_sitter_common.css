@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+  dd {
+    padding-bottom: 10px;
+  }
+  form #buttonRow input {
+    width: 100%;
+  }
+  #buttonRow {
+    text-align: center;
+  }
+  img {
+    width: 300px;
+    height: 250px;
+  }
+  #id {
+    text-align: center;
+  }
+  

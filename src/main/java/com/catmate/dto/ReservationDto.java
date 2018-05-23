@@ -1,6 +1,5 @@
 package com.catmate.dto;
 
-import java.security.Timestamp;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;

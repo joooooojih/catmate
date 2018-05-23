@@ -1,7 +1,6 @@
 package com.catmate.sregister;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.Room_photoDto;
 import com.catmate.dto.User_profileDto;
-import com.catmate.member.service.MemberService;
+import com.catmate.mypage.service.MypageService;
 import com.catmate.reserve.service.ReserveService;
 import com.catmate.sregister.service.SregisterService;
 
@@ -29,18 +28,18 @@ public class Pet_sitter {
     @Autowired
     ReserveService reserveService;
     @Autowired
-    MemberService memberService;
+    MypageService mypageService;
 
     public void idx_check(HttpSession session, HttpServletRequest request) {
         int idx;
         try {
-            idx = Integer.parseInt((String) session.getAttribute("idx"));
+            idx = (Integer) session.getAttribute("idx");
         } catch(Exception e) {
             idx = 0;
             session.setAttribute("idx", 0);
         }
         if(idx != 0) {
-            Map<String, Object> map = reserveService.getPet_sitter_house(idx);
+            Map<String, Object> map = reserveService.getSitter_detail(idx);
 
             request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
             request.setAttribute("room_photoList", map.get("room_photo"));
@@ -60,7 +59,8 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter01", method=RequestMethod.POST)
     public String pet_sitter01(HttpServletRequest request, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto) {
 
-        int idx = Integer.parseInt((String) session.getAttribute("idx")); 
+        
+        int idx = (Integer) session.getAttribute("idx");
         if(idx == 0) {
             User_profileDto user_profile = (User_profileDto) session.getAttribute("user_profile");
             pet_sitter_houseDto.setUser_email(user_profile.getUser_email());
@@ -124,7 +124,7 @@ public class Pet_sitter {
         string_check_out += " : ";
         string_check_out += check_out[3];
 
-        pet_sitter_houseDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
+        pet_sitter_houseDto.setIdx( (Integer) session.getAttribute("idx") );
         pet_sitter_houseDto.setCheck_in(string_check_in);
         pet_sitter_houseDto.setCheck_out(string_check_out);
 
@@ -179,7 +179,7 @@ public class Pet_sitter {
         }
         
         pet_sitter_houseDto.setCare_age(string_care_age);
-        pet_sitter_houseDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
+        pet_sitter_houseDto.setIdx((Integer) session.getAttribute("idx"));
 
         sregisterService.updatePet_sitter03(pet_sitter_houseDto);
 
@@ -203,8 +203,8 @@ public class Pet_sitter {
 
     @RequestMapping(value="/sregister/pet_sitter04", method=RequestMethod.POST)
     public String pet_sitter04(HttpServletRequest request, HttpSession session, Room_photoDto room_photoDto) {
-        String savePath = request.getServletContext().getRealPath("\\resources\\pet_sitter\\img\\");
-        room_photoDto.setIdx(Integer.parseInt((String) session.getAttribute("idx")));
+        String savePath = request.getServletContext().getRealPath("\\resources\\img\\pet_sitter_img\\");
+        room_photoDto.setIdx((Integer) session.getAttribute("idx"));
 
         idx_check(session, request);
         List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");
@@ -241,7 +241,7 @@ public class Pet_sitter {
 
         idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
-        User_profileDto pet_sitter_user_profile = memberService.getUser_profile(pet_sitter_houseDto.getUser_email());
+        User_profileDto pet_sitter_user_profile = mypageService.getUser_profile(pet_sitter_houseDto.getUser_email());
         
         request.setAttribute("house_user_profile", pet_sitter_user_profile);
         request.setAttribute("sregister", "sregister");
@@ -251,13 +251,13 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter05", method=RequestMethod.POST)
     public String post_pet_sitter05(HttpServletRequest request, HttpSession session) {
 
+        int idx = (Integer) session.getAttribute("idx");
         idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         pet_sitter_houseDto.setSregister("yes");
         sregisterService.updatePet_sitter05(pet_sitter_houseDto);
         
         session.setAttribute("idx", null);
-        
-        return "reserve/sitter_detail";
+        return "redirect:/reserve/sitter_detail?idx=" + idx;
     }
 }

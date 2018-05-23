@@ -29,6 +29,7 @@
       SELECT * FROM pet_sitter_house
       WHERE 
       idx = #{idx}
+      AND sregister = 'yes'
       <if test="care_space != null and care_space == '아파트'">
         AND care_space = #{care_space}
       </if>
@@ -63,19 +64,17 @@
         <![CDATA[
           AND care_age LIKE CONCAT('%', #{care_age}, '%')
         ]]>
-        </if>
-      <choose>
-        <when test="care_size != 0 and care_size != 16">
-          <![CDATA[
-            AND care_size <= #{care_size}
-          ]]>
-        </when>
-        <when test="care_size == 16">
-          <![CDATA[
-            AND care_size == #{care_size}
-          ]]>
-        </when>
-      </choose>
+      </if>
+      <if test="care_size != 0">
+        <![CDATA[
+          AND care_size >= #{care_size}
+        ]]>
+      </if>
+      <if test="area != '' and area != null and area != '전체'">
+        <![CDATA[
+          AND house_address LIKE CONCAT(#{area}, '%')
+        ]]>
+      </if>
   </select>
   
   <insert id="insertReservation">
@@ -90,16 +89,14 @@
       SELECT * FROM reservation 
       WHERE
       idx = #{idx}
+      ORDER BY
+      start_day asc
     ]]>
   </select>
   
-  <select id="getReservation_search" resultType="reservation">
+  <select id="getReservationList" resultType="reservation">
     <![CDATA[
       SELECT * FROM reservation
-      WHERE
-      start_day BETWEEN #{start_day} AND #{end_day}
-      OR
-      end_day BETWEEN #{start_day} AND #{end_day}
     ]]>
   </select>
   
@@ -109,5 +106,18 @@
     ]]>
   </select>
   
+  <select id="getAreaAllCount" resultType="integer">
+    <![CDATA[
+      SELECT COUNT(*) FROM pet_sitter_house WHERE sregister = 'yes'
+    ]]>
+  </select>
+  
+  <select id="getAreaCount" resultType="integer">
+    <![CDATA[
+      SELECT COUNT(*) FROM pet_sitter_house 
+      WHERE house_address LIKE CONCAT(#{area}, '%')
+      AND sregister = 'yes'
+    ]]>
+  </select>
 
 </mapper>

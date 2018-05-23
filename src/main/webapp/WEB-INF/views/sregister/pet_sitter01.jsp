@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>캣페이트 펫시터 등록</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/pet_sitter/css/common.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/pet_sitter_common.css" rel="stylesheet"/>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <body>
@@ -14,8 +14,8 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-      <div class="col-md-3"> </div>
-        <div class="col-md-6">
+      <div class="col-md-2"> </div>
+        <div class="col-md-8">
           <div class="card text-dark p-5 bg-default">
           <h3>
             <b>지헌님 안녕하세요!
@@ -28,7 +28,9 @@
               <h4 class="text-primary">펫시터 제목</h4>
             </dt>
             <dd>
-              <input type="text" name="house_title" class="form-control" placeholder="제목" value="${pet_sitter_house.house_title }">
+              <div class="col-md-12">
+                <input type="text" name="house_title" class="form-control" placeholder="제목" value="${pet_sitter_house.house_title }">
+              </div>
             </dd>
           </dl>
           <dl>
@@ -36,11 +38,14 @@
               <h4 class="text-primary">주소</h4>
             </dt>
             <dd>
-              <input type="text" name="house_zip_code" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" value="${pet_sitter_house.house_zip_code }">
-              <br>
-              <input type="text" name="house_address" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" value="${pet_sitter_house.house_address }">
-              <br>
-              <input type="text" name="house_daddress" id="sample6_address2" class="form-control" placeholder="상세주소" value="${pet_sitter_house.house_daddress }"> </dd>
+              <div class="col-md-6">
+                <input type="text" name="house_zip_code" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" value="${pet_sitter_house.house_zip_code }"><br>
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="house_address" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" value="${pet_sitter_house.house_address }"><br>
+                <input type="text" name="house_daddress" id="sample6_address2" class="form-control" placeholder="상세주소" value="${pet_sitter_house.house_daddress }"> 
+              </div>
+            </dd>
           </dl>
           <br>
           <div class="row" id="buttonRow">

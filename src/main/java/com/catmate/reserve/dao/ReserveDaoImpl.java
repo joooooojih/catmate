@@ -37,13 +37,13 @@ public class ReserveDaoImpl implements ReserveDao {
     }
 
     @Override
-    public List<ReservationDto> getReservationDto(int idx) {
+    public List<ReservationDto> getReservation(int idx) {
         return sqlSession.selectList("reserve.getReservation", idx);
     }
 
     @Override
-    public List<ReservationDto> getReservation_search(ReservationDto reservationDto) {
-        return sqlSession.selectList("reserve.getReservation_search", reservationDto);
+    public List<ReservationDto> getReservationList() {
+        return sqlSession.selectList("reserve.getReservationList");
     }
 
     @Override
@@ -58,6 +58,16 @@ public class ReserveDaoImpl implements ReserveDao {
         pet_sitter_house_searchDto = sqlSession.selectOne("reserve.getPet_sitter_house_search", pet_sitter_houseDto);
         } catch(Exception e) {}
         return pet_sitter_house_searchDto;
+    }
+
+    @Override
+    public int getAreaAllCount() {
+        return sqlSession.selectOne("reserve.getAreaAllCount");
+    }
+
+    @Override
+    public int getAreaCount(String area) {
+        return sqlSession.selectOne("reserve.getAreaCount", area);
     }
 
 }

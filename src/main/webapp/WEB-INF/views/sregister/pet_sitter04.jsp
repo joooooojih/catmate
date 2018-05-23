@@ -7,32 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>캣메이트 펫 시터 등록</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/pet_sitter/css/common.css" rel="stylesheet"/>
-  <link href="${pageContext.request.contextPath }/resources/reserve/css/sitter_detail.css" rel="stylesheet"/>
-  <style>
-    .filebox label { 
-      display: inline-block; 
-      padding: .5em .75em; 
-      color: #999; font-size: inherit; 
-      line-height: normal; 
-      vertical-align: middle; 
-      background-color: #fdfdfd; 
-      cursor: pointer; 
-      border: 1px solid #ebebeb; 
-      border-bottom-color: #e2e2e2; 
-      border-radius: .25em; 
-    } 
-    input[type="file"] { /* 파일 필드 숨기기 */ 
-      position: absolute; 
-      width: 1px; 
-      height: 1px; 
-      padding: 0; 
-      margin: -1px; 
-      overflow: hidden; 
-      clip:rect(0,0,0,0); 
-      border: 0; 
-    }
-  </style>
+  <link href="${pageContext.request.contextPath }/resources/css/pet_sitter_common.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/sitter_detail.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/file.css" rel="stylesheet"/>
+  <script src="${pageContext.request.contextPath}/resources/js/file.js"></script>
   <script>
     $(document).ready(function() { // 이전
       $("#previous").click(function() {
@@ -60,35 +38,21 @@
     $(document).ready(function() {  // 이미 파일을 한 번 올린 경우 이미지 셋팅
     	if(${submit_check}) {
     		for(var i = 0; i < 5; i++) {
-    			$("#file"+i).next().prop("src", "${pageContext.request.contextPath }/resources/pet_sitter/img/"+$("input[type=hidden]").eq(i).val());
+    			$("#file"+i).next().prop("src", "${pageContext.request.contextPath }/resources/img/pet_sitter_img/"+$("input[type=hidden]").eq(i).val());
     		}
     	}
     });
-    
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $(input).next().attr("src", e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    function filePreview(input) {
-        readURL(input);
-     }
     
   </script>
 </head>
 <body>
 
   <jsp:include page="../set/setLayout/navigation.jsp" flush="false"/>
-  <section class="py-5">
+  <section class="py-5 text-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
+        <div class="col-md-2"> </div>
+        <div class="col-md-8">
           <div class="card text-dark p-5 bg-default">
             <h3>
               <b>사진을 등록해주세요! </b>
@@ -110,8 +74,9 @@
                     <label for="file${i }">사진 업로드</label> 
                   </div>
                   <input type="file" id="file${i }" name="uploadFile" onchange="javascript:filePreview(this)"> 
-                  <img src="${pageContext.request.contextPath }/resources/icon/home_icon.png">
+                  <img src="${pageContext.request.contextPath }/resources/img/icon/home_icon.png">
                 </dd>
+                <br>
               </c:forEach>
             </dl>
             <br>

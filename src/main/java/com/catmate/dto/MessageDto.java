@@ -7,21 +7,22 @@ import org.apache.ibatis.type.Alias;
 @Alias("Message")
 public class MessageDto {
 
-    private String user_email1;
-    private String user_email2;
+    private String to_user_email;
+    private String from_user_email;
     private String msg_content;
     private Timestamp msg_date;
-    public String getUser_email1() {
-        return user_email1;
+    
+    public String getTo_user_email() {
+        return to_user_email;
     }
-    public void setUser_email1(String user_email1) {
-        this.user_email1 = user_email1;
+    public void setTo_user_email(String to_user_email) {
+        this.to_user_email = to_user_email;
     }
-    public String getUser_email2() {
-        return user_email2;
+    public String getFrom_user_email() {
+        return from_user_email;
     }
-    public void setUser_email2(String user_email2) {
-        this.user_email2 = user_email2;
+    public void setFrom_user_email(String from_user_email) {
+        this.from_user_email = from_user_email;
     }
     public String getMsg_content() {
         return msg_content;

@@ -43,7 +43,7 @@
         <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4">
-              <img src="${pageContext.request.contextPath }/resources/start/img/main_catmate1.png">
+              <img src="${pageContext.request.contextPath }/resources/img/main_img/main_catmate1.png">
             </div>
             <div class="col-8">
               <h5 class="mb-3 text-primary">
@@ -56,7 +56,7 @@
         <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4">
-              <img src="${pageContext.request.contextPath }/resources/start/img/main_catmate2.png">
+              <img src="${pageContext.request.contextPath }/resources/img/main_img/main_catmate2.png">
             </div>
             <div class="col-8">
               <h5 class="mb-3 text-primary">
@@ -71,7 +71,7 @@
         <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4">
-              <img src="${pageContext.request.contextPath }/resources/start/img/main_catmate3.png">
+              <img src="${pageContext.request.contextPath }/resources/img/main_img/main_catmate3.png">
             </div>
             <div class="col-8">
               <h5 class="mb-3 text-primary">
@@ -84,7 +84,7 @@
         <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4">
-              <img src="${pageContext.request.contextPath }/resources/start/img/main_catmate4.png">
+              <img src="${pageContext.request.contextPath }/resources/img/main_img/main_catmate4.png">
             </div>
             <div class="col-8">
               <h5 class="mb-3 text-primary">

@@ -9,8 +9,8 @@
 	</typeAliases>
 	
 	<mappers>
-	 <mapper resource="mappings/member-Mapper.xml" />
 	 <mapper resource="mappings/sregister-Mapper.xml"/>
 	 <mapper resource="mappings/reserve-Mapper.xml"/>
+	 <mapper resource="mappings/mypage-Mapper.xml"/>
 	</mappers>
 </configuration>

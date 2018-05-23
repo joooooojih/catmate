@@ -32,6 +32,8 @@ public class Pet_sitter_houseDto {
     private String homemade_snacks;
     private String first_aid;
     private String medication_possible;
+    private String area;
+    
     public int getIdx() {
         return idx;
     }
@@ -193,6 +195,12 @@ public class Pet_sitter_houseDto {
     }
     public void setMedication_possible(String medication_possible) {
         this.medication_possible = medication_possible;
+    }
+    public String getArea() {
+        return area;
+    }
+    public void setArea(String area) {
+        this.area = area;
     }
     
 }

@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title>캣메이트 예약하기</title>
   <jsp:include page="../set/setLink/link.jsp" flush="false"/>
-  <link href="${pageContext.request.contextPath }/resources/reserve/css/sitter_detail.css" rel="stylesheet"/>
+  <link href="${pageContext.request.contextPath }/resources/css/sitter_detail.css" rel="stylesheet"/>
   <script>
   $(document).ready(function() { // 이전
     if(${sregister eq 'sregister'}) {
@@ -35,7 +35,6 @@
     $("input[id=disable_day]").each(function() {
     	disabledDays.push(this.value);
     });
-    
     
     function setPrice() {  // 가격 셋팅
       $("#pet_add_text").text(pet_add_text + " 마리");
@@ -290,10 +289,10 @@
                 </c:otherwise>
               </c:choose>
               <div class="${carouselClass }">
-                <img class="d-block img-fluid w-100" id="mainImg" src="${pageContext.request.contextPath }/resources/pet_sitter/img/${room_photo.room_photo }">
+                <img class="d-block img-fluid w-100" id="mainImg" src="${pageContext.request.contextPath }/resources/img/pet_sitter_img/${room_photo.room_photo }">
                 <div class="carousel-caption">
                   <h5>
-                    <img src="${pageContext.request.contextPath }/resources/icon/addressIcon.png"> ${pet_sitter_house.house_address }
+                    <img src="${pageContext.request.contextPath }/resources/img/icon/addressIcon.png"> ${pet_sitter_house.house_address }
                     <c:if test="${pet_sitter_house.house_daddress != '' && pet_sitter_house.house_daddress != null }">
                       <br> ${pet_sitter_house.house_daddress }
                     </c:if>
@@ -318,7 +317,7 @@
             <div class="row">
               <div class="col-md-3" id="topCon1">
                 <div class="carousel-inner">
-                  <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/profile/user_img/${house_user_profile.user_photo }">
+                  <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/user_img/${house_user_profile.user_photo }">
                 </div>
               </div>
               <div class="col-md-9" id="tags">
@@ -329,7 +328,7 @@
                 <c:if test="${pet_sitter_house.pick_up eq 'yes'}">
                   <button class="btn btn-warning text-light">픽업</button>&nbsp;&nbsp;
                 </c:if>
-                <c:if test="${pet_sitter_house.yard eq '없습니다.'}">
+                <c:if test="${pet_sitter_house.yard eq '있습니다.'}">
                   <button class="btn btn-warning text-light">마당</button>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${pet_sitter_house.other_animal eq '없습니다.'}">
@@ -361,7 +360,7 @@
                <div class="col-md-6">
                  <div class="row">
                    <div class="col-md-3">
-                     <img src="${pageContext.request.contextPath }/resources/icon/icon-dog2.png">
+                     <img src="${pageContext.request.contextPath }/resources/img/icon/icon-dog2.png">
                    </div>
                    <div class="col-md-9" >
                      <ul>
@@ -374,7 +373,7 @@
                <div class="col-md-6">
                  <div class="row">
                    <div class="col-md-3">
-                     <img src="${pageContext.request.contextPath }/resources/icon/icon-clock.png">
+                     <img src="${pageContext.request.contextPath }/resources/img/icon/icon-clock.png">
                    </div>
                    <div class="col-md-9">
                      <ul>
@@ -440,7 +439,7 @@
               <div class="row" id="middle4">
                 <div class="col-md-3" id="topCon1">
                   <div class="carousel-inner">
-                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/pet_sitter/img/test1.png">
+                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/pet_sitter_img/test1.png">
                   </div>
                 </div>
                 <div class="col-md-9">
@@ -508,7 +507,7 @@
             </table>
             <input type="button" class="btn btn-warning text-light" value="예약하기" id="reservation">
             <br><br>
-            <img src="${pageContext.request.contextPath }/resources/icon/inquiry.png">
+            <img src="${pageContext.request.contextPath }/resources/img/icon/inquiry.png">
             <a href="#" class="text-secondary">메세지 보내기</a>
           </div>
         </div>
