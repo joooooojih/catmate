@@ -100,7 +100,6 @@
   <section class="bg-primary" >
     <div class="container text-center">
       <h2 class="section-heading text-white">믿을 수 있는 펫시터의 집에서 반려견을 돌봐드립니다.</h2>
-      <a class="nav-link js-scroll-trigger" href="#top"><input type="button" class="btn btn-light btn-xl sr-button" value="시작하기!"></a>
     </div>
   </section>
   

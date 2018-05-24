@@ -40,17 +40,18 @@
         	   var pet_sitter_house_search = responseData.pet_sitter_houseList;
         	   var user_profile_search = responseData.user_profileList;
         	   var room_photo_search = responseData.room_photoList;
+        	   var wish_list_search = responseData.wish_listList;
+        	   var pet_count_search = responseData.pet_countList;
         	   
         	   var carouselClass;
-        	   var room_photo_text = "";
-        	   var tags_text = "";
         	   
         	   $("#middle_container").text("");  // 초기화
         	   
         	   for(var i = 0; i < pet_sitter_house_search.length; i++) {
         		   
-        		   tags_text = "";
-        		   room_photo_text = "";
+        		   var tags_text = "";
+        		   var room_photo_text = "";
+        		   var wish_list_text = '<i id="' + pet_sitter_house_search[i].idx + '" class="fa fa-heart-o pull-right"></i>';
         		   
         		   if(pet_sitter_house_search[i].care_space == '아파트') {
         			   tags_text += '<button class="btn btn-warning text-light">아파트</button>&nbsp;&nbsp;';
@@ -83,7 +84,13 @@
         			   tags_text += '<button class="btn btn-warning text-light">투약가능</button>&nbsp;&nbsp;';
         		   }
         		   
-        		   for(var j = 0; j < room_photo_search[i].length; j++) {
+        		   for(var j = 0; j < wish_list_search.length; j++) { // 위시리스트
+        			   if(wish_list_search[j].idx == pet_sitter_house_search[i].idx) {
+        				   wish_list_text = '<i id="' + pet_sitter_house_search[i].idx + '" class="fa fa-heart pull-right"></i>';
+        			   }
+        		   }
+        		   
+        		   for(var j = 0; j < room_photo_search[i].length; j++) {  // 사진
         			   if(j == 0) {
         				   carouselClass = "carousel-item active";
         			   } else {
@@ -122,11 +129,11 @@
         					          '<a href="${pageContext.request.contextPath }/reserve/sitter_detail?idx=' + pet_sitter_house_search[i].idx + '">'+
         					            '<b>' + pet_sitter_house_search[i].house_title + '</b>'+
         					          '</a>'+
-        					            '<i class="d-block fa fa-heart-o fa-fw pull-right"></i>'+
+        					            wish_list_text +
         					          '</h3>'+
         					          '<p id="subtitle">'+
         					           '<b>'+
-        					            '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-dog.png">&nbsp;&nbsp;반려견 1마리 '+  // 강아지 등록 하고 마저
+        					            '<img class="rounded-circle" id="subImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-dog.png">&nbsp;&nbsp;반려견 ' + pet_count_search[i] + '마리 '+  // 강아지 등록 하고 마저
         					           '</b>'+
         					          '</p>'+
         					          '<hr>'+
@@ -162,8 +169,29 @@
         				   
         	   }  // for
         	   
-        	   
-        	   
+        	   $("i").click(function() {
+        		   
+        		   $.ajax({
+        			   type: "post",
+        		     url: "${pageContext.request.contextPath}/mypage/wish_list_reserve",
+        		     data: {
+        		    	 idx: this.id
+        		     },
+        		     dataType: "text",
+        		     success: function(responseData, status, xhr) {
+        		    	 
+        		    	 if($("#" + responseData).prop("class") == "fa fa-heart-o pull-right") {  // 빈 하트면
+        	           $("#" + responseData).prop("class", "fa fa-heart pull-right");
+        	         } else {
+        	           $("#" + responseData).prop("class", "fa fa-heart-o pull-right");
+        	         }
+        		     },
+        		     error: function(xhr, status, error) {
+        		    	 alert("위시리스트에 접근 하지 못했습니다.");
+        		     }
+        		   });
+        		   
+        	   });
         	   
            },
            error: function(xhr, status, error) {

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
 import com.catmate.dto.Room_photoDto;
 import com.catmate.dto.User_profileDto;
+import com.catmate.dto.Wish_listDto;
 import com.catmate.mypage.service.MypageService;
 import com.catmate.reserve.service.ReserveService;
 
@@ -81,18 +83,17 @@ public class Search {
     }
 
     @RequestMapping(value="/reserve/search_ajax", method=RequestMethod.GET)
-    public void search(HttpServletRequest request, HttpServletResponse response, Pet_sitter_houseDto pet_sitter_houseDto) throws IOException {
+    public void search(HttpServletRequest request, HttpServletResponse response, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         List<ReservationDto> tmpReservationList = reserveService.getReservationList();
         List<ReservationDto> reservationList = new ArrayList<ReservationDto>();
-        
         List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
         List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
-        
         List<Pet_sitter_houseDto> pet_sitter_houseList = new ArrayList<Pet_sitter_houseDto>();
-        
         List<Pet_sitter_houseDto> pet_sitter_house_notList = null;
+        List<Wish_listDto> wish_listList = mypageService.getWish_listList((User_profileDto) session.getAttribute("user_profile"));
+        List<Integer> pet_countList = new ArrayList<Integer>();
         
         Map<String, Object> map = new HashMap<String, Object>();
         
@@ -145,12 +146,14 @@ public class Search {
         for(Pet_sitter_houseDto pet_sitter_house : pet_sitter_houseList) {  // user_profile, pet_sitter_house photo 가져오기
             room_photoList.add(reserveService.getRoom_photoDto(pet_sitter_house.getIdx()));
             user_profileList.add(mypageService.getUser_profile(pet_sitter_house.getUser_email()));
+            pet_countList.add(reserveService.getPetCount(pet_sitter_house.getUser_email()));
         }
 
         map.put("pet_sitter_houseList", pet_sitter_houseList);
         map.put("room_photoList", room_photoList);
         map.put("user_profileList", user_profileList);
-
+        map.put("wish_listList", wish_listList);
+        map.put("pet_countList", pet_countList);
         
         ObjectMapper mapper = new ObjectMapper();
         String jsonText = "";

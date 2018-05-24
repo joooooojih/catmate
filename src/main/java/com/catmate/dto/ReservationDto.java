@@ -12,6 +12,7 @@ public class ReservationDto {
     private Date start_day;
     private Date end_day;
     private int how_many;
+    private String review_check;
     public int getIdx() {
         return idx;
     }
@@ -41,6 +42,12 @@ public class ReservationDto {
     }
     public void setHow_many(int how_many) {
         this.how_many = how_many;
+    }
+    public String getReview_check() {
+        return review_check;
+    }
+    public void setReview_check(String review_check) {
+        this.review_check = review_check;
     }
     
 }

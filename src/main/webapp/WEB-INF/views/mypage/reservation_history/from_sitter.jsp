@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +34,15 @@
                 <c:set var="i" value="${0 }"/>
                 <c:forEach var="reservation" items="${reservationList }">
                   <tr>
-                    <td>${user_profileList[i].user_name }</td>
-                    <td>${start_dayList[i] }<br>${end_dayList[i] }</td>
+                    <td>
+                      <a href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile?user_email=${user_profileList[i].user_email}">
+                        ${user_profileList[i].user_name }
+                      </a>
+                    </td>
+                    <td>
+                      <fmt:formatDate value="${reservation.start_day}" pattern="yyyy-MM-dd"/><br>
+                      <fmt:formatDate value="${reservation.end_day}" pattern="yyyy-MM-dd"/>
+                    </td>
                     <td>
                       <a href="${pageContext.request.contextPath }/reserve/sitter_detail?idx=${pet_sitter_houseList[i].idx}">
                         ${pet_sitter_houseList[i].house_address }<br>${pet_sitter_houseList[i].house_daddress }

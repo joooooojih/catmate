@@ -75,17 +75,17 @@
                 <h4 class="text-primary">Day Care 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.day_care }"> </dd>
+                <input type="text" name="day_care" id="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.day_care }"> </dd>
               <dt>
                 <h4 class="text-primary">1박 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.nightly_rate }"> </dd>
+                <input type="text" name="nightly_rate" id="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.nightly_rate }"> </dd>
               <dt>
                 <h4 class=text-primary>마리당 추가 요금</h4>
               </dt>
               <dd>
-                <input type="text" name="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.surcharge }"> </dd>
+                <input type="text" name="surcharge" id="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.surcharge }"> </dd>
             </dl>
             <br>
             <div class="row" id="buttonRow">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,29 @@
 <title>캣메이트 예약 내역</title>
   <jsp:include page="../../set/setLink/link.jsp" flush="false"/>
   <link href="${pageContext.request.contextPath }/resources/css/mypage_common.css" rel="stylesheet"/>
+  <script>
+    $(document).ready(function() {
+    	$("td").children("a.cancel").click(function() {
+    		$.ajax({
+    	    type: "post",
+    	    url: "delete_to_sitter",
+    	    data: {
+    	      num: this.id,
+    	      idx: $("#idx"+this.id).val(),
+    	      start_date: $("#start_day"+this.id).text(),
+    	      end_date: $("#end_day"+this.id).text()
+    	    },
+    	    dataType: "text",
+    	    success: function(responseData, status, xhr) {
+    	      $("#" + responseData).parents("tr").remove();
+         },
+    	    error: function(xhr, status, error) {
+    	      alert("취소에 실패하였습니다.");
+    	    }
+    	  });
+    	});
+    });
+  </script>
 </head>
 <body>
   <jsp:include page="../../set/setLayout/navigation.jsp" flush="false"/>
@@ -29,19 +52,26 @@
                   <th>펫시터</th>
                   <th>날짜</th>
                   <th>주소</th>
-                  <th>마리 수</th>
+                  <th>비고</th>
                 </tr>
                 <c:set var="i" value="${0 }"/>
                 <c:forEach var="reservation" items="${reservationList }">
+                  <input type="hidden" id="idx${i }" value="${reservation.idx }">
                   <tr>
-                    <td>${user_profile.user_name }</td>
-                    <td>${start_day[i] }<br>${end_day[i] }</td>
+                    <td>${user_profileList[i].user_name }</td>
+                    <td>
+                      <span id="start_day${i }"><fmt:formatDate value="${reservation.start_day}" pattern="yyyy-MM-dd"/></span>
+                      <br>
+                      <span id="end_day${i }"><fmt:formatDate value="${reservation.end_day}" pattern="yyyy-MM-dd"/></span>
+                    </td>
                     <td>
                       <a href="${pageContext.request.contextPath }/reserve/sitter_detail?idx=${reservation.idx}">
                         ${pet_sitter_houseList[i].house_address }<br>${pet_sitter_houseList[i].house_daddress }
                       </a>
                     </td>
-                    <td>${reservation.how_many+1 }</td>
+                    <td>
+                      <a href="#" id="${i }" class="cancel">취소</a>
+                    </td>
                   </tr>
                   <c:set var="i" value="${i+1 }"/>
                 </c:forEach>

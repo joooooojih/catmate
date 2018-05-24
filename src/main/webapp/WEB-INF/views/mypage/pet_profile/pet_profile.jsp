@@ -24,7 +24,9 @@
             <h4 class="mb-4 text-warning text-center">강아지 정보 관리</h4>
               <div class="row text-right">
                 <div class="col-md-12">
-                  <b><a href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile_reg">+ 반려견 추가하기</a></b>
+                  <c:if test="${pet_profileDto.user_email == null }">
+                    <b><a href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile_reg">+ 반려견 추가하기</a></b>
+                  </c:if>
                 </div>
               </div>
               <br><br>
@@ -35,11 +37,13 @@
                   <th>성별</th>
                   <th>품종</th>
                 </tr>
-                
+                <c:if test="${pet_profileDto.user_email != null}">
+                  <c:set var="user_email" value="&user_email=${pet_profileDto.user_email }"/>
+                </c:if>
                 <c:forEach var="pet_profile" items="${pet_profileList }">
                   <tr>
                     <td>
-                      <a href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile_reg?idx=${pet_profile.idx }">
+                      <a href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile_reg?idx=${pet_profile.idx }${user_email }">
                         <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/dog_img/${pet_profile.pet_photo }" id="pet_profile_img">
                       </a>
                     </td>

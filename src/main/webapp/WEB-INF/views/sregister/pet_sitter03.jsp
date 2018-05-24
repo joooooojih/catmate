@@ -67,8 +67,8 @@
                 <div class="col-md-12">
                   <select class="form-control" name="care_size" id="care_size" >
                     <option value="5">소형견(0~4.9kg) 케어 가능합니다.</option>
-                    <option value="15">중형견(5~14.9kg) 케어 가능합니다.</option>
-                    <option value="16">대형견(15kg 이상) 케어 가능합니다.</option>
+                    <option value="15">중형견(0~14.9kg) 케어 가능합니다.</option>
+                    <option value="16">대형견(모든 무게) 케어 가능합니다.</option>
                   </select>
                 </div>
               </dd>

@@ -20,6 +20,12 @@
     }
   });
   
+  $(document).ready(function() {
+	  if(${pet_sitter_house.sregister eq 'no'}) {
+		  $("#reservation").prop("disabled", true);
+	  }
+  });
+  
   $(document).ready(function() {  // 가격 변동
     
     var pet_add_text = 0;

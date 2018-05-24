@@ -23,22 +23,27 @@ public class Pet_profile {
     MypageService mypageService;
     
     @RequestMapping(value="/mypage/pet_profile/pet_profile", method=RequestMethod.GET)
-    public String pet_profile (HttpServletRequest request, HttpSession session) {
-        
-        request.setAttribute("pet_profileList", mypageService.getPet_profileList((User_profileDto) session.getAttribute("user_profile")));
+    public String pet_profile (HttpServletRequest request, HttpSession session, Pet_profileDto pet_profileDto) {
+        User_profileDto user_profileDto = new User_profileDto();
+        if(pet_profileDto.getUser_email() != null) {  // 예약자의 강아지 정보
+            user_profileDto.setUser_email(pet_profileDto.getUser_email());
+        } else {
+            user_profileDto = (User_profileDto) session.getAttribute("user_profile");
+        }
+        request.setAttribute("pet_profileList", mypageService.getPet_profileList(user_profileDto));
         
         return "mypage/pet_profile/pet_profile";
     }
     
     @RequestMapping(value="/mypage/pet_profile/pet_profile_reg", method=RequestMethod.GET)
     public String pet_profile_reg (HttpServletRequest request, HttpSession session, Pet_profileDto pet_profileDto) {
-        
         User_profileDto user_profileDto = (User_profileDto) session.getAttribute("user_profile");
         
         if(pet_profileDto.getIdx() != 0) {
-            pet_profileDto.setUser_email(user_profileDto.getUser_email());
+            if(pet_profileDto.getUser_email() == null) {
+                pet_profileDto.setUser_email(user_profileDto.getUser_email());
+            }
             request.setAttribute("pet_profile", mypageService.getPet_profile(pet_profileDto));
-            
             request.setAttribute("root", "update_pet_profile_reg");
         } else {
             request.setAttribute("root", "insert_pet_profile_reg");

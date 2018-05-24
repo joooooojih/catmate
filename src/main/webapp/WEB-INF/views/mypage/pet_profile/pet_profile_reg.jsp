@@ -12,8 +12,8 @@
   <script src="${pageContext.request.contextPath}/resources/js/file.js"></script>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script>
-    $(document).ready(function() {
-    	if(${!empty pet_profile}) {  // update
+    $(document).ready(function() {  // 값 셋팅
+    	if(${!empty pet_profile}) {
     		$("#pet_name").val("${pet_profile.pet_name}")
     		$("#pet_gender").val("${pet_profile.pet_gender}");
     		$("#pet_kind").val("${pet_profile.pet_kind}");
@@ -38,6 +38,12 @@
         $("#sample6_postcode").val("${pet_profile.animal_hospital_zip_code}");
         $("#sample6_address").val("${pet_profile.animal_hospital_address}");
         $("#sample6_address2").val("${pet_profile.animal_hospital_daddress}");
+        
+        if(${pet_profileDto.user_email != user_profile.user_email}) {
+        	$("body").find("input, select, textarea").each(function() {
+            $(this).prop("disabled", true);
+           });
+        }
     	}
     });
   </script>
@@ -113,6 +119,18 @@
                     <div class="row">
                       <div class="col-md-6">
                         <input type="text" name="pet_birth" id="pet_birth" class="form-control" placeholder="생년월 6자리를 입력해주세요" maxlength="6" required>
+                      </div>
+                    </div>
+                  </dd>
+                </dl>
+                <br>
+                
+                <dl>
+                  <dt>관리 지침 및 요청 사항</dt>
+                  <dd>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <textarea rows="8" class="form-control" name="requests" id="requests" maxlength="1000" placeholder="관리 지침 및 요청사항이 있다면 적어주세요" style="resize: none;">${pet_profile.requests}</textarea>
                       </div>
                     </div>
                   </dd>

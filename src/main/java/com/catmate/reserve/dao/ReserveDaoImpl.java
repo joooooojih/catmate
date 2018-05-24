@@ -70,4 +70,9 @@ public class ReserveDaoImpl implements ReserveDao {
         return sqlSession.selectOne("reserve.getAreaCount", area);
     }
 
+    @Override
+    public int getPetCount(String user_email) {
+        return sqlSession.selectOne("reserve.getPetCount", user_email);
+    }
+
 }

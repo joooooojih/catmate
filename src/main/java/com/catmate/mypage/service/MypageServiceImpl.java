@@ -9,6 +9,7 @@ import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
 import com.catmate.dto.User_profileDto;
+import com.catmate.dto.Wish_listDto;
 import com.catmate.mypage.dao.MypageDao;
 
 @Service("MypageService")
@@ -75,6 +76,31 @@ public class MypageServiceImpl implements MypageService {
     @Override
     public void updatePet_profile(Pet_profileDto pet_profileDto) {
         mypageDao.updatePet_profile(pet_profileDto);
+    }
+
+    @Override
+    public int getWish_list(Wish_listDto wish_listDto) {
+        return mypageDao.getWish_list(wish_listDto);
+    }
+
+    @Override
+    public List<Wish_listDto> getWish_listList(User_profileDto user_profileDto) {
+        return mypageDao.getWish_listList(user_profileDto);
+    }
+
+    @Override
+    public void insertWish_list(Wish_listDto wish_listDto) {
+        mypageDao.insertWish_list(wish_listDto);
+    }
+
+    @Override
+    public void deleteWish_list(Wish_listDto wish_listDto) {
+        mypageDao.deleteWish_list(wish_listDto);
+    }
+
+    @Override
+    public void deleteReservation(ReservationDto reservationDto) {
+        mypageDao.deleteReservation(reservationDto);
     }
 
     

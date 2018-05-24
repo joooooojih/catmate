@@ -92,4 +92,9 @@ public class ReserveServiceImpl implements ReserveService{
         return reserveDao.getPet_sitter_house(idx);
     }
 
+    @Override
+    public int getPetCount(String user_email) {
+        return reserveDao.getPetCount(user_email);
+    }
+
 }

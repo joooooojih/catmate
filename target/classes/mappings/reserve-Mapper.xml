@@ -13,6 +13,7 @@
   <select id="getPet_sitter_houseList" resultType="Pet_sitter_house">
     <![CDATA[
       SELECT * FROM pet_sitter_house
+      ORDER BY idx DESC
     ]]>
   </select>
   
@@ -23,6 +24,7 @@
     <foreach collection="list" item="reservationDto" index="index" separator="," open="(" close=")">
       #{reservationDto.idx}
     </foreach>
+    ORDER BY idx DESC
   </select>
   
   <select id="getPet_sitter_house_search" resultType="Pet_sitter_house">
@@ -119,5 +121,12 @@
       AND sregister = 'yes'
     ]]>
   </select>
-
+  
+  <select id="getPetCount" resultType="integer">
+    <![CDATA[
+      SELECT COUNT(*) FROM pet_profile
+      WHERE
+      user_email=#{user_email}
+    ]]>
+  </select>
 </mapper>

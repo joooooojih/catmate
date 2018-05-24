@@ -10,6 +10,7 @@ import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
 import com.catmate.dto.User_profileDto;
+import com.catmate.dto.Wish_listDto;
 
 @Repository("MypageDao")
 public class MypageDaoImpl implements MypageDao {
@@ -24,7 +25,6 @@ public class MypageDaoImpl implements MypageDao {
 
     @Override
     public void insertUser_profile(User_profileDto user_profileDto) {
-        
         sqlSession.insert("Mypage.insertUser_profile", user_profileDto);
     }
     
@@ -76,6 +76,31 @@ public class MypageDaoImpl implements MypageDao {
     @Override
     public void updatePet_profile(Pet_profileDto pet_profileDto) {
         sqlSession.update("Mypage.updatePet_profile", pet_profileDto);
+    }
+
+    @Override
+    public int getWish_list(Wish_listDto wish_listDto) {
+        return sqlSession.selectOne("Mypage.getWish_list", wish_listDto);
+    }
+
+    @Override
+    public List<Wish_listDto> getWish_listList(User_profileDto user_profileDto) {
+        return sqlSession.selectList("Mypage.getWish_listList", user_profileDto);
+    }
+
+    @Override
+    public void insertWish_list(Wish_listDto wish_listDto) {
+        sqlSession.insert("Mypage.insertWish_list", wish_listDto);
+    }
+
+    @Override
+    public void deleteWish_list(Wish_listDto wish_listDto) {
+        sqlSession.delete("Mypage.deleteWish_list", wish_listDto);
+    }
+
+    @Override
+    public void deleteReservation(ReservationDto reservationDto) {
+        sqlSession.delete("Mypage.deleteReservation", reservationDto);
     }
 
 }

@@ -18,6 +18,7 @@ public interface ReserveDao {
     public Pet_sitter_houseDto getPet_sitter_house_search(Pet_sitter_houseDto pet_sitter_houseDto);
     public int getAreaAllCount();
     public int getAreaCount(String area);
+    public int getPetCount(String user_email);
     
     
 }

@@ -19,4 +19,5 @@ public interface ReserveService {
     public List<Pet_sitter_houseDto> getPet_sitter_house_not(List<ReservationDto> reservationList);
     public Pet_sitter_houseDto getPet_sitter_house_search(Pet_sitter_houseDto pet_sitter_houseDto);
     public int getAreaCount(String area);
+    public int getPetCount(String user_email);
 }

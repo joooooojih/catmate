@@ -14,6 +14,7 @@ public class Pet_profileDto {
     private String pet_kind;
     private int pet_weight;
     private String pet_birth;
+    private String requests;
     private String registration;
     private String neutralization;
     private String friendly;
@@ -80,6 +81,12 @@ public class Pet_profileDto {
     }
     public void setPet_birth(String pet_birth) {
         this.pet_birth = pet_birth;
+    }
+    public String getRequests() {
+        return requests;
+    }
+    public void setRequests(String requests) {
+        this.requests = requests;
     }
     public String getRegistration() {
         return registration;
