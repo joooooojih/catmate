@@ -10,6 +10,9 @@
   <link href="${pageContext.request.contextPath }/resources/css/search.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() {
+    	
+    	var page_num = 1;
+    	
     	function search() {  // ajax를 이용한 검색
     		$.ajax({
           type: "get",
@@ -31,7 +34,9 @@
             
             care_size: $("#select_search_size").val(),
             care_age: $("#select_search_age").val(),
-            area: '${pet_sitter_houseDto.area}'
+            area: '${pet_sitter_houseDto.area}',
+            
+            page_num: page_num
            },
            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
            dataType: "json",
@@ -45,7 +50,9 @@
         	   
         	   var carouselClass;
         	   
-        	   $("#middle_container").text("");  // 초기화
+        	   if(page_num == 1) {
+        		   $("#middle_container").text("");  // 초기화
+        	   }
         	   
         	   for(var i = 0; i < pet_sitter_house_search.length; i++) {
         		   
@@ -220,6 +227,7 @@
     	$("#start_day").datepicker({  // 시작 날짜
     	  onClose: function( selectedDate ) {
 	        $("#end_day").datepicker( "option", "minDate", selectedDate );
+	        page_num = 1;
 	        search();
     	  }
       });
@@ -227,17 +235,12 @@
     	$("#end_day").datepicker({  // 마침 날짜
     	  onClose: function( selectedDate ) {
 	        $("#start_day").datepicker( "option", "maxDate", selectedDate );
+	        page_num = 1;
 	        search();
     	  }
       });
     	
-    	$("label[id^=tag_search]").click(function() {
-    		
-    		if($("input[name^=" + this.id + "]").prop("checked") == true) {
-    	      $("input[name^=" + this.id + "]").prop("checked", false);
-    	    } else {
-    	      $("input[name^=" + this.id + "]").prop("checked", true);
-    	    }
+    	$("label[id^=tag_search]").change(function() {
     		
     		$("input[name^=tag_search]:checked").each(function() {
     			if(this.id == 'care_space') {
@@ -254,12 +257,20 @@
     		 $('input:checkbox:not(:checked)').each(function(){
     			 $(this).val("");
     	  });
-    		
-    		search();
+    		 page_num = 1;
+    		 search();
     	});
     	
     	$("select[id^=select_search]").change(function() {
+    		page_num = 1;
     		search();
+    	});
+    	
+    	$(window).scroll(function() {  // 무한 스크롤
+    	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    	    	++page_num;
+    	    	search();
+    	    }
     	});
     	
     	search();

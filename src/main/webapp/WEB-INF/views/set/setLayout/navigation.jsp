@@ -53,6 +53,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/reservation_history/to_sitter">예약 내역</a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/pet_sitter_house_update">펫시터 수정</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile">강아지 정보 관리</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/account/account_check">개인정보변경</a>

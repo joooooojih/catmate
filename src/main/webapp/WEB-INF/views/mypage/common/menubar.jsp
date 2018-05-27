@@ -23,6 +23,9 @@
               <h5><a class="text-secondary" href="${pageContext.request.contextPath }/mypage/reservation_history/to_sitter">예약내역</a></h5>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+              <h5><a class="text-secondary" href="${pageContext.request.contextPath }/mypage/pet_sitter_house_update">펫시터 수정</a></h5>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
               <h5><a class="text-secondary" href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile">강아지 정보 관리</a></h5>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

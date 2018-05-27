@@ -61,7 +61,7 @@
       SELECT * FROM reservation 
       WHERE
       (
-        end_day >= now()
+        end_day >= date_add(now(), interval -1 day)
         OR
         review_check = 'X'
       )
@@ -78,7 +78,7 @@
       WHERE
       user_email=#{user_email}
       ORDER BY
-      idx asc
+      idx DESC
     ]]>
   </select>
   
@@ -86,10 +86,10 @@
     <![CDATA[
       SELECT * FROM reservation
       WHERE
-      end_day >= now()
+      end_day >= date_add(now(), interval -1 day)
       AND
     ]]>
-    <foreach collection="list" item="pet_sitter_house" separator="or">
+    <foreach collection="list" item="pet_sitter_house" separator="or" open="(" close=")">
       idx = #{pet_sitter_house.idx}
     </foreach>
     <![CDATA[
@@ -261,4 +261,6 @@
       idx=#{idx}
     ]]>
   </delete>
+  
+  <!-- 후기 -->
 </mapper>

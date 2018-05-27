@@ -2,7 +2,9 @@ package com.catmate.mypage;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,8 @@ public class Reservation_history {
         for(Pet_sitter_houseDto pet_sitter_houseDto : pet_sitter_houseList) {
             user_profileList.add(mypageService.getUser_profile(pet_sitter_houseDto.getUser_email()));
         }
+        
+        request.setAttribute("to_day", new java.util.Date());
         request.setAttribute("user_profileList", user_profileList);
         request.setAttribute("pet_sitter_houseList", pet_sitter_houseList);
         request.setAttribute("reservationList", reservationList);
@@ -77,6 +81,7 @@ public class Reservation_history {
                     }
                 }
             }
+            
             request.setAttribute("reservationList", reservationList);
             request.setAttribute("user_profileList", user_profileList);
             request.setAttribute("pet_sitter_houseList", asc_pet_sitter_houseList);

@@ -70,7 +70,14 @@
                       </a>
                     </td>
                     <td>
-                      <a href="#" id="${i }" class="cancel">취소</a>
+                      <c:choose>
+                        <c:when test="${to_day > reservation.end_day }">
+                          <a href="${pageContext.request.contextPath }/mypage/review?idx=${pet_sitter_houseList[i].idx }">후기</a>
+                        </c:when>
+                        <c:otherwise>
+                          <a href="#" id="${i }" class="cancel">취소</a>
+                        </c:otherwise>
+                      </c:choose>
                     </td>
                   </tr>
                   <c:set var="i" value="${i+1 }"/>

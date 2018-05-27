@@ -21,62 +21,79 @@
     SELECT * FROM pet_sitter_house
     WHERE
     idx NOT IN
-    <foreach collection="list" item="reservationDto" index="index" separator="," open="(" close=")">
+    <foreach collection="list" item="reservationDto" separator="," open="(" close=")">
       #{reservationDto.idx}
     </foreach>
-    ORDER BY idx DESC
   </select>
   
-  <select id="getPet_sitter_house_search" resultType="Pet_sitter_house">
-      SELECT * FROM pet_sitter_house
-      WHERE 
-      idx = #{idx}
-      AND sregister = 'yes'
-      <if test="care_space != null and care_space == '아파트'">
-        AND care_space = #{care_space}
-      </if>
-      <if test="pick_up != null and pick_up == 'yes'">
-        AND pick_up = #{pick_up}
-      </if>
-      <if test="yard != null and yard == '있습니다.'">
-        AND yard = #{yard}
-      </if>
-      <if test="other_animal != null and other_animal == '다른 동물은 없습니다.'">
-        AND other_animal = #{other_animal}
-      </if>
-      <if test="patient_dog != null and patient_dog == 'yes'">
-        AND patient_dog = #{patient_dog}
-      </if>
-      <if test="license != null and license == 'yes'">
-        AND license = #{license}
-      </if>
-      <if test="outdoor_bowels != null and outdoor_bowels == 'yes'">
-        AND outdoor_bowels = #{outdoor_bowels}
-      </if>
-      <if test="homemade_snacks != null and homemade_snacks == 'yes'">
-        AND homemade_snacks = #{homemade_snacks}
-      </if>
-      <if test="first_aid != null and first_aid == 'yes'">
-        AND first_aid = #{first_aid}
-      </if>
-      <if test="medication_possible != null and medication_possible == 'yes'">
-        AND medication_possible = #{medication_possible}
-      </if>
-      <if test="care_age != '모든연령' and care_age != null">
-        <![CDATA[
-          AND care_age LIKE CONCAT('%', #{care_age}, '%')
-        ]]>
-      </if>
-      <if test="care_size != 0">
-        <![CDATA[
-          AND care_size >= #{care_size}
-        ]]>
-      </if>
-      <if test="area != '' and area != null and area != '전체'">
-        <![CDATA[
-          AND house_address LIKE CONCAT(#{area}, '%')
-        ]]>
-      </if>
+  <select id="getPet_sitter_house_searchList" resultType="Pet_sitter_house" parameterType="HashMap">
+      
+      SELECT A.* FROM
+      (
+        SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+        pet_sitter_house.* FROM
+        (
+          SELECT *
+          FROM pet_sitter_house
+          WHERE
+          <foreach collection="idxList" item="pet_sitter_house" separator="OR" open="(" close=")">
+          idx=#{pet_sitter_house.idx}
+          </foreach>
+          AND sregister = 'yes'
+          <if test="pet_sitter_houseDto.care_space != null and pet_sitter_houseDto.care_space == '아파트'">
+            AND care_space = #{pet_sitter_houseDto.care_space}
+          </if>
+          <if test="pet_sitter_houseDto.pick_up != null and pet_sitter_houseDto.pick_up == 'yes'">
+            AND pick_up = #{pet_sitter_houseDto.pick_up}
+          </if>
+          <if test="pet_sitter_houseDto.yard != null and pet_sitter_houseDto.yard == '있습니다.'">
+            AND yard = #{pet_sitter_houseDto.yard}
+          </if>
+          <if test="pet_sitter_houseDto.other_animal != null and pet_sitter_houseDto.other_animal == '다른 동물은 없습니다.'">
+            AND other_animal = #{pet_sitter_houseDto.other_animal}
+          </if>
+          <if test="pet_sitter_houseDto.patient_dog != null and pet_sitter_houseDto.patient_dog == 'yes'">
+            AND patient_dog = #{pet_sitter_houseDto.patient_dog}
+          </if>
+          <if test="pet_sitter_houseDto.license != null and pet_sitter_houseDto.license == 'yes'">
+            AND license = #{pet_sitter_houseDto.license}
+          </if>
+          <if test="pet_sitter_houseDto.outdoor_bowels != null and pet_sitter_houseDto.outdoor_bowels == 'yes'">
+            AND outdoor_bowels = #{pet_sitter_houseDto.outdoor_bowels}
+          </if>
+          <if test="pet_sitter_houseDto.homemade_snacks != null and pet_sitter_houseDto.homemade_snacks == 'yes'">
+            AND homemade_snacks = #{pet_sitter_houseDto.homemade_snacks}
+          </if>
+          <if test="pet_sitter_houseDto.first_aid != null and pet_sitter_houseDto.first_aid == 'yes'">
+            AND first_aid = #{pet_sitter_houseDto.first_aid}
+          </if>
+          <if test="pet_sitter_houseDto.medication_possible != null and pet_sitter_houseDto.medication_possible == 'yes'">
+            AND medication_possible = #{pet_sitter_houseDto.medication_possible}
+          </if>
+          <if test="pet_sitter_houseDto.care_age != '모든연령' and pet_sitter_houseDto.care_age != null">
+            <![CDATA[
+              AND care_age LIKE CONCAT('%', #{pet_sitter_houseDto.care_age}, '%')
+            ]]>
+          </if>
+          <if test="pet_sitter_houseDto.care_size != 0">
+            <![CDATA[
+              AND care_size >= #{pet_sitter_houseDto.care_size}
+            ]]>
+          </if>
+          <if test="pet_sitter_houseDto.area != '' and pet_sitter_houseDto.area != null and pet_sitter_houseDto.area != '전체'">
+            <![CDATA[
+              AND house_address LIKE CONCAT(#{pet_sitter_houseDto.area}, '%')
+            ]]>
+          </if>
+          ORDER BY idx DESC
+        ) pet_sitter_house,
+        ( SELECT @ROWNUM := 0 ) R
+      ) A
+      <![CDATA[
+        WHERE
+        A.ROWNUM >= ${start_row} AND A.ROWNUM <= ${end_row}
+      ]]>
+      
   </select>
   
   <insert id="insertReservation">

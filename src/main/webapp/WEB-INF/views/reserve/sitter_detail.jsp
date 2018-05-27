@@ -519,7 +519,7 @@
         </div>
       </div>
       <br><br><br>
-      <c:if test="${sregister eq 'sregister' }">
+      <c:if test="${pet_sitter_house.sregister eq 'no' }">
         <div class="row">
           <div class="col-md-12">
             <form action="pet_sitter05" method="post" id="pet_sitter05_form">

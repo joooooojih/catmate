@@ -88,14 +88,22 @@ public class Search {
         
         List<ReservationDto> tmpReservationList = reserveService.getReservationList();
         List<ReservationDto> reservationList = new ArrayList<ReservationDto>();
-        List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
-        List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
-        List<Pet_sitter_houseDto> pet_sitter_houseList = new ArrayList<Pet_sitter_houseDto>();
         List<Pet_sitter_houseDto> pet_sitter_house_notList = null;
+        
+        List<Pet_sitter_houseDto> pet_sitter_houseList = null;
         List<Wish_listDto> wish_listList = mypageService.getWish_listList((User_profileDto) session.getAttribute("user_profile"));
         List<Integer> pet_countList = new ArrayList<Integer>();
+        List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
+        List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
         
-        Map<String, Object> map = new HashMap<String, Object>();
+        int page_num = Integer.parseInt((String) request.getParameter("page_num"));
+        int page_size = 2;
+        
+        int start_row = (page_num * page_size) - page_size + 1;
+        int end_row = page_num * page_size;
+        
+        Map<String, Object> search_map = new HashMap<String, Object>();
+        Map<String, Object> result_map = new HashMap<String, Object>();
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar start_cal = Calendar.getInstance();
@@ -133,31 +141,28 @@ public class Search {
             pet_sitter_house_notList = reserveService.getPet_sitter_house_not(reservationList); 
         }
         
+        search_map.put("idxList", pet_sitter_house_notList);
+        search_map.put("pet_sitter_houseDto", pet_sitter_houseDto);
+        search_map.put("start_row", start_row);
+        search_map.put("end_row", end_row);
         
-        for(Pet_sitter_houseDto pet_sitter_house_notDto : pet_sitter_house_notList) {  // pet_sitter_house 가져오기
-            pet_sitter_houseDto.setIdx(pet_sitter_house_notDto.getIdx());
-            Pet_sitter_houseDto tmpPet_sitter_houseDto = reserveService.getPet_sitter_house_search(pet_sitter_houseDto);
-            
-            if(tmpPet_sitter_houseDto != null) {
-                pet_sitter_houseList.add(tmpPet_sitter_houseDto);
-            }
-        }
+        pet_sitter_houseList = reserveService.getPet_sitter_house_searchList(search_map);
 
         for(Pet_sitter_houseDto pet_sitter_house : pet_sitter_houseList) {  // user_profile, pet_sitter_house photo 가져오기
-            room_photoList.add(reserveService.getRoom_photoDto(pet_sitter_house.getIdx()));
+            room_photoList.add(reserveService.getRoom_photo(pet_sitter_house.getIdx()));
             user_profileList.add(mypageService.getUser_profile(pet_sitter_house.getUser_email()));
             pet_countList.add(reserveService.getPetCount(pet_sitter_house.getUser_email()));
         }
 
-        map.put("pet_sitter_houseList", pet_sitter_houseList);
-        map.put("room_photoList", room_photoList);
-        map.put("user_profileList", user_profileList);
-        map.put("wish_listList", wish_listList);
-        map.put("pet_countList", pet_countList);
+        result_map.put("pet_sitter_houseList", pet_sitter_houseList);
+        result_map.put("room_photoList", room_photoList);
+        result_map.put("user_profileList", user_profileList);
+        result_map.put("wish_listList", wish_listList);
+        result_map.put("pet_countList", pet_countList);
         
         ObjectMapper mapper = new ObjectMapper();
         String jsonText = "";
-        jsonText = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map); 
+        jsonText = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result_map); 
         
         response.getWriter().print(jsonText);
     }

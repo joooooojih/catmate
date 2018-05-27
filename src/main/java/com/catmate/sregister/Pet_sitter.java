@@ -31,11 +31,10 @@ public class Pet_sitter {
     MypageService mypageService;
 
     public void idx_check(HttpSession session, HttpServletRequest request) {
-        int idx;
+        int idx = 0;
         try {
             idx = (Integer) session.getAttribute("idx");
         } catch(Exception e) {
-            idx = 0;
             session.setAttribute("idx", 0);
         }
         if(idx != 0) {
@@ -50,15 +49,13 @@ public class Pet_sitter {
     /*제목, 집 주소*/
     @RequestMapping(value="/sregister/pet_sitter01", method=RequestMethod.GET)
     public String pet_sitter01(HttpSession session, HttpServletRequest request) {
-
         idx_check(session, request);
-
+        
         return "sregister/pet_sitter01";
     }
 
     @RequestMapping(value="/sregister/pet_sitter01", method=RequestMethod.POST)
     public String pet_sitter01(HttpServletRequest request, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto) {
-
         
         int idx = (Integer) session.getAttribute("idx");
         if(idx == 0) {
@@ -107,7 +104,7 @@ public class Pet_sitter {
 
         String string_check_in = "";
         String string_check_out = "";
-
+        
         string_check_in += check_in[0];
         string_check_in += " : ";
         string_check_in += check_in[1];
@@ -238,14 +235,19 @@ public class Pet_sitter {
     /*미리보기*/
     @RequestMapping(value="/sregister/pet_sitter05", method=RequestMethod.GET)
     public String pet_sitter05(HttpServletRequest request, HttpSession session) {
-
+        int idx = (Integer) session.getAttribute("idx");
         idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         User_profileDto pet_sitter_user_profile = mypageService.getUser_profile(pet_sitter_houseDto.getUser_email());
         
-        request.setAttribute("house_user_profile", pet_sitter_user_profile);
-        request.setAttribute("sregister", "sregister");
-        return "reserve/sitter_detail";
+        if(pet_sitter_houseDto.getSregister().equals("yes")) {
+            session.setAttribute("idx", 0);
+            return "redirect:/reserve/sitter_detail?idx=" + idx;
+        } else {
+            request.setAttribute("house_user_profile", pet_sitter_user_profile);
+            return "reserve/sitter_detail";
+        }
+        
     }
 
     @RequestMapping(value="/sregister/pet_sitter05", method=RequestMethod.POST)

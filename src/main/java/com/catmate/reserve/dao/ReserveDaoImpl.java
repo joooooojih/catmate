@@ -1,6 +1,7 @@
 package com.catmate.reserve.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ReserveDaoImpl implements ReserveDao {
     }
 
     @Override
-    public List<Room_photoDto> getRoom_photoDto(int idx) {
+    public List<Room_photoDto> getRoom_photo(int idx) {
         return sqlSession.selectList("reserve.getRoom_photo", idx);
     }
 
@@ -52,12 +53,8 @@ public class ReserveDaoImpl implements ReserveDao {
     }
 
     @Override
-    public Pet_sitter_houseDto getPet_sitter_house_search(Pet_sitter_houseDto pet_sitter_houseDto) {
-        Pet_sitter_houseDto pet_sitter_house_searchDto = null;
-        try {
-        pet_sitter_house_searchDto = sqlSession.selectOne("reserve.getPet_sitter_house_search", pet_sitter_houseDto);
-        } catch(Exception e) {}
-        return pet_sitter_house_searchDto;
+    public List<Pet_sitter_houseDto> getPet_sitter_house_searchList(Map<String, Object> search_map) {
+        return sqlSession.selectList("reserve.getPet_sitter_house_searchList", search_map);
     }
 
     @Override

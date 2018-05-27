@@ -39,13 +39,13 @@
               <dd>
                 <div class="row">
                   <div class="col-md-3">
-                    <input type="text" name="check_in" class="form-control" placeholder="시작 시간" maxlength="2" value="${check_in_start[0] }"> </div>
+                    <input type="text" name="check_in" class="form-control" placeholder="시작 시간" maxlength="2" value="${check_in_start[0] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_in" class="form-control" placeholder="시작 분" maxlength="2" value="${check_in_start[1] }"> </div>
+                    <input type="text" name="check_in" class="form-control" placeholder="시작 분" maxlength="2" value="${check_in_start[1] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_in" class="form-control" placeholder="끝 시간" maxlength="2" value="${check_in_end[0] }"> </div>
+                    <input type="text" name="check_in" class="form-control" placeholder="끝 시간" maxlength="2" value="${check_in_end[0] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_in" class="form-control" placeholder="끝 분" maxlength="2" value="${check_in_end[1] }"> </div>
+                    <input type="text" name="check_in" class="form-control" placeholder="끝 분" maxlength="2" value="${check_in_end[1] }" required> </div>
                 </div>
               </dd>
             </dl>
@@ -59,13 +59,13 @@
               <dd>
                 <div class="row">
                   <div class="col-md-3">
-                    <input type="text" name="check_out" class="form-control" placeholder="시작 시간" maxlength="2" value="${check_out_start[0] }"> </div>
+                    <input type="text" name="check_out" class="form-control" placeholder="시작 시간" maxlength="2" value="${check_out_start[0] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_out" class="form-control" placeholder="시작 분" maxlength="2" value="${check_out_start[1] }"> </div>
+                    <input type="text" name="check_out" class="form-control" placeholder="시작 분" maxlength="2" value="${check_out_start[1] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_out" class="form-control" placeholder="끝 시간" maxlength="2" value="${check_out_end[0] }"> </div>
+                    <input type="text" name="check_out" class="form-control" placeholder="끝 시간" maxlength="2" value="${check_out_end[0] }" required> </div>
                   <div class="col-md-3">
-                    <input type="text" name="check_out" class="form-control" placeholder="끝 분" maxlength="2" value="${check_out_end[1] }"> </div>
+                    <input type="text" name="check_out" class="form-control" placeholder="끝 분" maxlength="2" value="${check_out_end[1] }" required> </div>
                 </div>
               </dd>
             </dl>
@@ -75,17 +75,17 @@
                 <h4 class="text-primary">Day Care 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="day_care" id="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.day_care }"> </dd>
+                <input type="text" name="day_care" id="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.day_care }" required> </dd>
               <dt>
                 <h4 class="text-primary">1박 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="nightly_rate" id="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.nightly_rate }"> </dd>
+                <input type="text" name="nightly_rate" id="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.nightly_rate }" required> </dd>
               <dt>
                 <h4 class=text-primary>마리당 추가 요금</h4>
               </dt>
               <dd>
-                <input type="text" name="surcharge" id="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.surcharge }"> </dd>
+                <input type="text" name="surcharge" id="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.surcharge }" required> </dd>
             </dl>
             <br>
             <div class="row" id="buttonRow">
