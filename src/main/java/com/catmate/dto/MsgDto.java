@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("Message")
-public class MessageDto {
+@Alias("Msg")
+public class MsgDto {
 
     private String to_user_email;
     private String from_user_email;

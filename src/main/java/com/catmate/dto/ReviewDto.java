@@ -9,8 +9,8 @@ public class ReviewDto {
 
     private int idx;
     private String user_email;
-    private String review_kidn;
-    private String review_scope;
+    private String review_kind;
+    private int review_scope;
     private String review_content;
     private Timestamp review_date;
     public int getIdx() {
@@ -25,16 +25,16 @@ public class ReviewDto {
     public void setUser_email(String user_email) {
         this.user_email = user_email;
     }
-    public String getReview_kidn() {
-        return review_kidn;
+    public String getReview_kind() {
+        return review_kind;
     }
-    public void setReview_kidn(String review_kidn) {
-        this.review_kidn = review_kidn;
+    public void setReview_kind(String review_kind) {
+        this.review_kind = review_kind;
     }
-    public String getReview_scope() {
+    public int getReview_scope() {
         return review_scope;
     }
-    public void setReview_scope(String review_scope) {
+    public void setReview_scope(int review_scope) {
         this.review_scope = review_scope;
     }
     public String getReview_content() {

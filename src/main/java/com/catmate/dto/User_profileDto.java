@@ -15,7 +15,7 @@ public class User_profileDto {
     private String user_zip_code;
     private String user_address;
     private String user_daddress;
-    private int user_grade;
+    private double user_grade;
     private MultipartFile uploadFile;
     
     public String getUser_phone() {
@@ -72,10 +72,10 @@ public class User_profileDto {
     public void setUser_daddress(String user_daddress) {
         this.user_daddress = user_daddress;
     }
-    public int getUser_grade() {
+    public double getUser_grade() {
         return user_grade;
     }
-    public void setUser_grade(int user_grade) {
+    public void setUser_grade(double user_grade) {
         this.user_grade = user_grade;
     }
     public MultipartFile getUploadFile() {

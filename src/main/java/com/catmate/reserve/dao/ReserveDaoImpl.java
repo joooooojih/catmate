@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.Room_photoDto;
 
 @Repository("reserveDao")
@@ -70,6 +71,16 @@ public class ReserveDaoImpl implements ReserveDao {
     @Override
     public int getPetCount(String user_email) {
         return sqlSession.selectOne("reserve.getPetCount", user_email);
+    }
+
+    @Override
+    public List<ReviewDto> getReviewList(int idx) {
+        return sqlSession.selectList("reserve.getReviewList", idx);
+    }
+
+    @Override
+    public int getReviewCount(int idx) {
+        return sqlSession.selectOne("reserve.getReviewCount", idx);
     }
 
 }

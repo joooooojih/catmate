@@ -72,7 +72,9 @@
                     <td>
                       <c:choose>
                         <c:when test="${to_day > reservation.end_day }">
-                          <a href="${pageContext.request.contextPath }/mypage/review?idx=${pet_sitter_houseList[i].idx }">후기</a>
+                          <c:if test="${reservation.review_check eq 'X' }">
+                            <a href="${pageContext.request.contextPath }/mypage/review?idx=${reservation.idx}&start_date=<fmt:formatDate value='${reservation.start_day}' pattern='yyyy-MM-dd'/>&end_date=<fmt:formatDate value='${reservation.end_day}' pattern='yyyy-MM-dd'/>">후기</a>
+                          </c:if>
                         </c:when>
                         <c:otherwise>
                           <a href="#" id="${i }" class="cancel">취소</a>

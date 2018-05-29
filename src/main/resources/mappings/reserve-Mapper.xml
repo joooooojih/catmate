@@ -146,4 +146,20 @@
       user_email=#{user_email}
     ]]>
   </select>
+  
+  <select id="getReviewList" resultType="Review">
+    <![CDATA[
+      SELECT * FROM review
+      WHERE
+      idx=#{idx}
+    ]]>
+  </select>
+  
+  <select id="getReviewCount" resultType="integer">
+    <![CDATA[
+      SELECT COUNT(*) FROM review
+      WHERE
+      idx=#{idx}
+    ]]>
+  </select>
 </mapper>

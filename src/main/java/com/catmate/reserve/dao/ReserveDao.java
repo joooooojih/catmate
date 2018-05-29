@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.Room_photoDto;
 
 public interface ReserveDao {
@@ -20,6 +21,8 @@ public interface ReserveDao {
     public int getAreaAllCount();
     public int getAreaCount(String area);
     public int getPetCount(String user_email);
+    public List<ReviewDto> getReviewList(int idx);
+    public int getReviewCount(int idx);
     
     
 }

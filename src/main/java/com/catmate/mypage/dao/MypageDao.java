@@ -5,6 +5,7 @@ import java.util.List;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.User_profileDto;
 import com.catmate.dto.Wish_listDto;
 
@@ -35,4 +36,10 @@ public interface MypageDao {
     public List<Wish_listDto> getWish_listList(User_profileDto user_profileDto);
     public void insertWish_list(Wish_listDto wish_listDto);
     public void deleteWish_list(Wish_listDto wish_listDto);
+    
+    /*후기*/
+    public List<ReviewDto> getMyReviewList(List<Pet_sitter_houseDto> pet_sitter_houseList);
+    public void updateReservation_review(ReservationDto reservationDto);
+    public void updateUser_profile_grade(User_profileDto user_profileDto);
+    public void insertReview(ReviewDto reviewDto);
 }

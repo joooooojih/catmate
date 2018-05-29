@@ -30,27 +30,9 @@ public class Pet_sitter {
     @Autowired
     MypageService mypageService;
 
-    public void idx_check(HttpSession session, HttpServletRequest request) {
-        int idx = 0;
-        try {
-            idx = (Integer) session.getAttribute("idx");
-        } catch(Exception e) {
-            session.setAttribute("idx", 0);
-        }
-        if(idx != 0) {
-            Map<String, Object> map = reserveService.getSitter_detail(idx);
-
-            request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
-            request.setAttribute("room_photoList", map.get("room_photo"));
-
-        }
-    }
-
     /*제목, 집 주소*/
     @RequestMapping(value="/sregister/pet_sitter01", method=RequestMethod.GET)
     public String pet_sitter01(HttpSession session, HttpServletRequest request) {
-        idx_check(session, request);
-        
         return "sregister/pet_sitter01";
     }
 
@@ -76,8 +58,6 @@ public class Pet_sitter {
     /*체크인 체크아웃, 데이케어 1박 마리당 추가 금액*/
     @RequestMapping(value="/sregister/pet_sitter02", method=RequestMethod.GET)
     public String pet_sitter02(HttpSession session, HttpServletRequest request) {
-        idx_check(session, request);
-
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
 
         if(pet_sitter_houseDto.getCheck_in() != null && pet_sitter_houseDto.getCheck_out() != null) {
@@ -134,7 +114,6 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter03", method=RequestMethod.GET)
     public String pet_sitter03(HttpServletRequest request, HttpSession session) {
 
-        idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         if(pet_sitter_houseDto.getCare_age() != null) {
             String[] care_age = pet_sitter_houseDto.getCare_age().split(", ");
@@ -187,8 +166,6 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter04", method=RequestMethod.GET)
     public String pet_sitter04(HttpServletRequest request, HttpSession session) {
 
-        idx_check(session, request);
-
         List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");
         if(room_photoList.isEmpty()) {
             request.setAttribute("submit_check", false);
@@ -203,7 +180,6 @@ public class Pet_sitter {
         String savePath = request.getServletContext().getRealPath("\\resources\\img\\pet_sitter_img\\");
         room_photoDto.setIdx((Integer) session.getAttribute("idx"));
 
-        idx_check(session, request);
         List<Room_photoDto> room_photoList = (List<Room_photoDto>) request.getAttribute("room_photoList");
 
         for(int i = 0; i < room_photoDto.getUploadFile().size(); i++) {
@@ -236,7 +212,6 @@ public class Pet_sitter {
     @RequestMapping(value="/sregister/pet_sitter05", method=RequestMethod.GET)
     public String pet_sitter05(HttpServletRequest request, HttpSession session) {
         int idx = (Integer) session.getAttribute("idx");
-        idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         User_profileDto pet_sitter_user_profile = mypageService.getUser_profile(pet_sitter_houseDto.getUser_email());
         
@@ -254,7 +229,6 @@ public class Pet_sitter {
     public String post_pet_sitter05(HttpServletRequest request, HttpSession session) {
 
         int idx = (Integer) session.getAttribute("idx");
-        idx_check(session, request);
         Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) request.getAttribute("pet_sitter_house");
         pet_sitter_houseDto.setSregister("yes");
         sregisterService.updatePet_sitter05(pet_sitter_houseDto);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.User_profileDto;
 import com.catmate.dto.Wish_listDto;
 
@@ -101,6 +102,26 @@ public class MypageDaoImpl implements MypageDao {
     @Override
     public void deleteReservation(ReservationDto reservationDto) {
         sqlSession.delete("Mypage.deleteReservation", reservationDto);
+    }
+
+    @Override
+    public List<ReviewDto> getMyReviewList(List<Pet_sitter_houseDto> pet_sitter_houseList) {
+        return sqlSession.selectList("Mypage.getMyReviewList", pet_sitter_houseList);
+    }
+
+    @Override
+    public void updateReservation_review(ReservationDto reservationDto) {
+        sqlSession.update("Mypage.updateReservation_review", reservationDto);
+    }
+
+    @Override
+    public void updateUser_profile_grade(User_profileDto user_profileDto) {
+        sqlSession.update("Mypage.updateUser_profile_grade", user_profileDto);
+    }
+
+    @Override
+    public void insertReview(ReviewDto reviewDto) {
+        sqlSession.insert("Mypage.insertReview", reviewDto);
     }
 
 }

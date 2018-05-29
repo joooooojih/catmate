@@ -25,9 +25,6 @@
   #reservation {
     width: 20em;
   }
-  #buttonRow {
-    text-align: center;
-  }
   #pet_sitter05_form #buttonRow input {
     width: 300px;
     height: 50px;
@@ -44,20 +41,11 @@
     width: 100px;
     height: 100px;
   }
-  #middle #topCon1 {
-    text-align: center;
-  }
   #middle #middle2 li {
     list-style: square;
   }
   #middle #middle2 ul {
     margin-top: 1em;
-  }
-  #middle #left {
-    text-align: lift;
-  }
-  #middle #right {
-    text-align: right;
   }
   #middle #middle4 {
     padding-top: 2em;

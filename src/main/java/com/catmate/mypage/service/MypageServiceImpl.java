@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.User_profileDto;
 import com.catmate.dto.Wish_listDto;
 import com.catmate.mypage.dao.MypageDao;
@@ -101,6 +102,18 @@ public class MypageServiceImpl implements MypageService {
     @Override
     public void deleteReservation(ReservationDto reservationDto) {
         mypageDao.deleteReservation(reservationDto);
+    }
+
+    @Override
+    public List<ReviewDto> getMyReviewList(List<Pet_sitter_houseDto> pet_sitter_houseList) {
+        return mypageDao.getMyReviewList(pet_sitter_houseList);
+    }
+
+    @Override
+    public void insertReview(ReservationDto reservationDto, User_profileDto user_profileDto, ReviewDto reviewDto) {
+        mypageDao.insertReview(reviewDto);
+        mypageDao.updateUser_profile_grade(user_profileDto);
+        mypageDao.updateReservation_review(reservationDto);
     }
 
     

@@ -57,7 +57,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/pet_profile/pet_profile">강아지 정보 관리</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/account/account_check">개인정보변경</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/account/account_info">개인정보변경</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
               </div>

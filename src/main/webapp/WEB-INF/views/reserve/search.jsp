@@ -47,6 +47,7 @@
         	   var room_photo_search = responseData.room_photoList;
         	   var wish_list_search = responseData.wish_listList;
         	   var pet_count_search = responseData.pet_countList;
+        	   var review_count_search = responseData.review_countList;
         	   
         	   var carouselClass;
         	   
@@ -166,7 +167,7 @@
         					            '</div>'+
         					            '<div class="col-md-4 text-secondary" id="reviewsGrade">'+
         					             '<img id="subtitleImg" src="${pageContext.request.contextPath }/resources/img/icon/icon-review.png">'+
-        					              '<b>후기 평점</b>&nbsp;&nbsp;&nbsp;0점'+   // 후기하고 마저
+        					              '<b>고객 후기</b>&nbsp;&nbsp;&nbsp;' + review_count_search[i] + '개'+   // 후기하고 마저
         					            '</div>'+
         					          '</div>'+
         					        '</div>'+

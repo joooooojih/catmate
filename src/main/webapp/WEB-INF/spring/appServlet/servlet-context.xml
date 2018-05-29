@@ -27,4 +27,23 @@
   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
   </bean>
   
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/mypage/**"/>
+      <mvc:mapping path="/sregister/**"/>
+      <mvc:mapping path="/reserve/sitter_detail_price_check"/>
+        <bean class="com.catmate.Interceptor.Login_inter"/>
+      </mvc:interceptor>
+      
+    <mvc:interceptor>
+      <mvc:mapping path="/sregister/**"/>
+        <bean class="com.catmate.Interceptor.Sregister_inter"/>
+    </mvc:interceptor>
+    
+    <mvc:interceptor>
+      <mvc:mapping path="/mypage/account/**"/>
+      <mvc:exclude-mapping path="/mypage/account/account_check"/>
+        <bean class="com.catmate.Interceptor.Account_inter"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
 </beans>

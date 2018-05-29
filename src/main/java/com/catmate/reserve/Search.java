@@ -95,6 +95,7 @@ public class Search {
         List<Integer> pet_countList = new ArrayList<Integer>();
         List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
         List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
+        List<Integer> review_countList = new ArrayList<Integer>();
         
         int page_num = Integer.parseInt((String) request.getParameter("page_num"));
         int page_size = 2;
@@ -152,6 +153,7 @@ public class Search {
             room_photoList.add(reserveService.getRoom_photo(pet_sitter_house.getIdx()));
             user_profileList.add(mypageService.getUser_profile(pet_sitter_house.getUser_email()));
             pet_countList.add(reserveService.getPetCount(pet_sitter_house.getUser_email()));
+            review_countList.add(reserveService.getReviewCount(pet_sitter_house.getIdx()));
         }
 
         result_map.put("pet_sitter_houseList", pet_sitter_houseList);
@@ -159,6 +161,7 @@ public class Search {
         result_map.put("user_profileList", user_profileList);
         result_map.put("wish_listList", wish_listList);
         result_map.put("pet_countList", pet_countList);
+        result_map.put("review_countList", review_countList);
         
         ObjectMapper mapper = new ObjectMapper();
         String jsonText = "";

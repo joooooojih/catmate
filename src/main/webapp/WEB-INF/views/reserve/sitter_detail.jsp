@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,15 +15,15 @@
   $(document).ready(function() { // 이전
     if(${sregister eq 'sregister'}) {
       $("#previous").click(function() {
-    	  $(location).attr("href", "pet_sitter04");
+        $(location).attr("href", "pet_sitter04");
       })
     }
   });
   
   $(document).ready(function() {
-	  if(${pet_sitter_house.sregister eq 'no'}) {
-		  $("#reservation").prop("disabled", true);
-	  }
+    if(${pet_sitter_house.sregister eq 'no'}) {
+      $("#reservation").prop("disabled", true);
+    }
   });
   
   $(document).ready(function() {  // 가격 변동
@@ -39,7 +39,7 @@
     var disabledDays = new Array;  // disable 할 날짜
     
     $("input[id=disable_day]").each(function() {
-    	disabledDays.push(this.value);
+      disabledDays.push(this.value);
     });
     
     function setPrice() {  // 가격 셋팅
@@ -197,9 +197,9 @@
     
     
     $("#reservation").click(function() {
-    	
-    	$.ajax({  // 금액 유효성 검사
-    		type: "get",
+      
+      $.ajax({  // 금액 유효성 검사
+        type: "get",
         url: "sitter_detail_price_check",
         data: {
           idx: ${pet_sitter_house.idx},
@@ -209,9 +209,9 @@
         },
         dataType: "text",
         success: function(responseData, status, xhr) {
-        	
-        	if(responseData == total_price) {
-         	    IMP.init('iamport');  // 결제
+          
+          if(responseData == total_price) {
+              IMP.init('iamport');  // 결제
               IMP.request_pay({
                   pg : 'inicis', // version 1.1.0부터 지원.
                   pay_method : 'card',
@@ -256,16 +256,16 @@
                   }
                 alert(msg);
              });
-        	} else {
-        		alert("금액이 일치 하지 않습니다.");
-        	}
-        	
+          } else {
+            alert("로그인 후 이용해주세요.");
+          }
+          
         },
         error: function(xhr, status, error) {
-          alert("처음부터 다시 해주세요.");
+          alert("날짜를 선택해 주세요.");
         }
-    	});
-    	
+      });
+      
     });
   });
   
@@ -402,32 +402,32 @@
                <div class="col-md-6">
                 <table class="table table-striped">
                   <tr> 
-                    <td id="left">돌봄공간</td>
-                    <td id="right">${pet_sitter_house.care_space }</td>
+                    <td class="text-left">돌봄공간</td>
+                    <td class="text-right">${pet_sitter_house.care_space }</td>
                   </tr>
                   <tr> 
-                    <td id="left">인근지하철역</td>
-                    <td id="right">${pet_sitter_house.subway_station }</td>
+                    <td class="text-left">인근지하철역</td>
+                    <td class="text-right">${pet_sitter_house.subway_station }</td>
                   </tr>
                    <tr> 
-                    <td id="left">마당유무</td>
-                    <td id="right">${pet_sitter_house.yard }</td>
+                    <td class="text-left">마당유무</td>
+                    <td class="text-right">${pet_sitter_house.yard }</td>
                   </tr>
                 </table>
                </div>
                <div class="col-md-6">
                 <table class="table table-striped">
                   <tr> 
-                    <td id="left">14세 미만 아동</td>
-                    <td id="right">${pet_sitter_house.children_under_14 }</td>
+                    <td class="text-left">14세 미만 아동</td>
+                    <td class="text-right">${pet_sitter_house.children_under_14 }</td>
                   </tr>
                   <tr> 
-                    <td id="left">가족 동거 유무</td>
-                    <td id="right">${pet_sitter_house.live_together }</td>
+                    <td class="text-left">가족 동거 유무</td>
+                    <td class="text-right">${pet_sitter_house.live_together }</td>
                   </tr>
                    <tr> 
-                    <td id="left">다른 동물 유무</td>
-                    <td id="right">${pet_sitter_house.other_animal }</td>
+                    <td class="text-left">다른 동물 유무</td>
+                    <td class="text-right">${pet_sitter_house.other_animal }</td>
                   </tr>
                 </table>
                </div>
@@ -437,33 +437,90 @@
            
               <div class="row">
                 <div class="col-md-12">
-                  <h5 class="text-primary">후기 (0개)</h5>
+                  <h5 class="text-primary">후기 (${review_count }개)</h5>
                   <br><br>
                 </div>
               </div>
               
-              <div class="row" id="middle4">
-                <div class="col-md-3" id="topCon1">
-                  <div class="carousel-inner">
-                    <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/pet_sitter_img/test1.png">
+              <c:if test="${review_check eq 'yes' }">
+                <form action="../mypage/review" method="post">
+                  <div class="row" id="middle4">
+                    <div class="col-md-3 text-center">
+                      <div class="carousel-inner">
+                        <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/user_img/${user_profile.user_photo }">
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row">
+                        <div class="col-md-6 text-left">
+                          <b>${user_profile.user_name }</b>
+                          <input type="hidden" name="idx" value="${reservation.idx }">
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <b>
+                            <input type="hidden" name="start_date" value="<fmt:formatDate value='${reservation.start_day}' pattern='yyyy-MM-dd'/>">
+                            <input type="hidden" name="end_date" value="<fmt:formatDate value='${reservation.end_day}' pattern='yyyy-MM-dd'/>">
+                            <c:choose>
+                              <c:when test="${reservation.start_day == reservation.end_day }">
+                                day care
+                                <input type="hidden" name="review_kind" value="day care">
+                              </c:when>
+                              <c:otherwise>
+                                24시간 돌봄
+                                <input type="hidden" name="review_kind" value="24시간 돌봄">
+                              </c:otherwise>
+                            </c:choose>
+                          </b>
+                        </div>
+                      </div>
+                      <textarea class="form-control" name="review_content" rows="5" required style="resize: none;"></textarea>
+                      <br>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <select class="form-control" name="review_scope" required>
+                            <option value="0">펫시터 점수</option>
+                            <option value="0">0점</option>
+                            <option value="1">1점</option>
+                            <option value="2">2점</option>
+                            <option value="3">3점</option>
+                            <option value="4">4점</option>
+                            <option value="5">5점</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="submit" class="btn btn-primary" value="작성 완료">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </c:if>
+              
+              <c:set var="i" value="0"/>
+              <c:forEach var="review" items="${reviewList }">
+                <div class="row" id="middle4">
+                  <div class="col-md-3 text-center">
+                    <div class="carousel-inner">
+                      <img class="rounded-circle" src="${pageContext.request.contextPath }/resources/img/user_img/${review_user_profileList[i].user_photo}">
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-6 text-left">
+                        <b>${review_user_profileList[i].user_name }</b>
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <b>${review.review_kind }</b>
+                      </div>
+                    </div>
+                    <p>${review.review_content }</p>
+                    <fmt:formatDate value="${review.review_date}" pattern="yyyy-MM-dd"/>
                   </div>
                 </div>
-                <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-6" id="left">
-                      <b id="left">조지헌</b>
-                    </div>
-                    <div class="col-md-6" id="right">
-                      <b id="right" >24시간 돌봄</b>
-                    </div>
-                  </div>
-                  <p>너무너무 감사드려요! 사전만남부터 꼼꼼히 챙겨주시고 정말 잘 돌봐주셨어요 저도 못 갔던 피크닉도 가주셨어요ㅜㅜ 사진,돌봄일지,카톡 너무 감사드리며 특히 가족분들께서도 자상하게 잘 돌봐주셔서 감사드립니다! 자주 연락드릴께요 :)
-                  </p>
-                  2018.03.02
-                </div>
-             </div>
+                <c:set var="i" value="${i+1 }"/>
+              </c:forEach>
+              
            </div>
-           
         </div>
         
         
@@ -523,7 +580,7 @@
         <div class="row">
           <div class="col-md-12">
             <form action="pet_sitter05" method="post" id="pet_sitter05_form">
-              <div class="row" id="buttonRow">
+              <div class="row text-center" id="buttonRow">
                 <div class="col-md-6">
                   <input type="button" id="previous" class="btn btn-primary" value="이전">
                 </div>

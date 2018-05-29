@@ -2,7 +2,6 @@ package com.catmate.reserve;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.User_profileDto;
+import com.catmate.mypage.service.MypageService;
 import com.catmate.reserve.service.ReserveService;
 
 @Controller
@@ -28,12 +29,12 @@ public class Sitter_detail {
 
     @Autowired
     ReserveService reserveService;
+    @Autowired
+    MypageService mypageService;
 
     @RequestMapping(value="reserve/sitter_detail", method=RequestMethod.GET)
     public String sitter_detail(HttpServletRequest request) {
-
-        String idx = (String)request.getParameter("idx");
-        
+        String tmp_idx = (String)request.getParameter("idx");
         List<String> area_textList = new ArrayList<String>();
         area_textList.add("전체");
         area_textList.add("서울");
@@ -47,14 +48,21 @@ public class Sitter_detail {
         }
         
         String return_text = "redirect:search";
-        if(idx != null) {
-
-            Map<String, Object> map = reserveService.getSitter_detail(Integer.parseInt(idx));
+        if(tmp_idx != null) {
+            int idx = Integer.parseInt(tmp_idx);
+            Map<String, Object> map = reserveService.getSitter_detail(idx);
             Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) map.get("pet_sitter_house");
 
             if(pet_sitter_houseDto.getSregister().equals("yes")) {
-                List<ReservationDto> reservationList = reserveService.getReservation(Integer.parseInt(idx));
+                List<ReservationDto> reservationList = reserveService.getReservation(idx);
+                List<ReviewDto> reviewList = reserveService.getReviewList(idx);
+                int review_count = reserveService.getReviewCount(idx);
                 List<String> disable_dayList = new ArrayList<String>();
+                List<User_profileDto> review_user_profileList = new ArrayList<User_profileDto>();
+                
+                for(ReviewDto reviewDto : reviewList) {
+                    review_user_profileList.add(mypageService.getUser_profile(reviewDto.getUser_email()));
+                }
 
                 for(ReservationDto reservationDto : reservationList) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,6 +85,11 @@ public class Sitter_detail {
                 request.setAttribute("room_photoList", map.get("room_photo"));
                 request.setAttribute("house_user_profile", map.get("user_profile"));
                 request.setAttribute("disable_dayList", disable_dayList);
+                
+                request.setAttribute("reviewList", reviewList);
+                request.setAttribute("review_count", review_count);
+                request.setAttribute("review_user_profileList", review_user_profileList);
+                
                 
                 return_text = "reserve/sitter_detail";
             }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
+import com.catmate.dto.ReviewDto;
 import com.catmate.dto.Room_photoDto;
 import com.catmate.dto.User_profileDto;
 import com.catmate.mypage.dao.MypageDao;
@@ -92,6 +93,16 @@ public class ReserveServiceImpl implements ReserveService{
     @Override
     public int getPetCount(String user_email) {
         return reserveDao.getPetCount(user_email);
+    }
+
+    @Override
+    public List<ReviewDto> getReviewList(int idx) {
+        return reserveDao.getReviewList(idx);
+    }
+
+    @Override
+    public int getReviewCount(int idx) {
+        return reserveDao.getReviewCount(idx);
     }
 
 }

@@ -263,4 +263,46 @@
   </delete>
   
   <!-- 후기 -->
+  <select id="getMyReviewList" resultType="Review">
+    <![CDATA[
+      SELECT * FROM review
+      WHERE
+    ]]>
+    <foreach collection="list" item="pet_sitter_house" separator="or" open="(" close=")">
+      idx = #{pet_sitter_house.idx}
+    </foreach>
+  </select>
+  
+  <update id="updateReservation_review">
+    <![CDATA[
+      UPDATE reservation
+      SET
+      review_check = 'O'
+      WHERE
+      idx=#{idx}
+      AND
+      user_email=#{user_email}
+      AND
+      start_day=#{start_day}
+      AND
+      end_day=#{end_day}
+    ]]>
+  </update>
+  
+  <update id="updateUser_profile_grade">
+    <![CDATA[
+      UPDATE user_profile
+      SET
+      user_grade=#{user_grade}
+      WHERE
+      user_email=#{user_email}
+    ]]>
+  </update>
+  
+  <insert id="insertReview">
+    <![CDATA[
+      INSERT INTO review (idx, user_email, review_kind, review_scope, review_content)
+      VALUES (#{idx}, #{user_email}, #{review_kind}, #{review_scope}, #{review_content})
+    ]]>
+  </insert>
 </mapper>
