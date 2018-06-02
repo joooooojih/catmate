@@ -11,7 +11,7 @@
   <link href="${pageContext.request.contextPath }/resources/css/mypage_common.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() {
-    	$("td").children("a").click(function() {
+    	$("td").children("a").unbind("click").bind("click", function() {
     		$.ajax({
     			type: "post",
     			url: "wish_list_reserve",

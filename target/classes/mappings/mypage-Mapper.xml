@@ -4,7 +4,6 @@
 
 <mapper namespace="Mypage">
 
-
   <!-- 개인정보 관련 -->
   <select id="getUser_profile" resultType="User_profile">
     <![CDATA[
@@ -305,4 +304,35 @@
       VALUES (#{idx}, #{user_email}, #{review_kind}, #{review_scope}, #{review_content})
     ]]>
   </insert>
+  
+  <!-- 메시지 -->
+  <insert id="insertMsg">
+    <![CDATA[
+      INSERT INTO msg (to_user_email, from_user_email, msg_content)
+      VALUES (#{to_user_email}, #{from_user_email}, #{msg_content})
+    ]]>
+  </insert>
+  
+  <select id="getMsgList" resultType="Msg">
+      SELECT *
+      FROM msg
+      WHERE
+      (
+        to_user_email=#{msgDto.to_user_email}
+        AND
+        from_user_email=#{msgDto.from_user_email}
+      )
+      OR
+      (
+        to_user_email=#{msgDto.from_user_email}
+        AND
+        from_user_email=#{msgDto.to_user_email}
+      )
+      ORDER BY msg_date DESC
+      LIMIT ${start_row}, ${end_row}
+  </select>
+  
+  <select id="getMsg_new" resultType="Msg">
+    SELECT * FROM msg ORDER BY msg_date DESC LIMIT 1
+  </select>
 </mapper>

@@ -38,7 +38,7 @@ $(document).ready(function() {
     		  
     		  // 인증번호 input 생성
     		  $("#certificationDiv").after(
-    		            '<br><div class="input-group" id="certificationDiv2">'+
+    				         '<div class="input-group" id="certificationDiv2">'+
     		                '<input type="text" id="certification_number" class="form-control" placeholder="인증번호 5자 입력" required maxlength="5">'+
     		                '<div class="input-group-append">'+
     		                  '<input type="button" id="certification_check" class="btn btn-warning text-light" value="확인">'+

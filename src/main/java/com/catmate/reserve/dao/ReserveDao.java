@@ -24,5 +24,4 @@ public interface ReserveDao {
     public List<ReviewDto> getReviewList(int idx);
     public int getReviewCount(int idx);
     
-    
 }

@@ -177,8 +177,7 @@
         				   
         	   }  // for
         	   
-        	   $("i").click(function() {
-        		   
+        	   $("i").unbind("click").bind("click", function() {
         		   $.ajax({
         			   type: "post",
         		     url: "${pageContext.request.contextPath}/mypage/wish_list_reserve",

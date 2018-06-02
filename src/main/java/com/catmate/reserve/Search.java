@@ -71,7 +71,11 @@ public class Search {
         
         List<Integer> area_countList = new ArrayList<Integer>();
         for(String area_text : area_textList) {
-            area_countList.add(reserveService.getAreaCount(area_text));
+            if(area_text.equals("전체")) {
+                area_countList.add(reserveService.getAreaAllCount());
+            } else {
+                area_countList.add(reserveService.getAreaCount(area_text));
+            }
         }
         
         request.setAttribute("area_text", area_textList);
@@ -83,7 +87,7 @@ public class Search {
     }
 
     @RequestMapping(value="/reserve/search_ajax", method=RequestMethod.GET)
-    public void search(HttpServletRequest request, HttpServletResponse response, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto) throws IOException {
+    public void search(HttpServletRequest request, HttpServletResponse response, HttpSession session, Pet_sitter_houseDto pet_sitter_houseDto, int page_num) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         List<ReservationDto> tmpReservationList = reserveService.getReservationList();
@@ -97,10 +101,9 @@ public class Search {
         List<User_profileDto> user_profileList = new ArrayList<User_profileDto>();
         List<Integer> review_countList = new ArrayList<Integer>();
         
-        int page_num = Integer.parseInt((String) request.getParameter("page_num"));
         int page_size = 2;
         
-        int start_row = (page_num * page_size) - page_size + 1;
+        int start_row = (page_num * page_size) - page_size;
         int end_row = page_num * page_size;
         
         Map<String, Object> search_map = new HashMap<String, Object>();

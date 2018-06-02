@@ -11,7 +11,17 @@
   $(document).ready(function() { // 이전
 	  $("#previous").click(function() {
 		  $(location).attr("href", "pet_sitter01");
-	  })
+	  });
+	  if(${pet_sitter_house.day_care } != 0) {
+		  $("#day_care").val("${pet_sitter_house.day_care }");
+	  }
+	  if(${pet_sitter_house.nightly_rate } != 0) {
+		  $("#nightly_rate").val("${pet_sitter_house.nightly_rate}");
+	  }
+	  if(${pet_sitter_house.surcharge } != 0) {
+		  $("#surcharge").val("${pet_sitter_house.surcharge }");
+	  }
+	  
   });
   </script>
 </head>
@@ -75,17 +85,17 @@
                 <h4 class="text-primary">Day Care 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="day_care" id="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.day_care }" required> </dd>
+                <input type="text" name="day_care" id="day_care" class="form-control" placeholder="Day Care 가격 (숫자만 입력)" maxlength="5" required> </dd>
               <dt>
                 <h4 class="text-primary">1박 가격</h4>
               </dt>
               <dd>
-                <input type="text" name="nightly_rate" id="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.nightly_rate }" required> </dd>
+                <input type="text" name="nightly_rate" id="nightly_rate" class="form-control" placeholder="1박 가격 (숫자만 입력)" maxlength="5" required> </dd>
               <dt>
                 <h4 class=text-primary>마리당 추가 요금</h4>
               </dt>
               <dd>
-                <input type="text" name="surcharge" id="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" value="${pet_sitter_house.surcharge }" required> </dd>
+                <input type="text" name="surcharge" id="surcharge" class="form-control" placeholder="마리당 추가 요금 (숫자만 입력)" maxlength="5" required> </dd>
             </dl>
             <br>
             <div class="row" id="buttonRow">

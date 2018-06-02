@@ -37,7 +37,7 @@ public class Review {
         
         redirectAttributes.addFlashAttribute("review_check", "yes");
         redirectAttributes.addFlashAttribute("reservation", reservationDto);
-        return "redirect:/reserve/sitter_detail?idx="+reservationDto.getIdx();
+        return "redirect:/reserve/sitter_detail?idx="+reservationDto.getIdx()+"#review";
     }
     
     @RequestMapping(value="/mypage/review", method=RequestMethod.POST)
@@ -63,7 +63,7 @@ public class Review {
             grade += tmpReviewDto.getReview_scope();
         }
         grade += reviewDto.getReview_scope();
-        house_user_profileDto.setUser_grade(grade / review_count);
+        house_user_profileDto.setUser_grade((double)grade / review_count);
         
         mypageService.insertReview(reservationDto, house_user_profileDto, reviewDto);
         return "redirect:/mypage/reservation_history/to_sitter";

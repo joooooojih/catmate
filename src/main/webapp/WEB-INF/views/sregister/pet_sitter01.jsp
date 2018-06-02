@@ -18,7 +18,7 @@
         <div class="col-md-8">
           <div class="card text-dark p-5 bg-default">
           <h3>
-            <b>지헌님 안녕하세요!
+            <b>${user_profile.user_name }님 안녕하세요!
               <br> 회원님의 펫시터 등록을 도와드리겠습니다. </b>
           </h3>
           <br>
@@ -29,7 +29,7 @@
             </dt>
             <dd>
               <div class="col-md-12">
-                <input type="text" name="house_title" class="form-control" placeholder="제목" value="${pet_sitter_house.house_title }">
+                <input type="text" name="house_title" class="form-control" placeholder="제목" value="${pet_sitter_house.house_title }" required>
               </div>
             </dd>
           </dl>
@@ -39,10 +39,10 @@
             </dt>
             <dd>
               <div class="col-md-6">
-                <input type="text" name="house_zip_code" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" value="${pet_sitter_house.house_zip_code }"><br>
+                <input type="text" name="house_zip_code" id="sample6_postcode" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="우편번호" value="${pet_sitter_house.house_zip_code }" required><br>
               </div>
               <div class="col-md-12">
-                <input type="text" name="house_address" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" value="${pet_sitter_house.house_address }"><br>
+                <input type="text" name="house_address" id="sample6_address" class="form-control" onclick="sample6_execDaumPostcode()" placeholder="주소" value="${pet_sitter_house.house_address }" required><br>
                 <input type="text" name="house_daddress" id="sample6_address2" class="form-control" placeholder="상세주소" value="${pet_sitter_house.house_daddress }"> 
               </div>
             </dd>

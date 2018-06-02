@@ -1,15 +1,15 @@
-package com.catmate.Interceptor;
-
-import java.util.Map;
+package com.catmate.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.catmate.reserve.service.ReserveService;
 
+@Component
 public class Sregister_inter extends HandlerInterceptorAdapter {
 
     @Autowired
@@ -25,9 +25,8 @@ public class Sregister_inter extends HandlerInterceptorAdapter {
             request.getSession().setAttribute("idx", 0);
         }
         if(idx != 0) {
-            Map<String, Object> map = reserveService.getSitter_detail(idx);
-            request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
-            request.setAttribute("room_photoList", map.get("room_photo"));
+            request.setAttribute("pet_sitter_house", reserveService.getPet_sitter_house(idx));
+            request.setAttribute("room_photoList", reserveService.getRoom_photo(idx));
         }
         return true;
     }

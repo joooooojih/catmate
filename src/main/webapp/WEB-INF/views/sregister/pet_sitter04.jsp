@@ -15,7 +15,7 @@
     $(document).ready(function() { // 이전
       $("#previous").click(function() {
     	  $(location).attr("href", "pet_sitter03");
-      })
+      });
     });
     
     $(document).ready(function() {

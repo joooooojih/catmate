@@ -24,22 +24,6 @@ public class ReserveServiceImpl implements ReserveService{
     MypageDao mypageDao;
 
     @Override
-    public Map<String, Object> getSitter_detail(int idx) {
-
-        Pet_sitter_houseDto pet_sitter_houseDto = reserveDao.getPet_sitter_house(idx);
-        List<Room_photoDto> room_photoList = reserveDao.getRoom_photo(idx);
-        User_profileDto user_profileDto = mypageDao.getUser_profile(pet_sitter_houseDto.getUser_email());
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        map.put("pet_sitter_house", pet_sitter_houseDto);
-        map.put("room_photo", room_photoList);
-        map.put("user_profile", user_profileDto);
-
-        return map;
-    }
-
-    @Override
     public void insertReservation(ReservationDto reservationDto) {
         reserveDao.insertReservation(reservationDto);
     }
@@ -50,14 +34,13 @@ public class ReserveServiceImpl implements ReserveService{
     }
 
     @Override
+    public int getAreaAllCount() {
+        return reserveDao.getAreaAllCount();
+    }
+    
+    @Override
     public int getAreaCount(String area) {
-        int count = 0;
-        if(area.equals("전체")) {
-            count = reserveDao.getAreaAllCount();
-        } else {
-            count = reserveDao.getAreaCount(area);
-        }
-        return count;
+        return reserveDao.getAreaCount(area);
     }
 
     @Override
@@ -104,5 +87,7 @@ public class ReserveServiceImpl implements ReserveService{
     public int getReviewCount(int idx) {
         return reserveDao.getReviewCount(idx);
     }
+
+    
 
 }

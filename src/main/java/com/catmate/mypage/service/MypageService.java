@@ -1,7 +1,9 @@
 package com.catmate.mypage.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.catmate.dto.MsgDto;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
@@ -40,5 +42,10 @@ public interface MypageService {
     /*후기*/
     public List<ReviewDto> getMyReviewList(List<Pet_sitter_houseDto> pet_sitter_houseList);
     public void insertReview(ReservationDto reservationDto, User_profileDto user_profileDto, ReviewDto reviewDto);
+    
+    /*메시지*/
+    public void insertMsg(MsgDto msgDto);
+    public List<MsgDto> getMsgList(Map<String, Object> search_map);
+    public MsgDto getMsg_new(MsgDto msgDto);
 
 }

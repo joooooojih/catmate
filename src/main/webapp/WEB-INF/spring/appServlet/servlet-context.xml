@@ -4,9 +4,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
     <!-- Uncomment and your base-package here:
          <context:component-scan
@@ -17,6 +21,7 @@
   
   <mvc:default-servlet-handler/>
   
+  <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
           <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -27,23 +32,33 @@
   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
   </bean>
   
+  
+  <!-- interceptor -->
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/mypage/**"/>
       <mvc:mapping path="/sregister/**"/>
       <mvc:mapping path="/reserve/sitter_detail_price_check"/>
-        <bean class="com.catmate.Interceptor.Login_inter"/>
+        <bean class="com.catmate.interceptor.Login_inter"/>
       </mvc:interceptor>
       
     <mvc:interceptor>
       <mvc:mapping path="/sregister/**"/>
-        <bean class="com.catmate.Interceptor.Sregister_inter"/>
+        <bean class="com.catmate.interceptor.Sregister_inter"/>
     </mvc:interceptor>
     
     <mvc:interceptor>
       <mvc:mapping path="/mypage/account/**"/>
       <mvc:exclude-mapping path="/mypage/account/account_check"/>
-        <bean class="com.catmate.Interceptor.Account_inter"/>
+        <bean class="com.catmate.interceptor.Account_inter"/>
     </mvc:interceptor>
   </mvc:interceptors>
+  
+  <websocket:handlers>
+    <websocket:mapping path="msg" handler="msg_handler"/>
+    <websocket:handshake-interceptors>
+      <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+    </websocket:handshake-interceptors>
+  </websocket:handlers>
+  
 </beans>

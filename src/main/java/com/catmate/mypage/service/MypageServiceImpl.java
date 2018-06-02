@@ -1,10 +1,12 @@
 package com.catmate.mypage.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.catmate.dto.MsgDto;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
@@ -115,6 +117,22 @@ public class MypageServiceImpl implements MypageService {
         mypageDao.updateUser_profile_grade(user_profileDto);
         mypageDao.updateReservation_review(reservationDto);
     }
+
+    @Override
+    public void insertMsg(MsgDto msgDto) {
+        mypageDao.insertMsg(msgDto);
+    }
+
+    @Override
+    public List<MsgDto> getMsgList(Map<String, Object> search_map) {
+        return mypageDao.getMsgList(search_map);
+    }
+
+    @Override
+    public MsgDto getMsg_new(MsgDto msgDto) {
+        return mypageDao.getMsg_new(msgDto);
+    }
+    
 
     
 }

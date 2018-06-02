@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
 import com.catmate.dto.ReviewDto;
+import com.catmate.dto.Room_photoDto;
 import com.catmate.dto.User_profileDto;
 import com.catmate.mypage.service.MypageService;
 import com.catmate.reserve.service.ReserveService;
@@ -50,8 +51,9 @@ public class Sitter_detail {
         String return_text = "redirect:search";
         if(tmp_idx != null) {
             int idx = Integer.parseInt(tmp_idx);
-            Map<String, Object> map = reserveService.getSitter_detail(idx);
-            Pet_sitter_houseDto pet_sitter_houseDto = (Pet_sitter_houseDto) map.get("pet_sitter_house");
+            Pet_sitter_houseDto pet_sitter_houseDto = reserveService.getPet_sitter_house(idx);
+            List<Room_photoDto> room_photoList = reserveService.getRoom_photo(idx);
+            User_profileDto house_user_profile = mypageService.getUser_profile(pet_sitter_houseDto.getUser_email());
 
             if(pet_sitter_houseDto.getSregister().equals("yes")) {
                 List<ReservationDto> reservationList = reserveService.getReservation(idx);
@@ -81,9 +83,9 @@ public class Sitter_detail {
                 request.setAttribute("area_text", area_textList);
                 request.setAttribute("area_count", area_countList);
                 
-                request.setAttribute("pet_sitter_house", map.get("pet_sitter_house"));
-                request.setAttribute("room_photoList", map.get("room_photo"));
-                request.setAttribute("house_user_profile", map.get("user_profile"));
+                request.setAttribute("pet_sitter_house", pet_sitter_houseDto);
+                request.setAttribute("room_photoList", room_photoList);
+                request.setAttribute("house_user_profile", house_user_profile);
                 request.setAttribute("disable_dayList", disable_dayList);
                 
                 request.setAttribute("reviewList", reviewList);
@@ -118,8 +120,7 @@ public class Sitter_detail {
         int day = -1;
         int total_price = 0;
         int excess_amount = 0;
-        Map<String, Object> map = reserveService.getSitter_detail(reservationDto.getIdx());
-        Pet_sitter_houseDto pet_sitter_houseDto =  (Pet_sitter_houseDto) map.get("pet_sitter_house");
+        Pet_sitter_houseDto pet_sitter_houseDto =  reserveService.getPet_sitter_house(reservationDto.getIdx());
 
         Calendar start_cal = Calendar.getInstance();
         Calendar end_cal = Calendar.getInstance();

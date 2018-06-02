@@ -11,6 +11,7 @@ public class MsgDto {
     private String from_user_email;
     private String msg_content;
     private Timestamp msg_date;
+    private String msg_read;
     
     public String getTo_user_email() {
         return to_user_email;
@@ -35,6 +36,12 @@ public class MsgDto {
     }
     public void setMsg_date(Timestamp msg_date) {
         this.msg_date = msg_date;
+    }
+    public String getMsg_read() {
+        return msg_read;
+    }
+    public void setMsg_read(String msg_read) {
+        this.msg_read = msg_read;
     }
     
 }

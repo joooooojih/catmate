@@ -12,10 +12,6 @@
                 </dd>
               </dl>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> 
-              <h5><a class="text-secondary" href="#">메시지</a></h5>
-              <span class="badge badge-light badge-pill">2</span>
-            </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <h5><a class="text-secondary" href="${pageContext.request.contextPath }/mypage/wish_list">위시리스트</a></h5>
             </li>

@@ -13,11 +13,9 @@
   <link href="${pageContext.request.contextPath }/resources/css/sitter_detail.css" rel="stylesheet"/>
   <script>
   $(document).ready(function() { // 이전
-    if(${sregister eq 'sregister'}) {
-      $("#previous").click(function() {
-        $(location).attr("href", "pet_sitter04");
-      })
-    }
+    $("#previous").click(function() {
+      $(location).attr("href", "pet_sitter04");
+    });
   });
   
   $(document).ready(function() {
@@ -433,9 +431,10 @@
                </div>
              </div>
            </div>
+           
            <div id="middle" class="text-secondary">
            
-              <div class="row">
+              <div class="row" id="review">
                 <div class="col-md-12">
                   <h5 class="text-primary">후기 (${review_count }개)</h5>
                   <br><br>
@@ -594,6 +593,7 @@
        </c:if>
     </div>
   </section>
+  
   <jsp:include page="../set/setLayout/footer.jsp" flush="false"/>
 </body>
 </html>

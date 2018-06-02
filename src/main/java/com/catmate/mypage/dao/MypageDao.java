@@ -1,7 +1,9 @@
 package com.catmate.mypage.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import com.catmate.dto.MsgDto;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
@@ -42,4 +44,9 @@ public interface MypageDao {
     public void updateReservation_review(ReservationDto reservationDto);
     public void updateUser_profile_grade(User_profileDto user_profileDto);
     public void insertReview(ReviewDto reviewDto);
+    
+    /*메시지*/
+    public void insertMsg(MsgDto msgDto);
+    public List<MsgDto> getMsgList(Map<String, Object> search_map);
+    public MsgDto getMsg_new(MsgDto msgDto);
 }

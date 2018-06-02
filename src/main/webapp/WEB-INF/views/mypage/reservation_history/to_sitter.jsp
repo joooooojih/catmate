@@ -11,7 +11,7 @@
   <link href="${pageContext.request.contextPath }/resources/css/mypage_common.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() {
-    	$("td").children("a.cancel").click(function() {
+    	$("td").children("a.cancel").unbind("click").bind("click", function() {
     		$.ajax({
     	    type: "post",
     	    url: "delete_to_sitter",

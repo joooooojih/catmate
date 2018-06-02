@@ -9,6 +9,42 @@
       height: 30px;
     }
   </style>
+  <script>
+    $(document).ready(function() {
+    	
+    	function msg_list() {
+    		$.ajax({
+    	    type: "get",
+    	    url: "${pageContext.request.contextPath }/mypage/msg_user_list",
+    	    dataType: "json",
+    	    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    	    success: function(responseData, status, xhr) {
+    	      var user_profileList = responseData.user_profileList;
+    	    
+    	      $("#modal-body").text(""); // 초기화
+    	      var user_profile_text = "";
+    	      for(var i = 0; i < user_profileList.length; i++) {
+    	        user_profile_text += '<tr>'+
+    	                               '<td><a href="${pageContext.request.contextPath}/mypage/msg?user_email='+ user_profileList[i].user_email +'">' + user_profileList[i].user_name + '</a></td>'+
+    	                               '<td>' + user_profileList[i].user_email + '</td>'+
+    	                               '<td>' + 0 + '</td>'+
+    	                              '</tr>'
+    	      }
+    	      $("#modal-body").append(
+    	            '<table class="table table-hover">'+
+    	                user_profile_text+
+    	            '</table>'
+    	      );
+    	    },
+    	  });
+    	}
+    	
+    	$("#msg").click(function() {  // 메시지 클릭 시 셋팅 
+    		msg_list();
+    	});
+    	
+    });
+  </script>
   <c:choose>
     <c:when test="${scrren eq 'main' }">
       <c:set var="navClass" value="navbar navbar-expand-lg navbar-light fixed-top"/>
@@ -47,7 +83,7 @@
             <div class="btn-group">
               <a class="nav-link js-scroll-trigger text-muted dropdown-toggle" data-toggle="dropdown"> ${user_profile.user_name } </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">메시지</a>
+                <a class="dropdown-item" data-toggle="modal" href="#msg_modal" id="msg">메시지</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/wish_list">위시리스트</a>
                 <div class="dropdown-divider"></div>
@@ -68,6 +104,21 @@
       </div>
     </div>
   </nav>
+  
+  <!-- 메시지 모달창 -->
+  <div class="modal fade" id="msg_modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h4 class="modal-title">메시지 목록</h4>
+        </div>
+        <div class="modal-body" id="modal-body">
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
   <c:if test="${scrren ne 'main' }">
     <br><br>
   </c:if>

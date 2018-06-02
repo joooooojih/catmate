@@ -1,11 +1,13 @@
 package com.catmate.mypage.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.catmate.dto.MsgDto;
 import com.catmate.dto.Pet_profileDto;
 import com.catmate.dto.Pet_sitter_houseDto;
 import com.catmate.dto.ReservationDto;
@@ -122,6 +124,21 @@ public class MypageDaoImpl implements MypageDao {
     @Override
     public void insertReview(ReviewDto reviewDto) {
         sqlSession.insert("Mypage.insertReview", reviewDto);
+    }
+
+    @Override
+    public void insertMsg(MsgDto msgDto) {
+        sqlSession.insert("Mypage.insertMsg", msgDto);
+    }
+
+    @Override
+    public List<MsgDto> getMsgList(Map<String, Object> search_map) {
+        return sqlSession.selectList("Mypage.getMsgList", search_map);
+    }
+
+    @Override
+    public MsgDto getMsg_new(MsgDto msgDto) {
+        return sqlSession.selectOne("Mypage.getMsg_new", msgDto);
     }
 
 }
