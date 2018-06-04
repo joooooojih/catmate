@@ -49,4 +49,8 @@ public interface MypageDao {
     public void insertMsg(MsgDto msgDto);
     public List<MsgDto> getMsgList(Map<String, Object> search_map);
     public MsgDto getMsg_new(MsgDto msgDto);
+    public MsgDto getMsgLately(MsgDto msgDto);
+    public List<User_profileDto> getUser_profileList();
+    public int getMsgCount(MsgDto msgDto);
+    public List<MsgDto> getMsgLatelyList(List<MsgDto> msgList);
 }

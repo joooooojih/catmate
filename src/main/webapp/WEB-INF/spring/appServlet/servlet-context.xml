@@ -32,7 +32,6 @@
   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
   </bean>
   
-  
   <!-- interceptor -->
   <mvc:interceptors>
     <mvc:interceptor>

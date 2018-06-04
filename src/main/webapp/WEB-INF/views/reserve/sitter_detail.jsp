@@ -570,7 +570,7 @@
             <input type="button" class="btn btn-warning text-light" value="예약하기" id="reservation">
             <br><br>
             <img src="${pageContext.request.contextPath }/resources/img/icon/inquiry.png">
-            <a href="#" class="text-secondary">메세지 보내기</a>
+            <a href="#" class="text-secondary" onclick="javascript:msg_window_open('${pet_sitter_house.user_email}')">메세지 보내기</a>
           </div>
         </div>
       </div>

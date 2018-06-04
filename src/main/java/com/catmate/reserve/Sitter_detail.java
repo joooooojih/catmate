@@ -45,7 +45,11 @@ public class Sitter_detail {
         
         List<Integer> area_countList = new ArrayList<Integer>();
         for(String area_text : area_textList) {
-            area_countList.add(reserveService.getAreaCount(area_text));
+            if(area_text.equals("전체")) {
+                area_countList.add(reserveService.getAreaAllCount());
+            } else {
+                area_countList.add(reserveService.getAreaCount(area_text));
+            }
         }
         
         String return_text = "redirect:search";

@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
   <!-- Plugin CSS -->
   <link href="${pageContext.request.contextPath}/resources/pingendo/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/nav.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/pingendo/css/creative.min.css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/resources/pingendo/vendor/jquery/jquery.min.js"></script>

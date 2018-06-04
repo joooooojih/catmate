@@ -199,7 +199,6 @@
         		   });
         		   
         	   });
-        	   
            },
            error: function(xhr, status, error) {
            alert("검색에 실패 했습니다.");
@@ -267,13 +266,14 @@
     	});
     	
     	$(window).scroll(function() {  // 무한 스크롤
-    	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    	    	++page_num;
-    	    	search();
-    	    }
+    	  if ($(window).scrollTop() == $(document).height() - $(window).height() ) {
+    	  	++page_num;
+    	  	search();
+    	  }
     	});
     	
     	search();
+    	
     });
    </script>
 </head>

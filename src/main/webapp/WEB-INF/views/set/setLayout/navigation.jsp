@@ -3,16 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <!-- Navigation -->
-  <style>
-    #navImg {
-      width: 30px;
-      height: 30px;
-    }
-  </style>
   <script>
+    function msg_window_open(user_email) {
+    	var x = 600;
+    	var y = 600;
+    	var msgX = (window.screen.width / 2) - (x / 2);
+    	var msgY= (window.screen.height /2) - (y / 2);
+      window.open("${pageContext.request.contextPath}/mypage/msg?user_email="+ user_email +"","msg_window","top=" + msgY + ", left=" + msgX + ", width=" + x + ", height=" + y + ", directories=0, location=0, menubar=0, resizable=0, scrollbars=0, status=0, toolbar=0");
+    }
     $(document).ready(function() {
     	
-    	function msg_list() {
+    	function msg_user_list() {
     		$.ajax({
     	    type: "get",
     	    url: "${pageContext.request.contextPath }/mypage/msg_user_list",
@@ -20,18 +21,34 @@
     	    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     	    success: function(responseData, status, xhr) {
     	      var user_profileList = responseData.user_profileList;
-    	    
+    	      var msgList = responseData.msgList;
+    	      
     	      $("#modal-body").text(""); // 초기화
     	      var user_profile_text = "";
+    	      var msg_content_color = "";
     	      for(var i = 0; i < user_profileList.length; i++) {
-    	        user_profile_text += '<tr>'+
-    	                               '<td><a href="${pageContext.request.contextPath}/mypage/msg?user_email='+ user_profileList[i].user_email +'">' + user_profileList[i].user_name + '</a></td>'+
-    	                               '<td>' + user_profileList[i].user_email + '</td>'+
-    	                               '<td>' + 0 + '</td>'+
-    	                              '</tr>'
+    	    	  if(msgList[i].msg_read == 'X' && msgList[i].to_user_email == user_profileList[i].user_email) {
+    	    		  msg_content_color = "text-primary";
+              } else {
+            	  msg_content_color = "text-dark";
+              }
+    	    	  
+    	        user_profile_text += 
+    	        	'<tr>'+
+    	            '<td id="user_name">'+
+    	              '<img class="rounded-circle" id="msg_user_img" src="${pageContext.request.contextPath }/resources/img/user_img/'+ user_profileList[i].user_photo +'"><br>'+
+    	              user_profileList[i].user_name + 
+    	              '</a>'+
+    	            '</td>'+
+    	            '<td>'+
+    	              '<a href="#" class="' + msg_content_color + '" onclick=javascript:msg_window_open("'+user_profileList[i].user_email+'")>'+
+    	              msgList[i].msg_content+
+    	              '</a>'+
+    	            '</td>'+
+    	          '</tr>'
     	      }
     	      $("#modal-body").append(
-    	            '<table class="table table-hover">'+
+    	            '<table class="table table-hover text-left">'+
     	                user_profile_text+
     	            '</table>'
     	      );
@@ -39,8 +56,8 @@
     	  });
     	}
     	
-    	$("#msg").click(function() {  // 메시지 클릭 시 셋팅 
-    		msg_list();
+    	$("#msg_user").unbind("click").bind("click", function() {  // 메시지 클릭 시 셋팅 
+    		msg_user_list();
     	});
     	
     });
@@ -83,7 +100,7 @@
             <div class="btn-group">
               <a class="nav-link js-scroll-trigger text-muted dropdown-toggle" data-toggle="dropdown"> ${user_profile.user_name } </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" data-toggle="modal" href="#msg_modal" id="msg">메시지</a>
+                <a class="dropdown-item" data-toggle="modal" href="#msg_modal" id="msg_user">메시지</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="${pageContext.request.contextPath }/mypage/wish_list">위시리스트</a>
                 <div class="dropdown-divider"></div>
@@ -118,7 +135,6 @@
       </div>
     </div>
   </div>
-
   <c:if test="${scrren ne 'main' }">
     <br><br>
   </c:if>

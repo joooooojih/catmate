@@ -141,4 +141,24 @@ public class MypageDaoImpl implements MypageDao {
         return sqlSession.selectOne("Mypage.getMsg_new", msgDto);
     }
 
+    @Override
+    public List<User_profileDto> getUser_profileList() {
+        return sqlSession.selectList("Mypage.getUser_profileList");
+    }
+
+    @Override
+    public int getMsgCount(MsgDto msgDto) {
+        return sqlSession.selectOne("Mypage.getMsgCount", msgDto);
+    }
+
+    @Override
+    public MsgDto getMsgLately(MsgDto msgDto) {
+        return sqlSession.selectOne("Mypage.getMsgLately", msgDto);
+    }
+
+    @Override
+    public List<MsgDto> getMsgLatelyList(List<MsgDto> msgList) {
+        return sqlSession.selectList("Mypage.getMsgLatelyList", msgList);
+    }
+
 }

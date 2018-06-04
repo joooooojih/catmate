@@ -104,7 +104,6 @@ public class Search {
         int page_size = 2;
         
         int start_row = (page_num * page_size) - page_size;
-        int end_row = page_num * page_size;
         
         Map<String, Object> search_map = new HashMap<String, Object>();
         Map<String, Object> result_map = new HashMap<String, Object>();
@@ -148,7 +147,7 @@ public class Search {
         search_map.put("idxList", pet_sitter_house_notList);
         search_map.put("pet_sitter_houseDto", pet_sitter_houseDto);
         search_map.put("start_row", start_row);
-        search_map.put("end_row", end_row);
+        search_map.put("page_size", page_size);
         
         pet_sitter_houseList = reserveService.getPet_sitter_house_searchList(search_map);
 

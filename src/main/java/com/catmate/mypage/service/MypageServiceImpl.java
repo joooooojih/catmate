@@ -132,7 +132,25 @@ public class MypageServiceImpl implements MypageService {
     public MsgDto getMsg_new(MsgDto msgDto) {
         return mypageDao.getMsg_new(msgDto);
     }
-    
 
+    @Override
+    public List<User_profileDto> getUser_profileList() {
+        return mypageDao.getUser_profileList();
+    }
+
+    @Override
+    public int getMsgCount(MsgDto msgDto) {
+        return mypageDao.getMsgCount(msgDto);
+    }
+
+    @Override
+    public MsgDto getMsgLately(MsgDto msgDto) {
+        return mypageDao.getMsgLately(msgDto);
+    }
+
+    @Override
+    public List<MsgDto> getMsgLatelyList(List<MsgDto> msgList) {
+        return mypageDao.getMsgLatelyList(msgList);
+    }
     
 }
