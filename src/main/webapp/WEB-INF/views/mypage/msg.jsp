@@ -16,20 +16,20 @@
     	var msg_content;
     	var msg_date
     	
-    	function from_msg(user_profile, msg_search, msg_dates, i) {
-    		var msg_read;
+    	function from_msg(user_profile, msg_search, msg_dates, i) {  // 상대
+    		var msg_read = "";
     		var msg_div = "";
     		if(i == -1) {  // 방금 추가한 메세지
     			msg_content = msg_search.msg_content;
     			msg_date = msg_dates;
     			if(msg_search.msg_read == 'X') {
-    	      msg_read = 1;
+    	      msg_read = '&nbsp;&nbsp;<small id="from_read">1</small><br>';
           }
     		} else {
     			msg_content = msg_search[i].msg_content;
     	    msg_date = msg_dates[i];
     	    if(msg_search[i].msg_read == 'X') {
-            msg_read = 1;
+             msg_read = '&nbsp;&nbsp;<small id="from_read">1</small><br>';
           }
     		}
     		
@@ -43,7 +43,7 @@
               '</dt>'+
               '<dd id="from_dd">'+
                 '<span class="bg-white" id="msg_text">' + msg_content + '</span>' + 
-                '&nbsp;&nbsp;<small>' + msg_read + '</small><br>' + 
+                msg_read + 
                 '<small>' + msg_date + '</small>'+
               '</dd>'+
             '</dl>'+
@@ -61,28 +61,28 @@
         }
     	}
     	
-    	function to_msg(msg_search, msg_dates, i) {
-    		var msg_read;
+    	function to_msg(msg_search, msg_dates, i) {  // 나
+    		var msg_read = "";
     		var msg_div = "";
         if(i == -1) {  // 방금 추가한 메세지
             msg_content = msg_search.msg_content;
             msg_date = msg_dates;
             if(msg_search.msg_read == 'X') {
-            	msg_read = 1;
+            	msg_read = '<small id="to_read">1</small>&nbsp;&nbsp;';
             }
             
-        } else {
+        } else {  // 예전 list
           msg_content = msg_search[i].msg_content;
           msg_date = msg_dates[i];
           if(msg_search[i].msg_read == 'X') {
-            msg_read = 1;
+            msg_read = '<small id="to_read">1</small>&nbsp;&nbsp;';
           }
         }
         msg_div +=
         	'<div class="row text-right">'+
             '<div class="col-md-4"></div>'+
             '<div class="col-md-8">'+
-              '<small>' + msg_read + '</small>&nbsp;&nbsp;' + 
+              msg_read + 
               '<span class="bg-warning" id="msg_text">' + msg_content + '</span><br>'+
               '<small>' + msg_date + '</small>'+
             '</div>'+
@@ -96,7 +96,6 @@
                 msg_div
             );
           }
-    		
     	}
     	
     	function msg_list() {  // 예전 메세지 데이터
@@ -146,29 +145,35 @@
         onMessage(event)
       };
       function onMessage(event) {
-      	$.ajax({
-          type: "get",
-          url: "${pageContext.request.contextPath}/mypage/msg_new",
-          data: {
-            from_user_email: "${from_user_profile.user_email}"
-          },
-          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          dataType: "json",
-          success: function(responseData, status, xhr) {
-            var msg_search = responseData.msg_search;
-            var msg_dates = responseData.msg_date;
-              
-            var to_user_profile = responseData.to_user_profile;
-            var from_user_profile = responseData.from_user_profile;
-            var set_user;
-            if(msg_search.to_user_email == from_user_profile.user_email) {
-            	from_msg(from_user_profile, msg_search, msg_dates, -1);
-            } else {
-            	to_msg(msg_search, msg_dates, -1);
-            }
-            $(window).scrollTop($(document).height());
-          }
-        });
+    	  if(event.data == "message") {
+    		  $.ajax({
+    	      type: "get",
+    	      url: "${pageContext.request.contextPath}/mypage/msg_new",
+    	      data: {
+    	        from_user_email: "${from_user_profile.user_email}"
+    	      },
+    	      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    	      dataType: "json",
+    	      success: function(responseData, status, xhr) {
+    	        var msg_search = responseData.msg_search;
+    	        var msg_dates = responseData.msg_date;
+    	          
+    	        var to_user_profile = responseData.to_user_profile;
+    	        var from_user_profile = responseData.from_user_profile;
+    	        var set_user;
+    	        if(msg_search.to_user_email == from_user_profile.user_email) {
+    	          from_msg(from_user_profile, msg_search, msg_dates, -1);
+    	        } else {
+    	          to_msg(msg_search, msg_dates, -1);
+    	        }
+    	        $(window).scrollTop($(document).height());
+    	      }
+    	    });
+    	  } else if(event.data == "${from_user_profile.user_email}") {
+    		  $("small").filter("#from_read").remove();
+        } else {
+        	$("small").filter("#to_read").remove();
+        }
       }
       function onOpen(event) {
       	msg_list();
@@ -179,7 +184,7 @@
       }
       $("#send").click(function() {  // 메세지 보내기
         if($("#inputMessage").val() != "") {
-            webSocket.send("${from_user_profile.user_email}:" + $("#inputMessage").val());
+            webSocket.send("${from_user_profile.user_email}:" + $("#inputMessage").val() + ":message");
             $("#inputMessage").val("");
             $("#inputMessage").focus();
         }
@@ -196,6 +201,12 @@
           ++page_num;
           msg_list();
         }
+      });
+      
+      $("#inputMessage").focus(function () {  // 읽음 처리
+    	  if($("small").filter("#from_read").length != 0) {
+    		  webSocket.send("${from_user_profile.user_email}:${from_user_profile.user_email}:read");
+    	  }
       });
     });
   </script>

@@ -62,8 +62,6 @@ public class Msg {
             }
         }
 
-        // 읽음 처리 어떻게 할지
-        
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("user_profileList", user_profileList);
         map.put("msgList", newMsgList);

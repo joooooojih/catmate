@@ -152,5 +152,10 @@ public class MypageServiceImpl implements MypageService {
     public List<MsgDto> getMsgLatelyList(List<MsgDto> msgList) {
         return mypageDao.getMsgLatelyList(msgList);
     }
+
+    @Override
+    public void updateMsg_read(MsgDto msgDto) {
+        mypageDao.updateMsg_read(msgDto);
+    }
     
 }

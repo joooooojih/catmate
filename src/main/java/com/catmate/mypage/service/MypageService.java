@@ -51,5 +51,5 @@ public interface MypageService {
     public List<User_profileDto> getUser_profileList();
     public int getMsgCount(MsgDto msgDto);
     public List<MsgDto> getMsgLatelyList(List<MsgDto> msgList);
-
+    public void updateMsg_read(MsgDto msgDto);
 }

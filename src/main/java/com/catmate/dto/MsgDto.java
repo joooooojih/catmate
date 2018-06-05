@@ -7,12 +7,19 @@ import org.apache.ibatis.type.Alias;
 @Alias("Msg")
 public class MsgDto {
 
+    private int idx;
     private String to_user_email;
     private String from_user_email;
     private String msg_content;
     private Timestamp msg_date;
     private String msg_read;
     
+    public int getIdx() {
+        return idx;
+    }
+    public void setIdx(int idx) {
+        this.idx = idx;
+    }
     public String getTo_user_email() {
         return to_user_email;
     }

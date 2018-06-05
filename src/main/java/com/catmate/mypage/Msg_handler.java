@@ -28,14 +28,19 @@ public class Msg_handler extends TextWebSocketHandler {
         
         Map<String, Object> map = session.getAttributes();
         User_profileDto to_user_profile = (User_profileDto) map.get("user_profile");  // 내 email
-        User_profileDto from_user_profile = mypageService.getUser_profile(text[0]);  // 상대 email
         MsgDto msgDto = new MsgDto();
         msgDto.setTo_user_email(to_user_profile.getUser_email());
-        msgDto.setFrom_user_email(from_user_profile.getUser_email());
-        msgDto.setMsg_content(text[1]);
+        msgDto.setFrom_user_email(text[0]);
         
-        mypageService.insertMsg(msgDto);
-        WebSocketSession webSocketSession = sessions.get(to_user_profile.getUser_email());
+        if(text[2].equals("message")) {  // insertMsg
+            msgDto.setMsg_content(text[1]);
+            mypageService.insertMsg(msgDto);
+            text[1] = "message";
+        } else {  // 읽음 처리
+            mypageService.updateMsg_read(msgDto);
+        }
+       
+        WebSocketSession webSocketSession = sessions.get(msgDto.getTo_user_email());
         webSocketSession.sendMessage(new TextMessage(text[1]));  // 나
         webSocketSession = sessions.get(text[0]);
         if(webSocketSession != null) {

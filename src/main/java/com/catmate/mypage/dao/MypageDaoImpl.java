@@ -161,4 +161,9 @@ public class MypageDaoImpl implements MypageDao {
         return sqlSession.selectList("Mypage.getMsgLatelyList", msgList);
     }
 
+    @Override
+    public void updateMsg_read(MsgDto msgDto) {
+        sqlSession.update("Mypage.updateMsg_read", msgDto);
+    }
+
 }
