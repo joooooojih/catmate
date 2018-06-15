@@ -4,7 +4,7 @@
 
 # 주 기능
 * 예약 시스템
-* 메시지
+* 실시간 메세지
 
 # 사용한 기술
-* JSP(SpringFramework), jQuery, AJAX
+* JAVA, JSP, SpringFramework, jQuery, AJAX, Mybatis
