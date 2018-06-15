@@ -78,6 +78,7 @@
             msg_read = '<small id="to_read">1</small>&nbsp;&nbsp;';
           }
         }
+        
         msg_div +=
         	'<div class="row text-right">'+
             '<div class="col-md-4"></div>'+
@@ -87,15 +88,15 @@
               '<small>' + msg_date + '</small>'+
             '</div>'+
           '</div><br>';
-          if(i == -1) {
-        	  $("#msg_texts").append(
-                msg_div
-            );
-          } else {
-        	  $("#msg_texts").prepend(
-                msg_div
-            );
-          }
+        if(i == -1) {
+         $("#msg_texts").append(
+            msg_div
+          );
+        } else {
+         $("#msg_texts").prepend(
+            msg_div
+          );
+        }
     	}
     	
     	function msg_list() {  // 예전 메세지 데이터
@@ -169,11 +170,14 @@
     	        $(window).scrollTop($(document).height());
     	      }
     	    });
-    	  } else if(event.data == "${from_user_profile.user_email}") {
-    		  $("small").filter("#from_read").remove();
-        } else {
-        	$("small").filter("#to_read").remove();
-        }
+    	  } else {  // 읽음 처리
+    		  if(event.data == "${from_user_profile.user_email}") {
+    	      $("small").filter("#from_read").remove();
+    	    } else {
+    	      $("small").filter("#to_read").remove();
+    	    }
+    	  }
+    		  
       }
       function onOpen(event) {
       	msg_list();

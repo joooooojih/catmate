@@ -24,7 +24,6 @@ public class Account {
     /*password 검사*/
     @RequestMapping(value="/mypage/account/account_check", method=RequestMethod.GET)
     public String account_check() {
-        
         return "mypage/account/account_check";
     }
     
@@ -44,7 +43,6 @@ public class Account {
     /*개인정보 변경*/
     @RequestMapping(value="/mypage/account/account_info", method=RequestMethod.GET)
     public String account_info() {
-        
         return "mypage/account/account_info";
     }
     
@@ -54,9 +52,7 @@ public class Account {
         User_profileDto user_profileDto = (User_profileDto) session.getAttribute("user_profile");
         
         if(!updateUser_profileDto.getUploadFile().isEmpty()) {  // 파일을 바꿨다면
-            
             String fileName = System.currentTimeMillis() + updateUser_profileDto.getUploadFile().getOriginalFilename();
-            
             try {
                 updateUser_profileDto.getUploadFile().transferTo(new File(savePath, fileName));
                 updateUser_profileDto.setUser_photo(fileName);
@@ -68,14 +64,11 @@ public class Account {
                 File delFile = new File(savePath, user_profileDto.getUser_photo());
                 delFile.delete();
             }
-            
         } else {  // 파일을 바꾸지 않았다면
             updateUser_profileDto.setUser_photo(user_profileDto.getUser_photo());
         }
         updateUser_profileDto.setUser_email(user_profileDto.getUser_email());
-        
         mypageService.updateUser_profile(updateUser_profileDto);  // update
-        
         session.setAttribute("user_profile", mypageService.getUser_profile(user_profileDto.getUser_email()));  // 세션 다시 설정
         
         return "mypage/account/account_info";
@@ -84,13 +77,11 @@ public class Account {
     /*비밀번호 변경*/
     @RequestMapping(value="/mypage/account/account_pass", method=RequestMethod.GET)
     public String account_pass() {
-        
         return "mypage/account/account_pass";
     }
     
     @RequestMapping(value="/mypage/account/account_pass", method=RequestMethod.POST)
     public String account_pass(HttpSession session, String user_password) {
-        
         User_profileDto user_profileDto = (User_profileDto) session.getAttribute("user_profile");
         user_profileDto.setUser_password(passwordEncoder.encode(user_password));  // password 인코딩
         mypageService.updateUser_profile_pass(user_profileDto);
@@ -101,7 +92,6 @@ public class Account {
     /*회원탈퇴*/
     @RequestMapping(value="/mypage/account/account_breakup", method=RequestMethod.GET)
     public String account_breakup() {
-        
         return "mypage/account/account_breakup";
     }
     

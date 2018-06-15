@@ -314,6 +314,7 @@
   </insert>
   
   <select id="getMsgList" resultType="Msg">
+    <![CDATA[
       SELECT *
       FROM msg
       WHERE
@@ -330,9 +331,11 @@
       )
       ORDER BY msg_date DESC
       LIMIT ${start_row}, ${page_size}
+    ]]>
   </select>
   
   <select id="getMsgLately" resultType="Msg">
+    <![CDATA[
       SELECT *
       FROM msg
       WHERE
@@ -349,6 +352,7 @@
       )
       ORDER BY msg_date DESC
       LIMIT 1
+    ]]>
   </select>
   
   <select id="getMsgLatelyList" resultType="Msg">
@@ -362,39 +366,49 @@
   </select>
   
   <select id="getMsg_new" resultType="Msg">
-    SELECT * FROM msg ORDER BY msg_date DESC LIMIT 1
+    <![CDATA[
+      SELECT * FROM msg 
+      ORDER BY msg_date DESC 
+      LIMIT 1
+    ]]>
   </select>
   
   <select id="getUser_profileList" resultType="User_profile">
-    SELECT * FROM user_profile
+    <![CDATA[
+      SELECT * FROM user_profile
+    ]]>
   </select>
   
   <select id="getMsgCount" resultType="integer">
-    SELECT COUNT(*) FROM msg
-    WHERE
-    (
-      to_user_email=#{to_user_email}
-      AND
-      from_user_email=#{from_user_email}
-    )
-    OR
-    (
-      to_user_email=#{from_user_email}
-      AND
-      from_user_email=#{to_user_email}
-    )
+    <![CDATA[
+      SELECT COUNT(*) FROM msg
+      WHERE
+      (
+        to_user_email=#{to_user_email}
+        AND
+        from_user_email=#{from_user_email}
+      )
+      OR
+      (
+        to_user_email=#{from_user_email}
+        AND
+        from_user_email=#{to_user_email}
+      )
+    ]]>
   </select>
   
   <update id="updateMsg_read">
-    UPDATE msg
-    SET
-    msg_read='O'
-    WHERE
-    (
-      to_user_email=#{from_user_email}
-      AND
-      from_user_email=#{to_user_email}
-    )
+    <![CDATA[
+      UPDATE msg
+      SET
+      msg_read='O'
+      WHERE
+      (
+        to_user_email=#{from_user_email}
+        AND
+        from_user_email=#{to_user_email}
+      )
+    ]]>
   </update>
   
 </mapper>

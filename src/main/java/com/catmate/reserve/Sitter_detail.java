@@ -36,21 +36,6 @@ public class Sitter_detail {
     @RequestMapping(value="reserve/sitter_detail", method=RequestMethod.GET)
     public String sitter_detail(HttpServletRequest request) {
         String tmp_idx = (String)request.getParameter("idx");
-        List<String> area_textList = new ArrayList<String>();
-        area_textList.add("전체");
-        area_textList.add("서울");
-        area_textList.add("인천");
-        area_textList.add("경기");
-        area_textList.add("부산");
-        
-        List<Integer> area_countList = new ArrayList<Integer>();
-        for(String area_text : area_textList) {
-            if(area_text.equals("전체")) {
-                area_countList.add(reserveService.getAreaAllCount());
-            } else {
-                area_countList.add(reserveService.getAreaCount(area_text));
-            }
-        }
         
         String return_text = "redirect:search";
         if(tmp_idx != null) {
@@ -84,8 +69,6 @@ public class Sitter_detail {
                         start_cal.add(Calendar.DATE, 1);
                     }
                 }
-                request.setAttribute("area_text", area_textList);
-                request.setAttribute("area_count", area_countList);
                 
                 request.setAttribute("pet_sitter_house", pet_sitter_houseDto);
                 request.setAttribute("room_photoList", room_photoList);

@@ -51,6 +51,12 @@
       <mvc:exclude-mapping path="/mypage/account/account_check"/>
         <bean class="com.catmate.interceptor.Account_inter"/>
     </mvc:interceptor>
+    
+    <mvc:interceptor>
+      <mvc:mapping path="/reserve/sitter_detail"/>
+      <mvc:mapping path="/reserve/search"/>
+        <bean class="com.catmate.interceptor.Reserve_inter"/>
+    </mvc:interceptor>
   </mvc:interceptors>
   
   <websocket:handlers>

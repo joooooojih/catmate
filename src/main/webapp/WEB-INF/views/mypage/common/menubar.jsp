@@ -8,7 +8,7 @@
                 </dt>
                 <dd>
                   <br>
-                  <h4>조지헌</h4>
+                  <h4>${user_profile.user_name }</h4>
                 </dd>
               </dl>
             </li>

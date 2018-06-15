@@ -11,7 +11,8 @@
   <link href="${pageContext.request.contextPath }/resources/css/mypage_common.css" rel="stylesheet"/>
   <script>
     $(document).ready(function() {
-    	$("td").children("a").unbind("click").bind("click", function() {
+    	$("td").children("a").filter("[name^=cancel]").unbind("click").bind("click", function() {
+    		alert(this.id);
     		$.ajax({
     			type: "post",
     			url: "wish_list_reserve",
@@ -55,9 +56,13 @@
                   <tr>
                     <td>${user_profileDto.user_name }</td>
                     <td>${user_profileDto.user_grade }</td>
-                    <td>${pet_sitter_houseList[i].house_address }<br>${pet_sitter_houseList[i].house_daddress }</td>
                     <td>
-                      <a href="#" id="${pet_sitter_houseList[i].idx }">취소</a>
+                      <a href="${pageContext.request.contextPath }/reserve/sitter_detail?idx=${pet_sitter_houseList[i].idx }">
+                        ${pet_sitter_houseList[i].house_address }<br>${pet_sitter_houseList[i].house_daddress }
+                      </a>
+                    </td>
+                    <td>
+                      <a href="#" id="${pet_sitter_houseList[i].idx }" name="cancel">취소</a>
                     </td>
                   </tr>
                   <c:set var="i" value="${i+1 }"/>

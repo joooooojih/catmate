@@ -62,25 +62,6 @@ public class Search {
         tags_nameList.add("first_aid");
         tags_nameList.add("medication_possible");
         
-        List<String> area_textList = new ArrayList<String>();
-        area_textList.add("전체");
-        area_textList.add("서울");
-        area_textList.add("인천");
-        area_textList.add("경기");
-        area_textList.add("부산");
-        
-        List<Integer> area_countList = new ArrayList<Integer>();
-        for(String area_text : area_textList) {
-            if(area_text.equals("전체")) {
-                area_countList.add(reserveService.getAreaAllCount());
-            } else {
-                area_countList.add(reserveService.getAreaCount(area_text));
-            }
-        }
-        
-        request.setAttribute("area_text", area_textList);
-        request.setAttribute("area_count", area_countList);
-        
         request.setAttribute("tags_name", tags_nameList);
         request.setAttribute("tags", tagsList);
         return "reserve/search";
@@ -93,8 +74,6 @@ public class Search {
         List<ReservationDto> tmpReservationList = reserveService.getReservationList();
         List<ReservationDto> reservationList = new ArrayList<ReservationDto>();
         List<Pet_sitter_houseDto> pet_sitter_house_notList = null;
-        
-        List<Pet_sitter_houseDto> pet_sitter_houseList = null;
         List<Wish_listDto> wish_listList = mypageService.getWish_listList((User_profileDto) session.getAttribute("user_profile"));
         List<Integer> pet_countList = new ArrayList<Integer>();
         List<List<Room_photoDto>> room_photoList = new ArrayList<List<Room_photoDto>>();
@@ -102,7 +81,6 @@ public class Search {
         List<Integer> review_countList = new ArrayList<Integer>();
         
         int page_size = 2;
-        
         int start_row = (page_num * page_size) - page_size;
         
         Map<String, Object> search_map = new HashMap<String, Object>();
@@ -149,7 +127,7 @@ public class Search {
         search_map.put("start_row", start_row);
         search_map.put("page_size", page_size);
         
-        pet_sitter_houseList = reserveService.getPet_sitter_house_searchList(search_map);
+        List<Pet_sitter_houseDto> pet_sitter_houseList = reserveService.getPet_sitter_house_searchList(search_map);  // 필터 끝난 게시판
 
         for(Pet_sitter_houseDto pet_sitter_house : pet_sitter_houseList) {  // user_profile, pet_sitter_house photo 가져오기
             room_photoList.add(reserveService.getRoom_photo(pet_sitter_house.getIdx()));

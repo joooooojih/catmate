@@ -53,7 +53,7 @@ public class Msg {
         
         if(!msgList.isEmpty()) {  // 최신순 재 배열
             newMsgList = mypageService.getMsgLatelyList(msgList);
-            for(MsgDto tmpMsgDto : newMsgList) {
+            for(MsgDto tmpMsgDto : newMsgList) {  // 그에 맞게 user_profile 다시 정리
                 if(tmpMsgDto.getTo_user_email().equals(myUser_profileDto.getUser_email())) {
                     user_profileList.add(mypageService.getUser_profile(tmpMsgDto.getFrom_user_email()));
                 } else {
