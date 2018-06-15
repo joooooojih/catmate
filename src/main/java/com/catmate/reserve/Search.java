@@ -1,10 +1,9 @@
 package com.catmate.reserve;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,32 +85,23 @@ public class Search {
         Map<String, Object> search_map = new HashMap<String, Object>();
         Map<String, Object> result_map = new HashMap<String, Object>();
         
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar start_cal = Calendar.getInstance();
-        Calendar end_cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         try {
             Date start_date = Date.valueOf(request.getParameter("start_date"));  // 예약날짜 넣기
             Date end_date = Date.valueOf(request.getParameter("end_date"));
             
+            int start_int = Integer.parseInt(sdf.format(start_date));
+            int end_int = Integer.parseInt(sdf.format(end_date));
+            
             for(ReservationDto tmpReservationDto : tmpReservationList) {  // 예약 안되는 날 게시글 가져오기
                 
-                int check = 0;
+                int db_start_int = Integer.parseInt(sdf.format(tmpReservationDto.getStart_day()));
+                int db_end_int = Integer.parseInt(sdf.format(tmpReservationDto.getEnd_day()));
                 
-                start_cal.setTime(tmpReservationDto.getStart_day());
-                end_cal.setTime(tmpReservationDto.getEnd_day());
-                
-                while(start_cal.compareTo(end_cal) != 1) {
-                    if(sdf.format(start_cal.getTime()).equals(sdf.format(start_date)) ||
-                       sdf.format(start_cal.getTime()).equals(sdf.format(end_date))) {
-                        ++check;
-                        break;
-                    }
-                    start_cal.add(Calendar.DATE, 1);
-                }
-                
-                if(check != 0) {  // 예약이 안되는 게시글
+                if(!(end_int < db_start_int || start_int > db_end_int)) {
                     reservationList.add(tmpReservationDto);
                 }
+                    
             }  // for
             
         } catch(Exception e) {}
