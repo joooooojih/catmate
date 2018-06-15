@@ -111,7 +111,6 @@ public class Pet_profile {
     public String update_pet_profile_regPost (HttpServletRequest request, HttpSession session, Pet_profileDto updatePet_profileDto) {
         
         String savePath = request.getServletContext().getRealPath("\\resources\\img\\dog_img\\");
-        System.out.println(savePath);
         User_profileDto user_profileDto = (User_profileDto) session.getAttribute("user_profile");
         updatePet_profileDto.setUser_email(user_profileDto.getUser_email());
         

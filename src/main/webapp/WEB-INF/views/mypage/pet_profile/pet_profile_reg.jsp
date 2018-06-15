@@ -118,7 +118,7 @@
                   <dd>
                     <div class="row">
                       <div class="col-md-6">
-                        <input type="text" name="pet_birth" id="pet_birth" class="form-control" placeholder="생년월 6자리를 입력해주세요" maxlength="6" required>
+                        <input type="text" name="pet_birth" id="pet_birth" class="form-control" placeholder="생년월 6자리를 입력해주세요" maxlength="6">
                       </div>
                     </div>
                   </dd>
