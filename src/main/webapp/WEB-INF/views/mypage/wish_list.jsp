@@ -12,7 +12,6 @@
   <script>
     $(document).ready(function() {
     	$("td").children("a").filter("[name^=cancel]").unbind("click").bind("click", function() {
-    		alert(this.id);
     		$.ajax({
     			type: "post",
     			url: "wish_list_reserve",

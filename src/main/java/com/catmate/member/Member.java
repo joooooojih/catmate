@@ -50,7 +50,8 @@ public class Member {
 	        return "member/login"; // 일치하는 이메일 없음 //로그인 실패
 	    } else if(!loginUser_profileDto.getUser_password().equals(user_profileDto.getUser_password())) {
 	        return "member/login"; // 비밀번호가 다름 //로그인 실패
-//	        passwordEncoder.matches(loginUser_profileDto.getUser_password(), user_profileDto.getUser_password());
+//	        !loginUser_profileDto.getUser_password().equals(user_profileDto.getUser_password())
+//	        !passwordEncoder.matches(loginUser_profileDto.getUser_password(), user_profileDto.getUser_password())
 	    } else {
 	        session.setAttribute("user_profile", user_profileDto);
 	        return "redirect:/"; // 로그인 성공

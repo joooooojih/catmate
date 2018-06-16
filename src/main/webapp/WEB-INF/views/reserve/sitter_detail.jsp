@@ -18,7 +18,7 @@
     });
   });
   
-  $(document).ready(function() {
+  $(document).ready(function() {  // 펫시터 등록 예약하기 disabled 하기
     if(${pet_sitter_house.sregister eq 'no'}) {
       $("#reservation").prop("disabled", true);
     }
