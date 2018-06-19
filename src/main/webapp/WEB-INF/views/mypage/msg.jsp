@@ -43,7 +43,7 @@
               '</dt>'+
               '<dd id="from_dd">'+
                 '<span class="bg-white" id="msg_text">' + msg_content + '</span>' + 
-                msg_read + 
+                msg_read + '<br>' + 
                 '<small>' + msg_date + '</small>'+
               '</dd>'+
             '</dl>'+
