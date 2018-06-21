@@ -8,4 +8,7 @@
 * 실시간 메세지
 
 # 사용한 기술
-* JAVA, JSP, SpringFramework, jQuery, AJAX, Mybatis
+* 언어 : JAVA, JSP, SpringFramework, Javascript, jquery, AJAX, Mybatis
+* OS : Window10
+* DBMS : MySql
+* 기타 : Apache Server, Tomcat8.5, Maven, Bootstrap
